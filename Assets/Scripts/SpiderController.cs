@@ -21,6 +21,13 @@ public class SpiderController : MonoBehaviour {
 			float moveX = (playerPoint.x - currPoint.x) / distance;
 			Vector2 Movement = new Vector2 (moveX, moveY);
 			Vector2 newPosition = currPoint + speed * Movement;
+			//rb2d.MoveRotation (Mathf.Acos (moveX));
+			if (moveY > 0) {
+				rb2d.rotation = (180 + (Mathf.Acos (moveX) * 360 / 3.14F)) / 2;
+			} else {
+				rb2d.rotation = (180 - (Mathf.Acos (moveX) * 360 / 3.14F)) / 2;
+			}
+				
 			rb2d.MovePosition (newPosition);
 		} else {
 			rb2d.velocity = new Vector2(0, 0);
