@@ -10,10 +10,12 @@ public class PlayerController : MonoBehaviour {
 	}
 	void FixedUpdate ()
     {
+		Vector2 currPoint = rb2d.position;
         float MoveHorizontal = Input.GetAxis("Horizontal");
         float MoveVertical = Input.GetAxis("Vertical");
         Vector2 Movement = new Vector2(MoveHorizontal, MoveVertical);
-        rb2d.AddForce(Movement*speed);
+		Vector2 newPosition = currPoint + speed * Movement;
+		rb2d.MovePosition (newPosition);
 
     }
 	// Update is called once per frame
