@@ -4,7 +4,8 @@ using System.Collections;
 public class SpiderController : MonoBehaviour {
 	public float speed;
 	private Rigidbody2D rb2d;
-	public int range;
+	public float maxRange;
+	public float minRange;
 
 	// Use this for initialization
 	void Start () {
@@ -16,7 +17,7 @@ public class SpiderController : MonoBehaviour {
 		var playerPoint = GameObject.Find("Player").transform.position;
 		Vector2 currPoint = rb2d.position;
 		float distance = Mathf.Sqrt(Mathf.Pow((playerPoint.x - currPoint.x),2F) + Mathf.Pow((playerPoint.y - currPoint.y), 2F));
-		if (distance < range) {
+		if (distance < maxRange && distance > minRange) {
 			float moveY = (playerPoint.y - currPoint.y) / distance;
 			float moveX = (playerPoint.x - currPoint.x) / distance;
 			Vector2 Movement = new Vector2 (moveX, moveY);
