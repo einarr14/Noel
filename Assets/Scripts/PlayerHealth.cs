@@ -10,7 +10,8 @@ public class PlayerHealth : MonoBehaviour {
 	public Slider visualHealth;
 	public float totalHealth;
 	public float currentHealth;
-	PlayerController player;
+	//bool attack = GameObject.Find("Player").
+	private bool healing = false;
 
 	// Use this for initialization
 	void Start () {
@@ -20,14 +21,10 @@ public class PlayerHealth : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (/*!player.underAttack && */currentHealth < totalHealth) {
+		if (/*!player.underAttack && */currentHealth < totalHealth && healing == false) {
+			healing = true;
 			RegenHealth ();
 		}
-	}
-
-	public void TakeDamage (int ammount) {
-		currentHealth -= ammount;
-		visualHealth.value = currentHealth;
 	}
 
 	private void RegenHealth () {
@@ -35,11 +32,17 @@ public class PlayerHealth : MonoBehaviour {
 	}
 
 	private IEnumerator DoRegenHealth () {
-		float futureHealth = currentHealth += 1;
-		while (currentHealth != futureHealth) {
-			currentHealth += 1;
+		while (currentHealth < totalHealth) {
 			visualHealth.value = currentHealth;
-			yield return new WaitForSeconds(2F);
+			currentHealth++;
+
+			yield return new WaitForSeconds (0.05f);
 		}
+
+		healing = false;
 	}
-}
+
+	public void TakeDamage (int ammount) {
+		currentHealth -= ammount;
+		visualHealth.value = currentHealth;
+	}}

@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
     public float speed;
     private Rigidbody2D rb2d;
+	public bool underAttack = false;
 	// Use this for initialization
 	void Start () {
         rb2d = GetComponent<Rigidbody2D>();
