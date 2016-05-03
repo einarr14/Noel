@@ -6,15 +6,23 @@ public class SpiderController : MonoBehaviour {
 	private Rigidbody2D rb2d;
 	public float maxRange;
 	public float minRange;
+	public float biteRange;
+	private bool attacking = false;
+	private GameObject player;
+	public int damage;
+	public float attackSpeed;
+	PlayerHealth playerHealth;
 
 	// Use this for initialization
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D>();
+		player = GameObject.Find ("Player");
+		playerHealth = player.GetComponent<PlayerHealth> ();
 	}
 
 	// Update is called once per frame
 	void Update () {
-		var playerPoint = GameObject.Find("Player").transform.position;
+		var playerPoint = player.transform.position;
 		Vector2 currPoint = rb2d.position;
 		float distance = Mathf.Sqrt(Mathf.Pow((playerPoint.x - currPoint.x),2F) + Mathf.Pow((playerPoint.y - currPoint.y), 2F));
 		if (distance < maxRange && distance > minRange) {
@@ -33,7 +41,20 @@ public class SpiderController : MonoBehaviour {
 		} else {
 			rb2d.velocity = new Vector2(0, 0);
 		}
+		if (distance < biteRange && attacking == false) {
+			attacking = true;
+			BitePlayer ();
+		}
 
+	}
+	private void BitePlayer() {
+		StartCoroutine (DoBitePlayer());
+	}
+
+	private IEnumerator DoBitePlayer () {
+		playerHealth.TakeDamage (damage);
+		yield return new WaitForSeconds (attackSpeed);
+		attacking = false;
 	}
 }
 
