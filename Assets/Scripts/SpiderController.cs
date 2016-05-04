@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class SpiderController : MonoBehaviour {
@@ -14,6 +15,8 @@ public class SpiderController : MonoBehaviour {
 	public float attackSpeed;
 	PlayerHealth playerHealth;
     private Animator animator;
+    private GUIText killText;
+    public Text label;
 
 	// Use this for initialization
 	void Start () {
@@ -21,6 +24,9 @@ public class SpiderController : MonoBehaviour {
 		player = GameObject.Find ("Player");
 		playerHealth = player.GetComponent<PlayerHealth> ();
         animator = GetComponent<Animator>();
+        
+        
+
 	}
 
 	// Update is called once per frame
@@ -54,6 +60,7 @@ public class SpiderController : MonoBehaviour {
 		if (distance < biteRange && attacking == false) {
 			attacking = true;
             
+
             BitePlayer ();
             
 		}
@@ -76,9 +83,12 @@ public class SpiderController : MonoBehaviour {
 		Vector2 currPoint = rb2d.position;
 		float distance = Mathf.Sqrt (Mathf.Pow ((playerPoint.x - currPoint.x), 2F) + Mathf.Pow ((playerPoint.y - currPoint.y), 2F));
 		if (distance < maxRange) {
-			return true;
-		}
-		return false;
+            label.text = "Einsi Kaldi";
+            return true;
+            
+        }
+        label.text = "";
+        return false;
 	}
 }
 
