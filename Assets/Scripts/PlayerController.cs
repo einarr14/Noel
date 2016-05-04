@@ -41,8 +41,13 @@ public class PlayerController : MonoBehaviour {
 		for (int i = 0; i < boardManager.monsters.Length; i++) {
 			if (boardManager.monsters [i].GetComponent<SpiderController>().inRange() ){
 				underAttack = true;
+    
+                string killchar = Input.compositionString;
+                if (killchar == boardManager.monsters[i].GetComponent<SpiderController>().label.text)
+                {
+                    boardManager.monsters[i].GetComponent<SpiderController>().eliminate();
+                }
 				Debug.Log ("Under Attack");
-				return;
 			}
 		}
 		Debug.Log ("Not under Attack");

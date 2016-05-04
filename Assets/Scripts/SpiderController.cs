@@ -90,5 +90,9 @@ public class SpiderController : MonoBehaviour {
         label.text = "";
         return false;
 	}
+    public void eliminate ()
+    {
+        Destroy(this, 0F);
+    }
 }
 
