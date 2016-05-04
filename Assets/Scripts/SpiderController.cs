@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class SpiderController : MonoBehaviour {
+    public int strength;
 	public float speed;
 	private Rigidbody2D rb2d;
 	public float maxRange;

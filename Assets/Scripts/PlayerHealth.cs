@@ -12,6 +12,7 @@ public class PlayerHealth : MonoBehaviour {
 	public float currentHealth;
 	//bool attack = GameObject.Find("Player").
 	private bool healing = false;
+    public float regenTimeDelay;
 
 	// Use this for initialization
 	void Start () {
@@ -36,7 +37,7 @@ public class PlayerHealth : MonoBehaviour {
 			visualHealth.value = currentHealth;
 			currentHealth++;
 
-			yield return new WaitForSeconds (0.05f);
+			yield return new WaitForSeconds (regenTimeDelay);
 		}
 
 		healing = false;
