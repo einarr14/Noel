@@ -17,10 +17,9 @@ public class PlayerController : MonoBehaviour {
         Vector2 Movement = new Vector2(MoveHorizontal, MoveVertical);
 		Vector2 newPosition = currPoint + speed * Movement;
 		rb2d.MovePosition (newPosition);
-
     }
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 }
