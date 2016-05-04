@@ -17,6 +17,19 @@ public class PlayerController : MonoBehaviour {
         Vector2 Movement = new Vector2(MoveHorizontal, MoveVertical);
 		Vector2 newPosition = currPoint + speed * Movement;
 		rb2d.MovePosition (newPosition);
+
+		if (MoveHorizontal > 0) {
+			rb2d.rotation = -90;
+		}
+		if (MoveHorizontal < 0) {
+			rb2d.rotation = 90;
+		}
+		if (MoveVertical > 0) {
+			rb2d.rotation = 0;
+		}
+		if (MoveVertical < 0) {
+			rb2d.rotation = 180;
+		}
     }
 	// Update is called once per frame
 	void Update () {
