@@ -10,18 +10,25 @@ public class PlayerHealth : MonoBehaviour {
 	public Slider visualHealth;
 	public float totalHealth;
 	public float currentHealth;
-	//bool attack = GameObject.Find("Player").
 	private bool healing = false;
+	private GameObject gameManager;
+	private GameObject player;
+	BoardManager boardManager;
+	PlayerController playerController;
 
 	// Use this for initialization
 	void Start () {
 		//currentHealth = totalHealth;
 		visualHealth.value = currentHealth;
+		gameManager = GameObject.Find ("GameManager");
+		player = GameObject.Find ("Player");
+		playerController = player.GetComponent<PlayerController> ();
+		boardManager = gameManager.GetComponent<BoardManager> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (/*!player.underAttack && */currentHealth < totalHealth && healing == false) {
+		if (!playerController.getUnderAttack() && currentHealth < totalHealth && healing == false) {
 			healing = true;
 			RegenHealth ();
 		}

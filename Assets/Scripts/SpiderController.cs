@@ -69,5 +69,15 @@ public class SpiderController : MonoBehaviour {
         
         attacking = false;
 	}
+
+	public bool inRange () {
+		var playerPoint = player.transform.position;
+		Vector2 currPoint = rb2d.position;
+		float distance = Mathf.Sqrt (Mathf.Pow ((playerPoint.x - currPoint.x), 2F) + Mathf.Pow ((playerPoint.y - currPoint.y), 2F));
+		if (distance < maxRange) {
+			return true;
+		}
+		return false;
+	}
 }
 
