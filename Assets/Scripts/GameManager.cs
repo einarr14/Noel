@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour
 	PlayerController playerController;
 	BoardManager boardManager;
 	Animator anim;
-	float restartTimer;    
+	float restartTimer;
+	Vector3 initialPosition;
 
 	private int level = 1;
 
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
 		boardManager = GameObject.Find ("BoardManager").GetComponent<BoardManager>();
 		playerHealth = GameObject.Find ("Player").GetComponent<PlayerHealth> ();
 		anim = GetComponent<Animator> ();
+		initialPosition = GameObject.Find ("Player").transform.position;
 		InitGame ();
 
 	}
@@ -49,7 +51,11 @@ public class GameManager : MonoBehaviour
 	}
 
 	void gameOver() {
-		playerHealth.GetComponent<Renderer> ().enabled = false;
-		anim.SetTrigger ("GameOver");
+		resetPlayer ();
+		boardManager.resetLevel ();
+	}
+
+	void resetPlayer() {
+		GameObject.Find ("Player").transform.position = initialPosition;
 	}
 }
