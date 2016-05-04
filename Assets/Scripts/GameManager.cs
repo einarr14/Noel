@@ -11,44 +11,23 @@ public class GameManager : MonoBehaviour
 	PlayerHealth playerHealth;
 	PlayerController playerController;
 	BoardManager boardManager;
-	public GameObject player;
-	public GameObject health;
-	public GameObject manager;
+	Animator anim;
+	float restartTimer;
+	Vector3 initialPosition;
+
 	private int level = 1;
 
 	//Awake is always called before any Start functions
 	void Awake()
 	{
-		/*//Check if instance already exists
-		if (instance == null)
-
-			//if not, set instance to this
-			instance = this;
-
-		//If instance already exists and it's not this:
-		else if (instance != this)
-
-			//Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
-			Destroy(gameObject);    
-
-		//Sets this to not be destroyed when reloading scene
-		DontDestroyOnLoad(gameObject);
-
-		//Get a component reference to the attached BoardManager script
-		manager = GameObject.Find ("BoardManager");
-		boardManager = manager.GetComponent<BoardManager>();
-
-		//Call the InitGame function to initialize the first level 
-		InitGame();*/
 	}
 
 	void Start () {
-		manager = GameObject.Find ("BoardManager");
-		boardManager = manager.GetComponent<BoardManager>();
-		Debug.Log (boardManager);
-		player = GameObject.Find ("Player");
-		playerHealth = player.GetComponent<PlayerHealth> ();
-		playerController = player.GetComponent<PlayerController> ();
+		playerController = GameObject.Find ("Player").GetComponent<PlayerController> ();
+		boardManager = GameObject.Find ("BoardManager").GetComponent<BoardManager>();
+		playerHealth = GameObject.Find ("Player").GetComponent<PlayerHealth> ();
+		anim = GetComponent<Animator> ();
+		initialPosition = GameObject.Find ("Player").transform.position;
 		InitGame ();
 
 	}
@@ -64,6 +43,19 @@ public class GameManager : MonoBehaviour
 	//Update is called every frame.
 	void Update()
 	{
+		if (playerHealth.currentHealth < 1) {
+			Debug.Log ("here");
+			gameOver ();
+		}
 
+	}
+
+	void gameOver() {
+		resetPlayer ();
+		boardManager.resetLevel ();
+	}
+
+	void resetPlayer() {
+		GameObject.Find ("Player").transform.position = initialPosition;
 	}
 }
