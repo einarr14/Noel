@@ -21,25 +21,21 @@ public class PlayerController : MonoBehaviour {
         Vector2 currPoint = rb2d.position;
         float MoveHorizontal = Input.GetAxis("Horizontal");
         float MoveVertical = Input.GetAxis("Vertical");
-        if (MoveHorizontal != 0 || MoveVertical != 0)
-        {
-            float Direction = Mathf.Sqrt(MoveHorizontal * MoveHorizontal + MoveVertical * MoveVertical);
-            MoveHorizontal = MoveHorizontal / Direction;
-            MoveVertical = MoveVertical / Direction;
-            Vector2 Movement = new Vector2(MoveHorizontal, MoveVertical);
-            Vector2 newPosition = currPoint + speed * Movement;
-            rb2d.MovePosition(newPosition);
-            if (MoveVertical > 0)
-            {
-                rb2d.rotation = ((180 + (Mathf.Acos(MoveHorizontal) * 360 / 3.14F)) / 2)+180;
-            }
-            else
-            {
-                rb2d.rotation = ((180 - (Mathf.Acos(MoveHorizontal) * 360 / 3.14F)) / 2)+180;
-            }
-        }
-
-    }
+		if (MoveHorizontal != 0 || MoveVertical != 0) {
+			float Direction = Mathf.Sqrt (MoveHorizontal * MoveHorizontal + MoveVertical * MoveVertical);
+			MoveHorizontal = MoveHorizontal / Direction;
+			MoveVertical = MoveVertical / Direction;
+			Vector2 Movement = new Vector2 (MoveHorizontal, MoveVertical);
+			Vector2 newPosition = currPoint + speed * Movement;
+			rb2d.MovePosition (newPosition);
+			if (MoveVertical > 0) {
+				rb2d.rotation = ((180 + (Mathf.Acos (MoveHorizontal) * 360 / 3.14F)) / 2) + 180;
+			} else {
+				rb2d.rotation = ((180 - (Mathf.Acos (MoveHorizontal) * 360 / 3.14F)) / 2) + 180;
+			}
+			rb2d.velocity = new Vector2(0F, 0F);
+    	}
+	}
 	// Update is called once per frame
 	void Update () {
 		for (int i = 0; i < boardManager.monsters.Length; i++) {
