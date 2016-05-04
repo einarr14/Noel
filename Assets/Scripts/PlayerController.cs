@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
+        underAttack = false;
 		for (int i = 0; i < boardManager.monsters.Length; i++) {
 			if (boardManager.monsters [i].GetComponent<SpiderController>().inRange() ){
 				underAttack = true;
@@ -50,6 +51,10 @@ public class PlayerController : MonoBehaviour {
 				Debug.Log ("Under Attack");
 			}
 		}
+        if(underAttack)
+        {
+            return;
+        }
 		Debug.Log ("Not under Attack");
 		underAttack = false;
 	}
