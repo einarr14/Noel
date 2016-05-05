@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour {
     public float speed;
     private Rigidbody2D rb2d;
 	public bool underAttack = false;
+	public bool immobile = false;
 
 	GameManager gameManager;
 	BoardManager boardManager;
@@ -18,6 +19,9 @@ public class PlayerController : MonoBehaviour {
 	}
     void FixedUpdate()
     {
+		if (immobile) {
+			return;
+		}
         Vector2 currPoint = rb2d.position;
         float MoveHorizontal = Input.GetAxis("Horizontal");
         float MoveVertical = Input.GetAxis("Vertical");

@@ -17,6 +17,9 @@ public class CombatText : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+	}
+
+	void FixedUpdate() {
+
 	}
 }
