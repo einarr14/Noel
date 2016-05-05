@@ -48,14 +48,12 @@ public class PlayerController : MonoBehaviour {
                 {
                     boardManager.monsters[i].GetComponent<SpiderController>().eliminate();
                 }
-				Debug.Log ("Under Attack");
 			}
 		}
         if(underAttack)
         {
             return;
         }
-		Debug.Log ("Not under Attack");
 		underAttack = false;
 	}
 
