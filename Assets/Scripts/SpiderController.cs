@@ -88,7 +88,7 @@ public class SpiderController : MonoBehaviour {
 		float distance = Mathf.Sqrt (Mathf.Pow ((playerPoint.x - currPoint.x), 2F) + Mathf.Pow ((playerPoint.y - currPoint.y), 2F));
 		if (distance < maxRange) {
 
-            label.text = boardManager.killPhrases[5];
+            label.text = boardManager.killPhrases[randnum];
             return true;
             
         }
