@@ -88,6 +88,20 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+	public void openDoor(string open) 
+	{
+		for (int i = 0; i < boardManager.doors.Length; i++) 
+		{
+			if (boardManager.doors [i].GetComponent<DoorController> ().inRange()) 
+			{
+				if (open == boardManager.doors [i].GetComponent<DoorController> ().label.text) 
+				{
+					boardManager.doors [i].GetComponent<DoorController> ().unFreezeRotation ();
+				}
+			}
+		}
+	}
 }
 
 	

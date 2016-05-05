@@ -17,14 +17,26 @@ public class DoorController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+		inRange ();
+	}
+
+	public bool inRange () {
 		var playerPoint = player.transform.position;
 		Vector2 currPoint = rb2d.position;
-		float distance = Mathf.Sqrt(Mathf.Pow((playerPoint.x - currPoint.x),2F) + Mathf.Pow((playerPoint.y - currPoint.y), 2F));
-		if (distance < maxRange && distance > minRange) {
+		float distance = Mathf.Sqrt (Mathf.Pow ((playerPoint.x - currPoint.x), 2F) + Mathf.Pow ((playerPoint.y - currPoint.y), 2F));
+		if (distance < maxRange) {
 			label.text = "Open";
+			return true;
 		}
-		else {
-			label.text = "";
-		}
+		label.text = "";
+		return false;
+	}
+
+	public void freezeRotation() {
+		rb2d.freezeRotation = true;
+	}
+
+	public void unFreezeRotation() {
+		rb2d.freezeRotation = false;
 	}
 }
