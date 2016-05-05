@@ -32,6 +32,7 @@ public class PlayerInput : MonoBehaviour {
 			otherInput.Select ();
 			otherInput.ActivateInputField ();
             GameObject.Find("Player").GetComponent<PlayerController>().kill(sentence);
+			GameObject.Find ("Player").GetComponent<PlayerController> ().openDoor (sentence);
         }
 		else if (Input.GetKeyDown("return")) {
 			otherInput.Select ();

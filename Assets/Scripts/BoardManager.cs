@@ -9,6 +9,8 @@ public class BoardManager : MonoBehaviour {
 	public Vector3[] ghostPositions;
 	public GameObject[] items;
 	public Vector3[] itemPositions;
+	public GameObject[] doors;
+	public Vector3[] doorPositions;
     public string[] killPhrases;
     
 	// Use this for initialization
@@ -17,24 +19,27 @@ public class BoardManager : MonoBehaviour {
             
 			monsters = new GameObject[3];
 			ghosts = new GameObject[2];
-			items = new GameObject[5];
+			items = new GameObject[3];
+			doors = new GameObject[2];
             killPhrases = new string[9];
 			monsterPositions = new Vector3[3];
 			ghostPositions = new Vector3[2];
-			itemPositions = new Vector3[5];
-            
-            monsters[0] = GameObject.Find ("Spider1");
+
+			itemPositions = new Vector3[3];
+			doorPositions = new Vector3[2];
+			monsters[0] = GameObject.Find ("Spider1");
 			monsters[1] = GameObject.Find ("Spider2");
 			monsters[2] = GameObject.Find ("SpiderQueen");
 
 			ghosts[0] = GameObject.Find ("Ghost1");
 			ghosts[1] = GameObject.Find ("Ghost2");
 
-			items [0] = GameObject.Find ("Door");
-			items [1] = GameObject.Find ("Door1");
-			items [2] = GameObject.Find ("Door2");
-			items [3] = GameObject.Find ("Crate");
-			items [4] = GameObject.Find ("SpiderQueenWeb");
+			doors [0] = GameObject.Find ("Door");
+			doors [1] = GameObject.Find ("Door2");
+
+			items [0] = GameObject.Find ("Crate");
+			items [1] = GameObject.Find ("SpiderQueenWeb");
+			items [2] = GameObject.Find ("Door1");
 
             killPhrases[0] = "Chicks with dicks.";
             killPhrases[1] = "Murdertrain.";
@@ -55,6 +60,9 @@ public class BoardManager : MonoBehaviour {
 			}
 			for (int i = 0; i < items.Length; i++) {
 				itemPositions [i] = items [i].transform.position;
+			}
+			for (int i = 0; i < doors.Length; i++) {
+				doorPositions [i] = doors [i].transform.position;
 			}
 		}
 	}
