@@ -15,6 +15,7 @@ public class GhostController : MonoBehaviour {
     PlayerHealth playerHealth;
     public int damage;
     private string riddle;
+    public string type;
 
     // Use this for initialization
     void Start () {
@@ -33,23 +34,37 @@ public class GhostController : MonoBehaviour {
             var playerPoint = player.transform.position;
             Vector2 currPoint = rb2d.position;
             distance = Mathf.Sqrt(Mathf.Pow((playerPoint.x - currPoint.x), 2F) + Mathf.Pow((playerPoint.y - currPoint.y), 2F));
-            if (distance < maxRange && distance > minRange)
+            if (type != "block")
             {
-                float moveY = (playerPoint.y - currPoint.y) / distance;
-                float moveX = (playerPoint.x - currPoint.x) / distance;
-                Vector2 Movement = new Vector2(moveX, moveY);
-                Vector2 newPosition = currPoint + speed * Movement;
-                rb2d.MovePosition(newPosition);
-            }
-            else if (distance <= minRange)
-            {
-                GameManager.instance.ghostscreen();
-                label.text = riddle;
+                if (distance < maxRange && distance > minRange)
+                {
+                    float moveY = (playerPoint.y - currPoint.y) / distance;
+                    float moveX = (playerPoint.x - currPoint.x) / distance;
+                    Vector2 Movement = new Vector2(moveX, moveY);
+                    Vector2 newPosition = currPoint + speed * Movement;
+                    rb2d.MovePosition(newPosition);
+                }
+                else if (distance <= minRange)
+                {
+                    GameManager.instance.ghostscreen();
+                    label.text = riddle;
 
+                }
+                else
+                {
+                    rb2d.velocity = new Vector2(0, 0);
+                }
             }
             else
             {
-                rb2d.velocity = new Vector2(0, 0);
+                if (distance <= minRange)
+                {
+                    label.text = riddle;
+                }
+                else
+                {
+                    label.text = "";
+                }
             }
         }
         else

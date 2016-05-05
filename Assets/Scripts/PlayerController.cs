@@ -118,14 +118,20 @@ public class PlayerController : MonoBehaviour
                 {
                     boardManager.ghosts[i].GetComponent<GhostController>().increaseHealth();
                     boardManager.ghosts[i].GetComponent<GhostController>().eliminate();
-                    GameManager.instance.ghostscreen();
+                    if (boardManager.ghosts[i].GetComponent<GhostController>().type != "block")
+                    {
+                        GameManager.instance.ghostscreen();
+                    }
 
                 }
                 else
                 {
                     boardManager.ghosts[i].GetComponent<GhostController>().damagePlayer();
-                    boardManager.ghosts[i].GetComponent<GhostController>().eliminate();
-                    GameManager.instance.ghostscreen();
+                    if (boardManager.ghosts[i].GetComponent<GhostController>().type != "block")
+                    {
+                        boardManager.ghosts[i].GetComponent<GhostController>().eliminate();
+                        GameManager.instance.ghostscreen();
+                    }
                 }
             }
         }
