@@ -30,45 +30,51 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        Vector2 currPoint = rb2d.position;
-        float MoveHorizontal = Input.GetAxis("Horizontal");
-        float MoveVertical = Input.GetAxis("Vertical");
-        if (MoveHorizontal != 0 || MoveVertical != 0)
+        if (!GameManager.instance.ghostpause)
         {
-            float Direction = Mathf.Sqrt(MoveHorizontal * MoveHorizontal + MoveVertical * MoveVertical);
-            MoveHorizontal = MoveHorizontal / Direction;
-            MoveVertical = MoveVertical / Direction;
-            Vector2 Movement = new Vector2(MoveHorizontal, MoveVertical);
-            Vector2 newPosition = currPoint + speed * Movement;
-            rb2d.MovePosition(newPosition);
-            if (MoveVertical > 0)
+            Vector2 currPoint = rb2d.position;
+            float MoveHorizontal = Input.GetAxis("Horizontal");
+            float MoveVertical = Input.GetAxis("Vertical");
+            if (MoveHorizontal != 0 || MoveVertical != 0)
             {
-                rb2d.rotation = ((180 + (Mathf.Acos(MoveHorizontal) * 360 / 3.14F)) / 2) + 180;
+                float Direction = Mathf.Sqrt(MoveHorizontal * MoveHorizontal + MoveVertical * MoveVertical);
+                MoveHorizontal = MoveHorizontal / Direction;
+                MoveVertical = MoveVertical / Direction;
+                Vector2 Movement = new Vector2(MoveHorizontal, MoveVertical);
+                Vector2 newPosition = currPoint + speed * Movement;
+                rb2d.MovePosition(newPosition);
+                if (MoveVertical > 0)
+                {
+                    rb2d.rotation = ((180 + (Mathf.Acos(MoveHorizontal) * 360 / 3.14F)) / 2) + 180;
+                }
+                else
+                {
+                    rb2d.rotation = ((180 - (Mathf.Acos(MoveHorizontal) * 360 / 3.14F)) / 2) + 180;
+                }
+                rb2d.velocity = new Vector2(0F, 0F);
             }
-            else
-            {
-                rb2d.rotation = ((180 - (Mathf.Acos(MoveHorizontal) * 360 / 3.14F)) / 2) + 180;
-            }
-            rb2d.velocity = new Vector2(0F, 0F);
         }
     }
     // Update is called once per frame
     void Update()
     {
-        underAttack = false;
-        for (int i = 0; i < boardManager.monsters.Length; i++)
+        if (!GameManager.instance.ghostpause)
         {
-            if (boardManager.monsters[i].GetComponent<SpiderController>().inRange())
+            underAttack = false;
+            for (int i = 0; i < boardManager.monsters.Length; i++)
             {
-                underAttack = true;
-                Debug.Log("Under Attack");
+                if (boardManager.monsters[i].GetComponent<SpiderController>().inRange())
+                {
+                    underAttack = true;
+                    Debug.Log("Under Attack");
+                }
             }
+            if (underAttack)
+            {
+                return;
+            }
+            underAttack = false;
         }
-        if (underAttack)
-        {
-            return;
-        }
-        underAttack = false;
     }
     public bool getUnderAttack()
     {

@@ -10,10 +10,11 @@ public class BoardManager : MonoBehaviour {
 	public GameObject[] items;
 	public Vector3[] itemPositions;
     public string[] killPhrases;
-
+    
 	// Use this for initialization
 	public void initiateLevel (int level) {
 		if (level == 1) {
+            
 			monsters = new GameObject[3];
 			ghosts = new GameObject[2];
 			items = new GameObject[5];
@@ -21,7 +22,8 @@ public class BoardManager : MonoBehaviour {
 			monsterPositions = new Vector3[3];
 			ghostPositions = new Vector3[2];
 			itemPositions = new Vector3[5];
-			monsters[0] = GameObject.Find ("Spider1");
+            
+            monsters[0] = GameObject.Find ("Spider1");
 			monsters[1] = GameObject.Find ("Spider2");
 			monsters[2] = GameObject.Find ("SpiderQueen");
 
@@ -43,6 +45,7 @@ public class BoardManager : MonoBehaviour {
             killPhrases[6] = "Zoolander 2";
             killPhrases[7] = "Hot chocolate";
             killPhrases[8] = "Charlie's angels";
+            
 
             for (int i = 0; i < monsters.Length; i++) {
 				monsterPositions [i] = monsters [i].transform.position;

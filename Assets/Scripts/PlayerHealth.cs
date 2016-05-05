@@ -29,11 +29,15 @@ public class PlayerHealth : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		GetComponent<Renderer> ().enabled = player.GetComponent<Renderer> ().enabled;
-		if (!playerController.getUnderAttack() && currentHealth < totalHealth && healing == false) {
-			healing = true;
-			RegenHealth ();
-		}
+        if (!GameManager.instance.ghostpause)
+        {
+            GetComponent<Renderer>().enabled = player.GetComponent<Renderer>().enabled;
+            if (!playerController.getUnderAttack() && currentHealth < totalHealth && healing == false)
+            {
+                healing = true;
+                RegenHealth();
+            }
+        }
 	}
 
 	private void RegenHealth () {

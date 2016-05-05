@@ -14,8 +14,9 @@ public class GameManager : MonoBehaviour
 	//Animator anim;
 	float restartTimer;
 	Vector3 initialPosition;
+    public bool ghostpause;
 
-	private int level = 1;
+    private int level = 1;
 
 	//Awake is always called before any Start functions
 	void Awake()
@@ -23,14 +24,16 @@ public class GameManager : MonoBehaviour
 	}
 
 	void Start () {
+        instance = GameObject.FindObjectOfType<GameManager>();
 		playerController = GameObject.Find ("Player").GetComponent<PlayerController> ();
 		boardManager = GameObject.Find ("BoardManager").GetComponent<BoardManager>();
 		playerHealth = GameObject.Find ("Player").GetComponent<PlayerHealth> ();
 		//anim = GetComponent<Animator> ();
 		initialPosition = GameObject.Find ("Player").transform.position;
 		InitGame ();
+        ghostpause = false;
 
-	}
+    }
 
 	//Initializes the game for each level.
 	void InitGame()
@@ -58,4 +61,9 @@ public class GameManager : MonoBehaviour
 	void resetPlayer() {
 		GameObject.Find ("Player").transform.position = initialPosition;
 	}
+    
+    public void ghostscreen()
+    {
+        ghostpause = !ghostpause;
+    }
 }

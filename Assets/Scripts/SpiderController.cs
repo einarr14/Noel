@@ -35,39 +35,48 @@ public class SpiderController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		var playerPoint = player.transform.position;
-		Vector2 currPoint = rb2d.position;
-		float distance = Mathf.Sqrt(Mathf.Pow((playerPoint.x - currPoint.x),2F) + Mathf.Pow((playerPoint.y - currPoint.y), 2F));
-		if (distance < maxRange && distance > minRange) {
-			float moveY = (playerPoint.y - currPoint.y) / distance;
-			float moveX = (playerPoint.x - currPoint.x) / distance;
-			Vector2 Movement = new Vector2 (moveX, moveY);
-			Vector2 newPosition = currPoint + speed * Movement;
-            animator.SetBool("SpiderWalk",true);
-            //rb2d.MoveRotation (Mathf.Acos (moveX));
-            if (moveY > 0) {
-				rb2d.rotation = (180 + (Mathf.Acos (moveX) * 360 / 3.14F)) / 2;
-			} else {
-				rb2d.rotation = (180 - (Mathf.Acos (moveX) * 360 / 3.14F)) / 2;
-			}
-				
-			rb2d.MovePosition (newPosition);
-		}
-        else if (distance > maxRange)
+        if (!GameManager.instance.ghostpause)
         {
-            rb2d.velocity = new Vector2(0, 0);
-            animator.SetBool("SpiderWalk", false);
-        }
-        else {
-			rb2d.velocity = new Vector2(0, 0);
-        }
-		if (distance < biteRange && attacking == false) {
-			attacking = true;
-            
+            var playerPoint = player.transform.position;
+            Vector2 currPoint = rb2d.position;
+            float distance = Mathf.Sqrt(Mathf.Pow((playerPoint.x - currPoint.x), 2F) + Mathf.Pow((playerPoint.y - currPoint.y), 2F));
+            if (distance < maxRange && distance > minRange)
+            {
+                float moveY = (playerPoint.y - currPoint.y) / distance;
+                float moveX = (playerPoint.x - currPoint.x) / distance;
+                Vector2 Movement = new Vector2(moveX, moveY);
+                Vector2 newPosition = currPoint + speed * Movement;
+                animator.SetBool("SpiderWalk", true);
+                //rb2d.MoveRotation (Mathf.Acos (moveX));
+                if (moveY > 0)
+                {
+                    rb2d.rotation = (180 + (Mathf.Acos(moveX) * 360 / 3.14F)) / 2;
+                }
+                else
+                {
+                    rb2d.rotation = (180 - (Mathf.Acos(moveX) * 360 / 3.14F)) / 2;
+                }
 
-            BitePlayer ();
-            
-		}
+                rb2d.MovePosition(newPosition);
+            }
+            else if (distance > maxRange)
+            {
+                rb2d.velocity = new Vector2(0, 0);
+                animator.SetBool("SpiderWalk", false);
+            }
+            else
+            {
+                rb2d.velocity = new Vector2(0, 0);
+            }
+            if (distance < biteRange && attacking == false)
+            {
+                attacking = true;
+
+
+                BitePlayer();
+
+            }
+        }
 
 	}
 	private void BitePlayer() {
