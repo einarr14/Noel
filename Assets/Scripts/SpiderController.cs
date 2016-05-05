@@ -17,17 +17,21 @@ public class SpiderController : MonoBehaviour {
     private Animator animator;
     private GUIText killText;
     public Text label;
+    private int randnum;
+    private BoardManager boardManager;
 
 	// Use this for initialization
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D>();
 		player = GameObject.Find ("Player");
-		playerHealth = player.GetComponent<PlayerHealth> ();
+        boardManager = GameObject.Find("BoardManager").GetComponent<BoardManager>();
+        playerHealth = player.GetComponent<PlayerHealth> ();
         animator = GetComponent<Animator>();
-        
-        
+        randnum = Mathf.FloorToInt(Random.value * 8);
 
-	}
+
+
+    }
 
 	// Update is called once per frame
 	void Update () {
@@ -83,7 +87,8 @@ public class SpiderController : MonoBehaviour {
 		Vector2 currPoint = rb2d.position;
 		float distance = Mathf.Sqrt (Mathf.Pow ((playerPoint.x - currPoint.x), 2F) + Mathf.Pow ((playerPoint.y - currPoint.y), 2F));
 		if (distance < maxRange) {
-            label.text = "Einsi Kaldi";
+
+            label.text = boardManager.killPhrases[randnum];
             return true;
             
         }
