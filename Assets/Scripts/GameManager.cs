@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 	PlayerHealth playerHealth;
 	PlayerController playerController;
 	BoardManager boardManager;
-	Animator anim;
+	//Animator anim;
 	float restartTimer;
 	Vector3 initialPosition;
 
@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
 		playerController = GameObject.Find ("Player").GetComponent<PlayerController> ();
 		boardManager = GameObject.Find ("BoardManager").GetComponent<BoardManager>();
 		playerHealth = GameObject.Find ("Player").GetComponent<PlayerHealth> ();
-		anim = GetComponent<Animator> ();
+		//anim = GetComponent<Animator> ();
 		initialPosition = GameObject.Find ("Player").transform.position;
 		InitGame ();
 
