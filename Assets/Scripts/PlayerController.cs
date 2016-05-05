@@ -5,19 +5,32 @@ public class PlayerController : MonoBehaviour {
     public float speed;
     private Rigidbody2D rb2d;
 	public bool underAttack = false;
-
-	GameManager gameManager;
+    GameManager gameManager;
 	BoardManager boardManager;
+    private string killchar = "";
 
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
         rb2d = GetComponent<Rigidbody2D>();
 		gameManager = GameObject.Find ("GameManager").GetComponent<GameManager> ();
 		boardManager = GameObject.Find ("BoardManager").GetComponent<BoardManager> ();
-	}
+        
+
+    }
     void FixedUpdate()
     {
+        if (Input.GetAxis("TextStart") != 0)
+        {
+            Input.imeCompositionMode = IMECompositionMode.On;
+        }
+        if (Input.GetAxis("TextEnd") != 0)
+        {
+            string killchar = Input.compositionString;
+            Input.imeCompositionMode = IMECompositionMode.Off;
+        }
+
+
         Vector2 currPoint = rb2d.position;
         float MoveHorizontal = Input.GetAxis("Horizontal");
         float MoveVertical = Input.GetAxis("Vertical");
@@ -42,14 +55,18 @@ public class PlayerController : MonoBehaviour {
 		for (int i = 0; i < boardManager.monsters.Length; i++) {
 			if (boardManager.monsters [i].GetComponent<SpiderController>().inRange() ){
 				underAttack = true;
-    
-                string killchar = Input.compositionString;
+
+
+
+                
                 if (killchar == boardManager.monsters[i].GetComponent<SpiderController>().label.text)
                 {
                     boardManager.monsters[i].GetComponent<SpiderController>().eliminate();
                 }
 				Debug.Log ("Under Attack");
-			}
+                Debug.Log(killchar);
+
+            }
 		}
         if(underAttack)
         {
