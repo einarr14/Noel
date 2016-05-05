@@ -71,7 +71,7 @@ public class PlayerHealth : MonoBehaviour {
     }
 	public void fillHealth() {
 		currentHealth = 100;
-        visualHealth.value = currentHealth;
-        visualHealth.maxValue = totalHealth;
+		visualHealth.maxValue = totalHealth;
+		visualHealth.value = totalHealth;
 	}
 }
