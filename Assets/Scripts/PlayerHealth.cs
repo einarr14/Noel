@@ -58,4 +58,9 @@ public class PlayerHealth : MonoBehaviour {
 	public void TakeDamage (int ammount) {
 		currentHealth -= ammount;
 		visualHealth.value = currentHealth;
-	}}
+	}
+    public void IncreaseHealth (int ammount)
+    {
+        totalHealth += ammount;
+    }
+}
