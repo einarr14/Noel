@@ -25,7 +25,7 @@ public class DoorController : MonoBehaviour {
 		Vector2 currPoint = rb2d.position;
 		float distance = Mathf.Sqrt (Mathf.Pow ((playerPoint.x - currPoint.x), 2F) + Mathf.Pow ((playerPoint.y - currPoint.y), 2F));
 		if (distance < maxRange) {
-			label.text = "Open";
+			label.text = "Unlock";
 			return true;
 		}
 		label.text = "";
