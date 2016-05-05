@@ -27,10 +27,11 @@ public class PlayerInput : MonoBehaviour {
 		if (Input.GetKeyDown ("return") && writing == true) {
 			writing = false;
 			GameObject.Find ("Player").GetComponent<PlayerController> ().immobile = false;
-			string sence = input.text;
+			string sentence = input.text;
 			input.text = "";
 			otherInput.Select ();
 			otherInput.ActivateInputField ();
+			GameObject.Find ("Player").GetComponent<PlayerController> ().kill (sentecne);
 		}
 		else if (Input.GetKeyDown("return")) {
 			otherInput.Select ();
