@@ -45,12 +45,12 @@ public class PlayerHealth : MonoBehaviour {
 	}
 
 	private IEnumerator DoRegenHealth () {
-		while (currentHealth < totalHealth) {
+		//while (currentHealth < totalHealth) {
 			visualHealth.value = currentHealth;
 			currentHealth++;
 
 			yield return new WaitForSeconds (regenTimeDelay);
-		}
+		//}
 
 		healing = false;
 	}
@@ -62,5 +62,11 @@ public class PlayerHealth : MonoBehaviour {
     public void IncreaseHealth (int ammount)
     {
         totalHealth += ammount;
+        visualHealth.maxValue = totalHealth;
+    }
+    public void setHealth()
+    {
+        totalHealth = 100;
+        visualHealth.maxValue = totalHealth;
     }
 }

@@ -14,9 +14,11 @@ public class GhostController : MonoBehaviour {
     private float distance;
     PlayerHealth playerHealth;
     public int damage;
+    private string riddle;
 
     // Use this for initialization
     void Start () {
+        riddle = label.text;
         label.text = "";
 		rb2d = GetComponent<Rigidbody2D>();
 		player = GameObject.Find ("Player");
@@ -42,7 +44,7 @@ public class GhostController : MonoBehaviour {
             else if (distance <= minRange)
             {
                 GameManager.instance.ghostscreen();
-                label.text = "Who is da man?";
+                label.text = riddle;
 
             }
             else
