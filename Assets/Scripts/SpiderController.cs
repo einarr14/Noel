@@ -19,6 +19,8 @@ public class SpiderController : MonoBehaviour {
     public Text label;
     private int randnum;
     private BoardManager boardManager;
+	private GameObject myCanvas;
+	public string canvasName;
 
 	// Use this for initialization
 	void Start () {
@@ -28,13 +30,12 @@ public class SpiderController : MonoBehaviour {
         playerHealth = player.GetComponent<PlayerHealth> ();
         animator = GetComponent<Animator>();
         randnum = Mathf.FloorToInt(Random.value * 8);
-
-
-
+		myCanvas = GameObject.Find (canvasName);
     }
 
 	// Update is called once per frame
 	void Update () {
+		myCanvas.transform.position = this.transform.position;
         if (!GameManager.instance.ghostpause)
         {
             var playerPoint = player.transform.position;
@@ -51,10 +52,12 @@ public class SpiderController : MonoBehaviour {
                 if (moveY > 0)
                 {
                     rb2d.rotation = (180 + (Mathf.Acos(moveX) * 360 / 3.14F)) / 2;
+					//myCanvas.transform.RotateAround(this.transform.position, new Vector3(0,0,1),0);
                 }
                 else
                 {
                     rb2d.rotation = (180 - (Mathf.Acos(moveX) * 360 / 3.14F)) / 2;
+					//myCanvas.transform.RotateAround(this.transform.position, new Vector3(0,0,1),0);
                 }
 
                 rb2d.MovePosition(newPosition);
