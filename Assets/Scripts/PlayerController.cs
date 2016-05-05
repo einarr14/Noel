@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
         {
             if (boardManager.monsters[i].GetComponent<SpiderController>().inRange())
             {
-                if (killword == boardManager.monsters[i].GetComponent<SpiderController>().label.text)
+                if (killword.ToLower() == boardManager.monsters[i].GetComponent<SpiderController>().label.text.ToLower())
                 {
                     boardManager.monsters[i].GetComponent<SpiderController>().eliminate();
                 }
@@ -114,7 +114,7 @@ public class PlayerController : MonoBehaviour
         {
             if (boardManager.ghosts[i].GetComponent<GhostController>().inRange())
             {
-                if (sentence == boardManager.ghosts[i].GetComponent<GhostController>().answer.text)
+                if (sentence.ToLower().Contains(boardManager.ghosts[i].GetComponent<GhostController>().answer.text))
                 {
                     boardManager.ghosts[i].GetComponent<GhostController>().increaseHealth();
                     boardManager.ghosts[i].GetComponent<GhostController>().eliminate();
