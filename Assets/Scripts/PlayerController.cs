@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
 		{
 			if (boardManager.doors [i].GetComponent<DoorController> ().inRange()) 
 			{
-				if (open == boardManager.doors [i].GetComponent<DoorController> ().label.text) 
+				if (open.ToLower() == boardManager.doors [i].GetComponent<DoorController> ().label.text.ToLower()) 
 				{
 					boardManager.doors [i].GetComponent<DoorController> ().unFreezeRotation ();
 				}
