@@ -31,8 +31,8 @@ public class PlayerInput : MonoBehaviour {
 			input.text = "";
 			otherInput.Select ();
 			otherInput.ActivateInputField ();
-			GameObject.Find ("Player").GetComponent<PlayerController> ().kill (sentecne);
-		}
+            GameObject.Find("Player").GetComponent<PlayerController>().kill(sentence);
+        }
 		else if (Input.GetKeyDown("return")) {
 			otherInput.Select ();
 			otherInput.ActivateInputField ();

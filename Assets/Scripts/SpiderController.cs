@@ -92,7 +92,9 @@ public class SpiderController : MonoBehaviour {
 	}
     public void eliminate ()
     {
-        Destroy(this, 0F);
+		Vector3 curpos = this.transform.position;
+		curpos.y += 1000F;
+		this.transform.position = curpos;
     }
 }
 
