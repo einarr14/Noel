@@ -52,12 +52,12 @@ public class BoardManager : MonoBehaviour {
 			items [1] = GameObject.Find ("SpiderQueenWeb");
 			items [2] = GameObject.Find ("Door1");
 
-            killPhrases[0] = "Chicks with dicks.";
-            killPhrases[1] = "Murdertrain.";
+            killPhrases[0] = "Savage garden";
+            killPhrases[1] = "Murdertrain";
             killPhrases[2] = "Poppy";
             killPhrases[3] = "John Doe";
             killPhrases[4] = "Yo mama";
-            killPhrases[5] = "Elderly bingonight.";
+            killPhrases[5] = "Elderly bingonight";
             killPhrases[6] = "Zoolander 2";
             killPhrases[7] = "Hot chocolate";
             killPhrases[8] = "Charlie's angels";
