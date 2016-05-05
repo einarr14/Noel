@@ -39,4 +39,8 @@ public class DoorController : MonoBehaviour {
 	public void unFreezeRotation() {
 		rb2d.freezeRotation = false;
 	}
+
+	public void resetRotation() {
+		rb2d.rotation = 0;
+	}
 }
