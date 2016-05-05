@@ -8,15 +8,19 @@ public class PlayerController : MonoBehaviour {
 	public bool immobile = false;
 
 	GameManager gameManager;
-	BoardManager boardManager;
 
-	// Use this for initialization
-	void Start ()
+	BoardManager boardManager;
+    private string killchar = "";
+
+    // Use this for initialization
+    void Start ()
     {
         rb2d = GetComponent<Rigidbody2D>();
 		gameManager = GameObject.Find ("GameManager").GetComponent<GameManager> ();
 		boardManager = GameObject.Find ("BoardManager").GetComponent<BoardManager> ();
-	}
+        
+
+    }
     void FixedUpdate()
     {
 		if (immobile) {
@@ -46,25 +50,28 @@ public class PlayerController : MonoBehaviour {
 		for (int i = 0; i < boardManager.monsters.Length; i++) {
 			if (boardManager.monsters [i].GetComponent<SpiderController>().inRange() ){
 				underAttack = true;
-    
-                string killchar = Input.compositionString;
+
+
+
+                
                 if (killchar == boardManager.monsters[i].GetComponent<SpiderController>().label.text)
                 {
                     boardManager.monsters[i].GetComponent<SpiderController>().eliminate();
                 }
 				Debug.Log ("Under Attack");
+            }
 			}
-		}
-        if(underAttack)
+        if (underAttack)
         {
             return;
         }
-		Debug.Log ("Not under Attack");
-		underAttack = false;
-	}
-
-	public bool getUnderAttack() {
-		return underAttack;
-	}
-
+        underAttack = false;
+    }
+    public bool getUnderAttack()
+    {
+        return underAttack;
+    }
 }
+
+	
+

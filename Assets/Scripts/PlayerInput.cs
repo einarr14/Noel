@@ -37,9 +37,4 @@ public class PlayerInput : MonoBehaviour {
 			otherInput.ActivateInputField ();
 		}
 	}
-
-	void keepOnOtherInput() {
-		otherInput.Select ();
-		otherInput.ActivateInputField ();
-	}
 }
