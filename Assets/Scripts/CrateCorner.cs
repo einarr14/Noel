@@ -18,7 +18,7 @@ public class CrateCorner : MonoBehaviour {
     {
         if (other.name == "Crate")
         {
-            GameObject.Find("Crate").transform.position = new Vector3(14.9092f, -5.57005f, 0);
+            GameObject.Find("Crate").transform.position = new Vector3(11.3f, -9.83f, 0);
         }
     }
 }
