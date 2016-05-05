@@ -12,11 +12,15 @@ public class BoardManager : MonoBehaviour {
 	public GameObject[] doors;
 	public Vector3[] doorPositions;
     public string[] killPhrases;
-    
-	// Use this for initialization
-	public void initiateLevel (int level) {
+    public string[] riddles;
+    public string[] riddlesAnswer;
+    private PlayerHealth playerHealth ;
+
+    // Use this for initialization
+    public void initiateLevel (int level) {
 		if (level == 1) {
-            
+            riddles = new string[2];
+            riddlesAnswer = new string[2];
 			monsters = new GameObject[3];
 			ghosts = new GameObject[2];
 			items = new GameObject[3];
@@ -27,7 +31,14 @@ public class BoardManager : MonoBehaviour {
 
 			itemPositions = new Vector3[3];
 			doorPositions = new Vector3[2];
-			monsters[0] = GameObject.Find ("Spider1");
+
+            riddles[0] = "";
+            riddles[1] = "";
+            riddlesAnswer[0] = "";
+            riddlesAnswer[1] = "";
+
+
+            monsters[0] = GameObject.Find ("Spider1");
 			monsters[1] = GameObject.Find ("Spider2");
 			monsters[2] = GameObject.Find ("SpiderQueen");
 
@@ -63,6 +74,8 @@ public class BoardManager : MonoBehaviour {
 			}
 			for (int i = 0; i < doors.Length; i++) {
 				doorPositions [i] = doors [i].transform.position;
+		
+				doors [i].GetComponent<DoorController> ().freezeRotation ();
 			}
 		}
 	}
@@ -77,7 +90,16 @@ public class BoardManager : MonoBehaviour {
 		for (int i = 0; i < items.Length; i++) {
 			items [i].transform.position = itemPositions [i];
 		}
-	}
+		for (int i = 0; i < doors.Length; i++) {
+			doors [i].transform.position = doorPositions [i];
+			doors [i].GetComponent<DoorController> ().freezeRotation ();
+			doors [i].GetComponent<DoorController> ().resetRotation ();
+		}
+        playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
+        playerHealth.setHealth();
+		playerHealth.fillHealth();
+
+    }
 	
 	// Update is called once per frame
 	void Update () {

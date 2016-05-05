@@ -108,6 +108,34 @@ public class PlayerController : MonoBehaviour
 			}
 		}
 	}
+    public void answerghost(string sentence)
+    {
+        for (int i = 0; i < boardManager.ghosts.Length; i++)
+        {
+            if (boardManager.ghosts[i].GetComponent<GhostController>().inRange())
+            {
+                if (sentence == boardManager.ghosts[i].GetComponent<GhostController>().answer.text)
+                {
+                    boardManager.ghosts[i].GetComponent<GhostController>().increaseHealth();
+                    boardManager.ghosts[i].GetComponent<GhostController>().eliminate();
+                    if (boardManager.ghosts[i].GetComponent<GhostController>().type != "block")
+                    {
+                        GameManager.instance.ghostscreen();
+                    }
+
+                }
+                else
+                {
+                    boardManager.ghosts[i].GetComponent<GhostController>().damagePlayer();
+                    if (boardManager.ghosts[i].GetComponent<GhostController>().type != "block")
+                    {
+                        boardManager.ghosts[i].GetComponent<GhostController>().eliminate();
+                        GameManager.instance.ghostscreen();
+                    }
+                }
+            }
+        }
+    }
 }
 
 	
