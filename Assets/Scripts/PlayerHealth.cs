@@ -16,6 +16,8 @@ public class PlayerHealth : MonoBehaviour {
 	private GameObject player;
 	BoardManager boardManager;
 	PlayerController playerController;
+	private bool takingDAmage = false;
+	private CanvasGroup myCG;
 
 	// Use this for initialization
 	void Start () {
@@ -38,6 +40,15 @@ public class PlayerHealth : MonoBehaviour {
                 RegenHealth();
             }
         }
+		if (takingDAmage)
+		{
+			myCG.alpha = myCG.alpha - Time.deltaTime;
+			if (myCG.alpha <= 0)
+			{
+				myCG.alpha = 0;
+				takingDAmage = false;
+			}
+		}
 	}
 
 	private void RegenHealth () {
@@ -56,8 +67,11 @@ public class PlayerHealth : MonoBehaviour {
 	}
 
 	public void TakeDamage (int ammount) {
+		
 		currentHealth -= ammount;
 		visualHealth.value = currentHealth;
+		takingDAmage = true;
+		myCG.alpha = 1;
 	}
     public void IncreaseHealth (int ammount)
     {
