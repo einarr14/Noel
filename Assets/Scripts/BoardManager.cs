@@ -17,6 +17,19 @@ public class BoardManager : MonoBehaviour {
     private PlayerHealth playerHealth ;
 
     // Use this for initialization
+    void Awake()
+    {
+        killPhrases = new string[9];
+        killPhrases[0] = "SAVAGE GARDEN";
+        killPhrases[1] = "Murdertrain";
+        killPhrases[2] = "Poppy";
+        killPhrases[3] = "John Doe";
+        killPhrases[4] = "Yo mama";
+        killPhrases[5] = "Elderly bingonight";
+        killPhrases[6] = "Zoolander 2";
+        killPhrases[7] = "Hot chocolate";
+        killPhrases[8] = "Charlie's angels";
+    } 
     public void initiateLevel (int level) {
 		if (level == 1) {
             riddles = new string[2];
@@ -25,7 +38,7 @@ public class BoardManager : MonoBehaviour {
 			ghosts = new GameObject[2];
 			items = new GameObject[3];
 			doors = new GameObject[2];
-            killPhrases = new string[9];
+            
 			monsterPositions = new Vector3[3];
 			ghostPositions = new Vector3[2];
 
@@ -52,19 +65,12 @@ public class BoardManager : MonoBehaviour {
 			items [1] = GameObject.Find ("SpiderQueenWeb");
 			items [2] = GameObject.Find ("Door1");
 
-            killPhrases[0] = "Savage garden";
-            killPhrases[1] = "Murdertrain";
-            killPhrases[2] = "Poppy";
-            killPhrases[3] = "John Doe";
-            killPhrases[4] = "Yo mama";
-            killPhrases[5] = "Elderly bingonight";
-            killPhrases[6] = "Zoolander 2";
-            killPhrases[7] = "Hot chocolate";
-            killPhrases[8] = "Charlie's angels";
+            
             
 
             for (int i = 0; i < monsters.Length; i++) {
 				monsterPositions [i] = monsters [i].transform.position;
+                monsters[i].GetComponent<SpiderController>().initializeWord(killPhrases[0]);
 			}
 			for (int i = 0; i < ghosts.Length; i++) {
 				ghostPositions [i] = ghosts [i].transform.position;
@@ -83,7 +89,8 @@ public class BoardManager : MonoBehaviour {
 	public void resetLevel () {
 		for (int i = 0; i < monsters.Length; i++) {
 			monsters [i].transform.position = monsterPositions [i];
-		}
+            monsters[i].GetComponent<SpiderController>().initializeWord(killPhrases[0]);
+        }
 		for (int i = 0; i < ghosts.Length; i++) {
 			ghosts [i].transform.position = ghostPositions [i];
 		}

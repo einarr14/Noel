@@ -66,7 +66,6 @@ public class PlayerController : MonoBehaviour
                 if (boardManager.monsters[i].GetComponent<SpiderController>().inRange())
                 {
                     underAttack = true;
-                    Debug.Log("Under Attack");
                 }
             }
             if (underAttack)
@@ -83,13 +82,19 @@ public class PlayerController : MonoBehaviour
 
     public void kill(string killword)
     {
+        killword = killword.ToUpper();
+        
         for (int i = 0; i < boardManager.monsters.Length; i++)
         {
             if (boardManager.monsters[i].GetComponent<SpiderController>().inRange())
             {
-                if (killword.ToLower() == boardManager.monsters[i].GetComponent<SpiderController>().label.text.ToLower())
+                for(int j = 0; j<killword.Length; j++)
                 {
-                    boardManager.monsters[i].GetComponent<SpiderController>().eliminate();
+                    if (killword[j] == boardManager.monsters[i].GetComponent<SpiderController>().getChar())
+                    {
+                        boardManager.monsters[i].GetComponent<SpiderController>().increaseLetters();
+                       
+                    }
                 }
             }
         }

@@ -63,6 +63,8 @@ public class PlayerHealth : MonoBehaviour {
     {
         totalHealth += ammount;
         visualHealth.maxValue = totalHealth;
+        currentHealth += ammount;
+        visualHealth.value = currentHealth;
     }
     public void setHealth()
     {
