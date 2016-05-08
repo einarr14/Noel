@@ -16,6 +16,10 @@ public class GhostController : MonoBehaviour {
     public int damage;
     private string riddle;
     public string type;
+    private string ask;
+    private string askLeft;
+    private string askDone;
+   
 
     // Use this for initialization
     void Start () {
@@ -24,7 +28,10 @@ public class GhostController : MonoBehaviour {
 		rb2d = GetComponent<Rigidbody2D>();
 		player = GameObject.Find ("Player");
         boardmanager = GameObject.Find("BoardManager").GetComponent<BoardManager>();
-        playerHealth = player.GetComponent<PlayerHealth>(); 
+        playerHealth = player.GetComponent<PlayerHealth>();
+        ask = "TALK";
+        askLeft = ask;
+        askDone = "";
     }
 	
 	// Update is called once per frame
@@ -57,9 +64,9 @@ public class GhostController : MonoBehaviour {
             }
             else
             {
-                if (distance <= minRange)
+                if (inRange())
                 {
-                    label.text = riddle;
+                    label.text = "<color=#800000ff>" + askDone + "</color>" + askLeft;
                 }
                 else
                 {
@@ -94,5 +101,21 @@ public class GhostController : MonoBehaviour {
     public void damagePlayer()
     {
         playerHealth.TakeDamage(damage);
+    }
+    public void increaseLetters()
+    {
+
+        askDone = askDone + askLeft[0];
+        askLeft = askLeft.Remove(0, 1);
+        if (askDone == ask)
+        {
+            GameManager.instance.ghostscreen();
+            label.text = riddle;
+        } 
+        
+    }
+    public char getChar()
+    {
+        return askLeft[0];
     }
 }

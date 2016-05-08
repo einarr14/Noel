@@ -35,7 +35,7 @@ public class DoorController : MonoBehaviour {
 		Vector2 currPoint = rb2d.position;
 		float distance = Mathf.Sqrt (Mathf.Pow ((playerPoint.x - currPoint.x), 2F) + Mathf.Pow ((playerPoint.y - currPoint.y), 2F));
 		if (distance < maxRange) {
-			label.text = "<color=#800000ff>" + wordDone + "</color>" + wordLeft; ;
+			label.text = "<color=#800000ff>" + wordDone + "</color>" + wordLeft; 
 			return true;
 		}
 		label.text = "";
