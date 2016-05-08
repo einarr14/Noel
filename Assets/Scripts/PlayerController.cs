@@ -102,14 +102,18 @@ public class PlayerController : MonoBehaviour
 
 	public void openDoor(string open) 
 	{
+        open = open.ToUpper();
 		for (int i = 0; i < boardManager.doors.Length; i++) 
 		{
 			if (boardManager.doors [i].GetComponent<DoorController> ().inRange()) 
 			{
-				if (open.ToLower() == boardManager.doors [i].GetComponent<DoorController> ().label.text.ToLower()) 
-				{
-					boardManager.doors [i].GetComponent<DoorController> ().unFreezeRotation ();
-				}
+                for (int j = 0; j < open.Length; j++)
+                {
+                    if (open[j] == boardManager.doors[i].GetComponent<DoorController>().getChar())
+                    {
+                        boardManager.doors[i].GetComponent<DoorController>().increaseLetters();
+                    }
+                }
 			}
 		}
 	}
