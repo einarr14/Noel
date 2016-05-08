@@ -14,30 +14,19 @@ public class PlayerInput : MonoBehaviour {
 	void Start () {
 		gameManager = GameObject.Find ("GameManager").GetComponent<GameManager> ();
 		boardManager = GameObject.Find ("BoardManager").GetComponent<BoardManager> ();
-	}
+        input.Select();
+        input.ActivateInputField();
+    }
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown ("space") && writing == false) {
-			writing = true;
-			GameObject.Find ("Player").GetComponent<PlayerController> ().immobile = true;
-			input.Select ();
-			input.ActivateInputField ();
-		} 
-		if (Input.GetKeyDown ("return") && writing == true) {
-			writing = false;
-			GameObject.Find ("Player").GetComponent<PlayerController> ().immobile = false;
+		
+		
 			string sentence = input.text;
 			input.text = "";
-			otherInput.Select ();
-			otherInput.ActivateInputField ();
             GameObject.Find("Player").GetComponent<PlayerController>().kill(sentence);
 			GameObject.Find ("Player").GetComponent<PlayerController> ().openDoor (sentence);
-            GameObject.Find("Player").GetComponent<PlayerController>().answerghost(sentence);
-        }
-		else if (Input.GetKeyDown("return")) {
-			otherInput.Select ();
-			otherInput.ActivateInputField ();
-		}
+      
+		
 	}
 }

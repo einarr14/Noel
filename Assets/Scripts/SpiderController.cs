@@ -21,20 +21,27 @@ public class SpiderController : MonoBehaviour {
     private BoardManager boardManager;
 	private GameObject myCanvas;
 	public string canvasName;
+    private string theKillWord;
+    private string killWordLeft;
+    private string killWordDone;
+    private bool firsttime;
 
-	// Use this for initialization
-	void Start () {
-		rb2d = GetComponent<Rigidbody2D>();
-		player = GameObject.Find ("Player");
+    // Use this for initialization
+    void Start()
+    {
+        rb2d = GetComponent<Rigidbody2D>();
+        player = GameObject.Find("Player");
         boardManager = GameObject.Find("BoardManager").GetComponent<BoardManager>();
-        playerHealth = player.GetComponent<PlayerHealth> ();
+        playerHealth = player.GetComponent<PlayerHealth>();
         animator = GetComponent<Animator>();
         randnum = Mathf.FloorToInt(Random.value * 8);
-		myCanvas = GameObject.Find (canvasName);
+        myCanvas = GameObject.Find(canvasName);
+    
     }
 
 	// Update is called once per frame
 	void Update () {
+        
 		myCanvas.transform.position = this.transform.position;
         if (!GameManager.instance.ghostpause)
         {
@@ -100,7 +107,7 @@ public class SpiderController : MonoBehaviour {
 		float distance = Mathf.Sqrt (Mathf.Pow ((playerPoint.x - currPoint.x), 2F) + Mathf.Pow ((playerPoint.y - currPoint.y), 2F));
 		if (distance < maxRange) {
 
-            label.text = boardManager.killPhrases[randnum];
+            label.text =  "<color=#800000ff>" + killWordDone + "</color>" + killWordLeft;
             return true;
             
         }
@@ -112,6 +119,32 @@ public class SpiderController : MonoBehaviour {
 		Vector3 curpos = this.transform.position;
 		curpos.y += 1000F;
 		this.transform.position = curpos;
+        killWordDone = "";
+        killWordLeft = theKillWord;
+    }
+    public void increaseLetters()
+    {
+
+        killWordDone = killWordDone + killWordLeft[0];
+        killWordLeft = killWordLeft.Remove(0, 1);
+        Debug.Log(killWordLeft);
+        if (killWordDone == theKillWord)
+        {
+            eliminate();
+        }
+    }
+    public char getChar()
+    {
+        return killWordLeft[0];
+    }
+
+    public void initializeWord(string word)
+    {
+        theKillWord = word;
+        Debug.Log(theKillWord);
+        killWordLeft = theKillWord;
+        killWordDone = "";
     }
 }
+
 

@@ -66,7 +66,6 @@ public class PlayerController : MonoBehaviour
                 if (boardManager.monsters[i].GetComponent<SpiderController>().inRange())
                 {
                     underAttack = true;
-                    Debug.Log("Under Attack");
                 }
             }
             if (underAttack)
@@ -83,13 +82,19 @@ public class PlayerController : MonoBehaviour
 
     public void kill(string killword)
     {
+        killword = killword.ToUpper();
+        
         for (int i = 0; i < boardManager.monsters.Length; i++)
         {
             if (boardManager.monsters[i].GetComponent<SpiderController>().inRange())
             {
-                if (killword.ToLower() == boardManager.monsters[i].GetComponent<SpiderController>().label.text.ToLower())
+                for(int j = 0; j<killword.Length; j++)
                 {
-                    boardManager.monsters[i].GetComponent<SpiderController>().eliminate();
+                    if (killword[j] == boardManager.monsters[i].GetComponent<SpiderController>().getChar())
+                    {
+                        boardManager.monsters[i].GetComponent<SpiderController>().increaseLetters();
+                       
+                    }
                 }
             }
         }
@@ -97,14 +102,18 @@ public class PlayerController : MonoBehaviour
 
 	public void openDoor(string open) 
 	{
+        open = open.ToUpper();
 		for (int i = 0; i < boardManager.doors.Length; i++) 
 		{
 			if (boardManager.doors [i].GetComponent<DoorController> ().inRange()) 
 			{
-				if (open.ToLower() == boardManager.doors [i].GetComponent<DoorController> ().label.text.ToLower()) 
-				{
-					boardManager.doors [i].GetComponent<DoorController> ().unFreezeRotation ();
-				}
+                for (int j = 0; j < open.Length; j++)
+                {
+                    if (open[j] == boardManager.doors[i].GetComponent<DoorController>().getChar())
+                    {
+                        boardManager.doors[i].GetComponent<DoorController>().increaseLetters();
+                    }
+                }
 			}
 		}
 	}
