@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
                 MoveHorizontal = MoveHorizontal / Direction;
                 MoveVertical = MoveVertical / Direction;
                 Vector2 Movement = new Vector2(MoveHorizontal, MoveVertical);
-                Vector2 newPosition = currPoint + speed * Movement;
+				Vector2 newPosition = currPoint + speed * Movement;
                 rb2d.MovePosition(newPosition);
                 if (MoveVertical > 0)
                 {

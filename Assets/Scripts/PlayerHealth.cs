@@ -16,6 +16,12 @@ public class PlayerHealth : MonoBehaviour {
 	private GameObject player;
 	BoardManager boardManager;
 	PlayerController playerController;
+	private bool takingDAmage = false;
+	private Color normalColor;
+	private Color flashColor = new Color(1F,0F,0F,0.1F);
+	private float blendColor;
+	public Light playerLight;
+
 
 	// Use this for initialization
 	void Start () {
@@ -25,6 +31,7 @@ public class PlayerHealth : MonoBehaviour {
 		player = GameObject.Find ("Player");
 		playerController = player.GetComponent<PlayerController> ();
 		boardManager = gameManager.GetComponent<BoardManager> ();
+		normalColor = playerLight.color;
 	}
 	
 	// Update is called once per frame
@@ -37,6 +44,11 @@ public class PlayerHealth : MonoBehaviour {
                 healing = true;
                 RegenHealth();
             }
+			if (blendColor > 0F) {
+				blendColor -= 0.04F;	
+			}
+			playerLight.color = Color.Lerp (normalColor, flashColor, blendColor);
+
         }
 	}
 
@@ -56,8 +68,10 @@ public class PlayerHealth : MonoBehaviour {
 	}
 
 	public void TakeDamage (int ammount) {
+		
 		currentHealth -= ammount;
 		visualHealth.value = currentHealth;
+		blendColor = 1;
 	}
     public void IncreaseHealth (int ammount)
     {
