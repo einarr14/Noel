@@ -98,9 +98,9 @@ public class BoardManager : MonoBehaviour {
 			items [i].transform.position = itemPositions [i];
 		}
 		for (int i = 0; i < doors.Length; i++) {
-			doors [i].transform.position = doorPositions [i];
-			doors [i].GetComponent<DoorController> ().freezeRotation ();
 			doors [i].GetComponent<DoorController> ().resetRotation ();
+			doors [i].transform.position = doorPositions [i];
+			doors [i].GetComponent<DoorController> ().resetWord ();
 		}
         playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
         playerHealth.setHealth();

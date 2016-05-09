@@ -21,7 +21,7 @@ public class PlayerInput : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		
+			
 			string sentence = input.text;
 			input.text = "";
             GameObject.Find("Player").GetComponent<PlayerController>().kill(sentence);

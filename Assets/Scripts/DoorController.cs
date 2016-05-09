@@ -11,6 +11,8 @@ public class DoorController : MonoBehaviour {
     private string wordDone;
     private string wordLeft;
     private string unlock;
+	public float openTimeDelay;
+	public float openRotation;
 
 	// Use this for initialization
     void Awake ()
@@ -42,6 +44,12 @@ public class DoorController : MonoBehaviour {
 		return false;
 	}
 
+	public void resetWord() {
+		unlock = "UNLOCK";
+		wordDone = "";
+		wordLeft = unlock;
+	}
+
 	public void freezeRotation() {
 		rb2d.freezeRotation = true;
 	}
@@ -54,6 +62,18 @@ public class DoorController : MonoBehaviour {
 		rb2d.rotation = 0;
 	}
 
+	private IEnumerator rotateDoor () {
+		while (Mathf.Abs(rb2d.rotation - openRotation) > 1) {
+			if (openRotation >= rb2d.rotation) {
+				rb2d.rotation += 1;
+			} else {
+				rb2d.rotation -= 1;
+			}
+
+			yield return new WaitForSeconds (openTimeDelay);
+		}
+	}
+
     public void increaseLetters()
     {
 
@@ -61,11 +81,14 @@ public class DoorController : MonoBehaviour {
         wordLeft = wordLeft.Remove(0, 1);
         if (wordDone == unlock)
         {
-            unFreezeRotation();
+			StartCoroutine(rotateDoor());
         }
     }
     public char getChar()
     {
-        return wordLeft[0];
+		if (wordLeft.Length > 0) {
+			return wordLeft [0];
+		}
+		return ' ';
     }
 }
