@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		rb2d.velocity = new Vector2(0F, 0F);
+		//rb2d.velocity = new Vector2(0F, 0F);
         if (!GameManager.instance.ghostpause)
         {
             underAttack = false;
