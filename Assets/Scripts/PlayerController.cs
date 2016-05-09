@@ -180,20 +180,20 @@ public class PlayerController : MonoBehaviour
 		MoveVertical = 0;
         if (killChar != 'A' || killChar != 'D')
         {
-			if (Input.GetButton ("Right")) {
+			if (Input.GetKey (KeyCode.RightArrow)) {
 				MoveHorizontal++;
 			}
-			if (Input.GetButton ("Left")) {
+			if (Input.GetKey (KeyCode.LeftArrow)) {
 				MoveHorizontal--;
 			}
         }
 
         if (killChar != 'W' || killChar != 'D')
         {
-			if (Input.GetButton ("Up")) {
+			if (Input.GetKey (KeyCode.UpArrow)) {
 				MoveVertical++;
 			}
-			if (Input.GetButton ("Down")) {
+			if (Input.GetKey (KeyCode.DownArrow)) {
 				MoveVertical--;
 			}
         }
