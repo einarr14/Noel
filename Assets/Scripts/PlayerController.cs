@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Holoville.HOTween;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private float MoveVertical;
     private float MoveHorizontal;
     private char typechar;
+	public float timeScale;
 
 
     GameManager gameManager;
@@ -23,6 +25,7 @@ public class PlayerController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         boardManager = GameObject.Find("BoardManager").GetComponent<BoardManager>();
+		timeScale = 1;
 
 
     }
@@ -40,6 +43,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		Time.timeScale = timeScale;
 		//rb2d.velocity = new Vector2(0F, 0F);
         if (!GameManager.instance.ghostpause)
         {
@@ -48,6 +52,11 @@ public class PlayerController : MonoBehaviour
             {
                 if (boardManager.monsters[i].GetComponent<SpiderController>().inRange())
                 {
+					if (!boardManager.monsters[i].GetComponent<SpiderController>().timeSlowed) {
+						Debug.Log ("SLowint time");
+						StartCoroutine(slowTime(0.2F, 1F));
+						boardManager.monsters [i].GetComponent<SpiderController> ().timeSlowed = true;
+					}
                     underAttack = true;
                 }
             }
@@ -58,6 +67,17 @@ public class PlayerController : MonoBehaviour
             underAttack = false;
         }
     }
+	
+	private IEnumerator slowTime (float slowTo, float duration) {
+		timeScale = 1;
+		HOTween.To (this, duration, "timeScale", slowTo);
+
+		yield return new WaitForSeconds (duration);
+
+		HOTween.To (this, duration, "timeScale", 1);
+	}
+
+
     public bool getUnderAttack()
     {
         return underAttack;
@@ -160,20 +180,20 @@ public class PlayerController : MonoBehaviour
 		MoveVertical = 0;
         if (killChar != 'A' || killChar != 'D')
         {
-			if (Input.GetKey(KeyCode.RightArrow)) {
+			if (Input.GetButton ("Right")) {
 				MoveHorizontal++;
 			}
-			if (Input.GetKey(KeyCode.LeftArrow)) {
+			if (Input.GetButton ("Left")) {
 				MoveHorizontal--;
 			}
         }
 
         if (killChar != 'W' || killChar != 'D')
         {
-			if (Input.GetKey(KeyCode.UpArrow)) {
+			if (Input.GetButton ("Up")) {
 				MoveVertical++;
 			}
-			if (Input.GetKey (KeyCode.DownArrow)) {
+			if (Input.GetButton ("Down")) {
 				MoveVertical--;
 			}
         }

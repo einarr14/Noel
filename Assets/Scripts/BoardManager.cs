@@ -16,6 +16,7 @@ public class BoardManager : MonoBehaviour {
     public string[] riddlesAnswer;
     private PlayerHealth playerHealth ;
 
+
     // Use this for initialization
     void Awake()
     {
