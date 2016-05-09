@@ -58,6 +58,7 @@ public class PlayerInput : MonoBehaviour {
                 input.Select();
                 input.ActivateInputField();
                 GameObject.Find("Player").GetComponent<PlayerController>().answerghost(sentence);
+                GameManager.instance.ghostscreen();
             }
         }
         
