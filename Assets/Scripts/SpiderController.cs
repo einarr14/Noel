@@ -127,7 +127,6 @@ public class SpiderController : MonoBehaviour {
 
         killWordDone = killWordDone + killWordLeft[0];
         killWordLeft = killWordLeft.Remove(0, 1);
-        Debug.Log(killWordLeft);
         if (killWordDone == theKillWord)
         {
             eliminate();

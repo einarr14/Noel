@@ -117,6 +117,28 @@ public class PlayerController : MonoBehaviour
 			}
 		}
 	}
+    public void askghost(string ask)
+    {
+         ask = ask.ToUpper();
+            for (int i = 0; i < boardManager.ghosts.Length; i++)
+            {
+                if (boardManager.ghosts[i].GetComponent<GhostController>().type == "block")
+                { 
+                    if (boardManager.ghosts[i].GetComponent<GhostController>().inRange())
+                    {
+                        for (int j = 0; j < ask.Length; j++)
+                        {
+                            if (ask[j] == boardManager.ghosts[i].GetComponent<GhostController>().getChar())
+                            {
+                                boardManager.ghosts[i].GetComponent<GhostController>().increaseLetters();
+                            }
+                        }
+                    }
+                }
+            
+            }
+    }
+
     public void answerghost(string sentence)
     {
         for (int i = 0; i < boardManager.ghosts.Length; i++)
@@ -127,10 +149,8 @@ public class PlayerController : MonoBehaviour
                 {
                     boardManager.ghosts[i].GetComponent<GhostController>().increaseHealth();
                     boardManager.ghosts[i].GetComponent<GhostController>().eliminate();
-                    if (boardManager.ghosts[i].GetComponent<GhostController>().type != "block")
-                    {
+                   
                         GameManager.instance.ghostscreen();
-                    }
 
                 }
                 else
