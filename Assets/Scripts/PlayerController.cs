@@ -37,27 +37,29 @@ public class PlayerController : MonoBehaviour
             float MoveVertical = Input.GetAxis("Vertical");
             if (MoveHorizontal != 0 || MoveVertical != 0)
             {
-                float Direction = Mathf.Sqrt(MoveHorizontal * MoveHorizontal + MoveVertical * MoveVertical);
-                MoveHorizontal = MoveHorizontal / Direction;
-                MoveVertical = MoveVertical / Direction;
+                //float Direction = Mathf.Sqrt(MoveHorizontal * MoveHorizontal + MoveVertical * MoveVertical);
+                //MoveHorizontal = MoveHorizontal / Direction;
+                //MoveVertical = MoveVertical / Direction;
 				Vector2 Movement = new Vector2(MoveHorizontal, MoveVertical).normalized;
-				Vector2 newPosition = currPoint + speed * Movement;
+				Vector2 newPosition = currPoint + speed * Movement * Time.deltaTime;
                 rb2d.MovePosition(newPosition);
                 if (MoveVertical > 0)
                 {
-                    rb2d.rotation = ((180 + (Mathf.Acos(MoveHorizontal) * 360 / 3.14F)) / 2) + 180;
+					rb2d.rotation = ((180 + (Mathf.Acos(Movement.x) * 360 / 3.14F)) / 2) + 180;
                 }
                 else
                 {
-                    rb2d.rotation = ((180 - (Mathf.Acos(MoveHorizontal) * 360 / 3.14F)) / 2) + 180;
+					rb2d.rotation = ((180 - (Mathf.Acos(Movement.x) * 360 / 3.14F)) / 2) + 180;
                 }
+
+				Debug.Log (MoveHorizontal);
             }
         }
     }
     // Update is called once per frame
     void Update()
     {
-		rb2d.velocity = new Vector2(0F, 0F);
+		//rb2d.velocity = new Vector2(0F, 0F);
         if (!GameManager.instance.ghostpause)
         {
             underAttack = false;
