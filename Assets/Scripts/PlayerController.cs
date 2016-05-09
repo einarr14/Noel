@@ -156,22 +156,26 @@ public class PlayerController : MonoBehaviour
     private void move(int direction, char killChar) // direction should shuld be 1 or -1 to determine the direction
     {
         Vector2 currPoint = rb2d.position;
+		MoveHorizontal = 0;
+		MoveVertical = 0;
         if (killChar != 'A' || killChar != 'D')
         {
-            MoveHorizontal = Input.GetAxis("Horizontal") * direction;
-        }
-        else
-        {
-            MoveHorizontal = 0;
+			if (Input.GetButton ("Right")) {
+				MoveHorizontal++;
+			}
+			if (Input.GetButton ("Left")) {
+				MoveHorizontal--;
+			}
         }
 
         if (killChar != 'W' || killChar != 'D')
         {
-            MoveVertical = Input.GetAxis("Vertical") * direction;
-        }
-        else
-        {
-            MoveVertical = 0;
+			if (Input.GetButton ("Up")) {
+				MoveVertical++;
+			}
+			if (Input.GetButton ("Down")) {
+				MoveVertical--;
+			}
         }
 
         
