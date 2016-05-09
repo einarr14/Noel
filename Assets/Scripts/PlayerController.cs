@@ -7,7 +7,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb2d;
     public bool underAttack = false;
     public bool immobile = false;
-    private
+    private float MoveVertical;
+    private float MoveHorizontal;
+    private char typechar;
 
 
     GameManager gameManager;
@@ -32,28 +34,7 @@ public class PlayerController : MonoBehaviour
         }
         if (!GameManager.instance.ghostpause)
         {
-            Vector2 currPoint = rb2d.position;
-            float MoveHorizontal = Input.GetAxis("Horizontal");
-            float MoveVertical = Input.GetAxis("Vertical");
-            if (MoveHorizontal != 0 || MoveVertical != 0)
-            {
-                //float Direction = Mathf.Sqrt(MoveHorizontal * MoveHorizontal + MoveVertical * MoveVertical);
-                //MoveHorizontal = MoveHorizontal / Direction;
-                //MoveVertical = MoveVertical / Direction;
-				Vector2 Movement = new Vector2(MoveHorizontal, MoveVertical).normalized;
-				Vector2 newPosition = currPoint + speed * Movement * Time.deltaTime;
-                rb2d.MovePosition(newPosition);
-                if (MoveVertical > 0)
-                {
-					rb2d.rotation = ((180 + (Mathf.Acos(Movement.x) * 360 / 3.14F)) / 2) + 180;
-                }
-                else
-                {
-					rb2d.rotation = ((180 - (Mathf.Acos(Movement.x) * 360 / 3.14F)) / 2) + 180;
-                }
-
-				Debug.Log (MoveHorizontal);
-            }
+            move(1,'f');
         }
     }
     // Update is called once per frame
@@ -90,10 +71,12 @@ public class PlayerController : MonoBehaviour
         {
             if (boardManager.monsters[i].GetComponent<SpiderController>().inRange())
             {
-                for(int j = 0; j<killword.Length; j++)
+                typechar = boardManager.monsters[i].GetComponent<SpiderController>().getChar();
+                for (int j = 0; j<killword.Length; j++)
                 {
                     if (killword[j] == boardManager.monsters[i].GetComponent<SpiderController>().getChar())
                     {
+                        
                         boardManager.monsters[i].GetComponent<SpiderController>().increaseLetters();
                        
                     }
@@ -113,6 +96,7 @@ public class PlayerController : MonoBehaviour
                 {
                     if (open[j] == boardManager.doors[i].GetComponent<DoorController>().getChar())
                     {
+                        
                         boardManager.doors[i].GetComponent<DoorController>().increaseLetters();
                     }
                 }
@@ -128,10 +112,12 @@ public class PlayerController : MonoBehaviour
                 { 
                     if (boardManager.ghosts[i].GetComponent<GhostController>().inRange())
                     {
+                        typechar = boardManager.ghosts[i].GetComponent<GhostController>().getChar();
                         for (int j = 0; j < ask.Length; j++)
                         {
                             if (ask[j] == boardManager.ghosts[i].GetComponent<GhostController>().getChar())
                             {
+                                
                                 boardManager.ghosts[i].GetComponent<GhostController>().increaseLetters();
                             }
                         }
@@ -161,9 +147,49 @@ public class PlayerController : MonoBehaviour
                     if (boardManager.ghosts[i].GetComponent<GhostController>().type != "block")
                     {
                         boardManager.ghosts[i].GetComponent<GhostController>().eliminate();
-                        GameManager.instance.ghostscreen();
                     }
+                    
                 }
+            }
+        }
+    }
+    private void move(int direction, char killChar) // direction should shuld be 1 or -1 to determine the direction
+    {
+        Vector2 currPoint = rb2d.position;
+        if (killChar != 'A' || killChar != 'D')
+        {
+            MoveHorizontal = Input.GetAxis("Horizontal") * direction;
+        }
+        else
+        {
+            MoveHorizontal = 0;
+        }
+
+        if (killChar != 'W' || killChar != 'D')
+        {
+            MoveVertical = Input.GetAxis("Vertical") * direction;
+        }
+        else
+        {
+            MoveVertical = 0;
+        }
+
+        
+        if (MoveHorizontal != 0 || MoveVertical != 0)
+        {
+            float Direction = Mathf.Sqrt(MoveHorizontal * MoveHorizontal + MoveVertical * MoveVertical);
+            MoveHorizontal = MoveHorizontal / Direction;
+            MoveVertical = MoveVertical / Direction;
+            Vector2 Movement = new Vector2(MoveHorizontal, MoveVertical).normalized;
+            Vector2 newPosition = currPoint + speed * Movement;
+            rb2d.MovePosition(newPosition);
+            if (MoveVertical > 0)
+            {
+                rb2d.rotation = ((180 + (Mathf.Acos(MoveHorizontal) * 360 / 3.14F)) / 2) + 180;
+            }
+            else
+            {
+                rb2d.rotation = ((180 - (Mathf.Acos(MoveHorizontal) * 360 / 3.14F)) / 2) + 180;
             }
         }
     }

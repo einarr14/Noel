@@ -111,6 +111,8 @@ public class GhostController : MonoBehaviour {
         {
             GameManager.instance.ghostscreen();
             label.text = riddle;
+            askLeft = ask;
+            askDone = "";
         } 
         
     }
