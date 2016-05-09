@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
         }
         if (!GameManager.instance.ghostpause)
         {
-            move(1,'f');
+            move(1,typechar);
         }
     }
     // Update is called once per frame
@@ -138,7 +138,7 @@ public class PlayerController : MonoBehaviour
                     boardManager.ghosts[i].GetComponent<GhostController>().increaseHealth();
                     boardManager.ghosts[i].GetComponent<GhostController>().eliminate();
                    
-                        GameManager.instance.ghostscreen();
+                    
 
                 }
                 else
