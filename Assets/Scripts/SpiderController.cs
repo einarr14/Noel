@@ -26,11 +26,14 @@ public class SpiderController : MonoBehaviour {
     private string killWordDone;
     private bool firsttime;
 	public bool timeSlowed = false;
-	private AudioSource source;
+	private AudioSource spiderAttack;
+	private AudioSource spiderDie;
 
 	void Awake ()
 	{
-		source = GetComponent<AudioSource> ();
+		AudioSource[] source = GetComponents<AudioSource> ();
+		spiderAttack = source [0];
+		spiderDie = source [1];
 	}
 
     // Use this for initialization
@@ -100,7 +103,7 @@ public class SpiderController : MonoBehaviour {
 	}
 
 	private IEnumerator DoBitePlayer () {
-		source.Play ();
+		spiderAttack.Play ();
 		playerHealth.TakeDamage (damage);
         animator.SetTrigger("SpiderBite");
         yield return new WaitForSeconds (attackSpeed);
@@ -123,6 +126,7 @@ public class SpiderController : MonoBehaviour {
 	}
     public void eliminate ()
     {
+		spiderDie.Play ();
 		Vector3 curpos = this.transform.position;
 		curpos.y += 1000F;
 		this.transform.position = curpos;
