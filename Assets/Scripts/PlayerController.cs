@@ -167,7 +167,6 @@ public class PlayerController : MonoBehaviour
 				MoveHorizontal--;
 			}
         }
-
         if (killChar != 'W' || killChar != 'D')
         {
 			if (Input.GetKey(KeyCode.UpArrow)) {

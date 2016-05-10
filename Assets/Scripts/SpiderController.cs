@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class SpiderController : MonoBehaviour {
-    public int strength;
 	public float speed;
 	private Rigidbody2D rb2d;
 	public float maxRange;
@@ -15,10 +14,7 @@ public class SpiderController : MonoBehaviour {
 	public float attackSpeed;
 	PlayerHealth playerHealth;
     private Animator animator;
-    private GUIText killText;
     public Text label;
-    private int randnum;
-    private BoardManager boardManager;
 	private GameObject myCanvas;
 	public string canvasName;
     private string theKillWord;
@@ -31,10 +27,9 @@ public class SpiderController : MonoBehaviour {
     {
         rb2d = GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player");
-        boardManager = GameObject.Find("BoardManager").GetComponent<BoardManager>();
         playerHealth = player.GetComponent<PlayerHealth>();
         animator = GetComponent<Animator>();
-        randnum = Mathf.FloorToInt(Random.value * 8);
+        
         myCanvas = GameObject.Find(canvasName);
     
     }
