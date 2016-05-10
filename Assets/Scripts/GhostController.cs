@@ -8,7 +8,6 @@ public class GhostController : MonoBehaviour {
 	public float speed;
 	public float minRange;
 	public float maxRange;
-    private BoardManager boardmanager;
     public Text label;
     public Text answer;
     private float distance;
@@ -32,7 +31,6 @@ public class GhostController : MonoBehaviour {
         label.text = "";
 		rb2d = GetComponent<Rigidbody2D>();
 		player = GameObject.Find ("Player");
-        boardmanager = GameObject.Find("BoardManager").GetComponent<BoardManager>();
         playerHealth = player.GetComponent<PlayerHealth>();
         ask = "TALK";
         askLeft = ask;
