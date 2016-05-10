@@ -24,7 +24,6 @@ public class DoorController : UnitController {
 	protected void Update () {
 		base.Update ();
 		if (inRange ()) {
-			Debug.Log ("chuuuunt");
 		}
 	}
 

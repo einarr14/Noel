@@ -9,6 +9,15 @@ public class SpiderController : MonsterController {
     private Animator animator;
 	public bool timeSlowed = false;
 	private string [] killPhrases;
+	private AudioSource spiderAttack;
+	private AudioSource spiderDie;
+
+	void Awake ()
+	{
+		AudioSource[] source = GetComponents<AudioSource> ();
+		spiderAttack = source [0];
+		spiderDie = source [1];
+	}
 
     //to be removed
 	private GameObject myCanvas;
@@ -78,6 +87,7 @@ public class SpiderController : MonsterController {
 	}
 
 	private IEnumerator DoBitePlayer () {
+		spiderAttack.Play ();
 		playerHealth.TakeDamage (damage);
         animator.SetTrigger("SpiderBite");
         yield return new WaitForSeconds (attackSpeed);
@@ -88,6 +98,7 @@ public class SpiderController : MonsterController {
 
 	protected override void wordAction ()
     {
+		spiderDie.Play ();
 		Vector3 curpos = this.transform.position;
 		curpos.y += 1000F;
 		this.transform.position = curpos;

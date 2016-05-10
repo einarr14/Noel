@@ -31,7 +31,8 @@ public class GhostController : MonsterController {
             {
                 if (distance < maxRange && distance > minRange)
                 {
-					//source.Play ();
+					source.time = 0.9f;
+					source.Play ();
 					move ();
                 }
                 else if (distance <= minRange)
