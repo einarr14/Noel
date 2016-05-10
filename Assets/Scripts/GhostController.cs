@@ -3,7 +3,6 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class GhostController : MonsterController {
-	
     public Text answer;
     private string riddle;
     public string type;
