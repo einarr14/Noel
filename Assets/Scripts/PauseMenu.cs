@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour {
 	public bool isPaused;
 	public GameObject pauseMenuCanvas;
+	public InputField input;
 	
 	// Update is called once per frame
 	void Update () {
@@ -13,6 +15,8 @@ public class PauseMenu : MonoBehaviour {
 		} else {
 			pauseMenuCanvas.SetActive (false);
 			Time.timeScale = 1f;
+			input.Select ();
+			input.ActivateInputField();
 		}
 
 		if (Input.GetKeyDown (KeyCode.Escape)) {
