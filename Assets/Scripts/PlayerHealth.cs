@@ -21,10 +21,15 @@ public class PlayerHealth : MonoBehaviour {
 	private Color flashColor = new Color(1F,0F,0F,0.1F);
 	private float blendColor;
 	public Light playerLight;
-
+    public AudioSource charHit;
+    public AudioSource charDeath;
 
 	// Use this for initialization
 	void Start () {
+        AudioSource[] audio = GetComponents<AudioSource>();
+        charHit = audio[0];
+        charDeath = audio[1];
+
 		//currentHealth = totalHealth;
 		visualHealth.value = currentHealth;
 		gameManager = GameObject.Find ("GameManager");
@@ -68,7 +73,14 @@ public class PlayerHealth : MonoBehaviour {
 	}
 
 	public void TakeDamage (int ammount) {
-		
+		if(ammount >= currentHealth)
+        {
+            charDeath.Play();
+        }
+        else
+        {
+            charHit.Play();
+        }
 		currentHealth -= ammount;
 		visualHealth.value = currentHealth;
 		blendColor = 1;
