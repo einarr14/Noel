@@ -19,7 +19,12 @@ public class GhostController : MonoBehaviour {
     private string ask;
     private string askLeft;
     private string askDone;
-   
+	private AudioSource source;
+
+	void Awake ()
+	{
+		source = GetComponent<AudioSource> ();
+	}
 
     // Use this for initialization
     void Start () {
@@ -45,6 +50,7 @@ public class GhostController : MonoBehaviour {
             {
                 if (distance < maxRange && distance > minRange)
                 {
+					source.Play ();
                     float moveY = (playerPoint.y - currPoint.y) / distance;
                     float moveX = (playerPoint.x - currPoint.x) / distance;
                     Vector2 Movement = new Vector2(moveX, moveY);
