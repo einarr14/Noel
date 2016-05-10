@@ -21,6 +21,7 @@ public class SpiderController : MonoBehaviour {
     private string killWordLeft;
     private string killWordDone;
     private bool firsttime;
+	public bool timeSlowed = false;
 
     // Use this for initialization
     void Start()
@@ -31,7 +32,6 @@ public class SpiderController : MonoBehaviour {
         animator = GetComponent<Animator>();
         
         myCanvas = GameObject.Find(canvasName);
-    
     }
 
 	// Update is called once per frame
@@ -44,7 +44,7 @@ public class SpiderController : MonoBehaviour {
             Vector2 currPoint = rb2d.position;
             float distance = Mathf.Sqrt(Mathf.Pow((playerPoint.x - currPoint.x), 2F) + Mathf.Pow((playerPoint.y - currPoint.y), 2F));
             if (distance < maxRange && distance > minRange)
-            {
+			{
                 float moveY = (playerPoint.y - currPoint.y) / distance;
                 float moveX = (playerPoint.x - currPoint.x) / distance;
                 Vector2 Movement = new Vector2(moveX, moveY);
@@ -82,8 +82,8 @@ public class SpiderController : MonoBehaviour {
 
             }
         }
-
 	}
+
 	private void BitePlayer() {
 		StartCoroutine (DoBitePlayer());
 	}
@@ -116,6 +116,7 @@ public class SpiderController : MonoBehaviour {
 		this.transform.position = curpos;
         killWordDone = "";
         killWordLeft = theKillWord;
+		timeSlowed = false;
     }
     public void increaseLetters()
     {
@@ -138,6 +139,7 @@ public class SpiderController : MonoBehaviour {
         Debug.Log(theKillWord);
         killWordLeft = theKillWord;
         killWordDone = "";
+		timeSlowed = false;
     }
 }
 
