@@ -50,6 +50,7 @@ public class GhostController : MonoBehaviour {
             {
                 if (distance < maxRange && distance > minRange)
                 {
+					source.time = 0.9f;
 					source.Play ();
                     float moveY = (playerPoint.y - currPoint.y) / distance;
                     float moveX = (playerPoint.x - currPoint.x) / distance;
