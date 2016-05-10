@@ -13,10 +13,13 @@ public class UnitController : MonoBehaviour {
 	protected Vector3 playerPoint;
 	protected Vector2 currPoint;
 	protected Vector3 originalPosition;
+	protected GameObject privateCanvas; 
+	protected Text privateText;
+	protected Vector3 textPos;
 
 	public float maxRange;
 	public float minRange;
-	public Text label;
+	//public Text label;
 
 	void Awake () {
 		
@@ -27,6 +30,17 @@ public class UnitController : MonoBehaviour {
 		rb2d = GetComponent<Rigidbody2D> ();
 		player = GameObject.Find ("Player");
 		originalPosition = rb2d.transform.position;
+		textPos = new Vector3 (0, 2, 0);
+		privateCanvas = new GameObject("privateCanvas", typeof(Canvas));
+		privateCanvas.AddComponent<Text>();
+		privateText = privateCanvas.GetComponent<Text> ();
+		privateText.transform.position = textPos;
+		privateCanvas.transform.position = rb2d.transform.position;
+		privateCanvas.transform.localScale = new Vector3 (0.01F, 0.01F, 1);
+		privateText.font = GameObject.Find ("Canvas").GetComponentInChildren<Text> ().font;
+		privateText.alignment = TextAnchor.MiddleCenter;
+		privateText.horizontalOverflow = HorizontalWrapMode.Overflow;
+		privateText.fontSize = 50;
 	}
 	
 	// Update is called once per frame
@@ -35,6 +49,7 @@ public class UnitController : MonoBehaviour {
 			playerPoint = player.transform.position;
 			currPoint = rb2d.position;
 			distance = Mathf.Sqrt (Mathf.Pow ((playerPoint.x - currPoint.x), 2F) + Mathf.Pow ((playerPoint.y - currPoint.y), 2F));
+			privateCanvas.transform.position = textPos + rb2d.transform.position;
 		}
 	}
 
@@ -42,10 +57,10 @@ public class UnitController : MonoBehaviour {
 		{
 			if (distance <= maxRange)
 			{
-				label.text =  "<color=#800000ff>" + wordDone + "</color>" + wordLeft;
+				privateText.text =  "<color=#800000ff>" + wordDone + "</color>" + wordLeft;
 				return true;
 			}
-			label.text = "";
+			privateText.text = "";
 			return false;
 		}
 	}

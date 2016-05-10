@@ -20,8 +20,8 @@ public class SpiderController : MonsterController {
 	}
 
     //to be removed
-	private GameObject myCanvas;
-	public string canvasName;
+//	private GameObject myCanvas;
+//	public string canvasName;
     
     // Use this for initialization
 	protected void Start()
@@ -29,7 +29,7 @@ public class SpiderController : MonsterController {
 		base.Start ();
 		attacking = false;
         animator = GetComponent<Animator>();
-        myCanvas = GameObject.Find(canvasName);
+        //myCanvas = GameObject.Find(canvasName);
 		initializeKillPhrases ();
 		reset ();
     }
@@ -37,7 +37,6 @@ public class SpiderController : MonsterController {
 	// Update is called once per frame
 	protected void Update () {
 		base.Update ();
-		myCanvas.transform.position = this.transform.position;
         if (!GameManager.instance.ghostpause)
         {
 			move ();

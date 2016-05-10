@@ -17,7 +17,7 @@ public class GhostController : MonsterController {
     // Use this for initialization
 	protected void Start () {
 		base.Start ();
-		riddle = label.text;
+		riddle = privateText.text ;
 		reset ();
     }
 	
@@ -37,7 +37,7 @@ public class GhostController : MonsterController {
                 else if (distance <= minRange)
                 {
                     GameManager.instance.ghostscreen();
-                    label.text = riddle;
+					privateText.text = riddle;
 
                 }
                 else
@@ -51,7 +51,7 @@ public class GhostController : MonsterController {
 	protected override void wordAction()
     {
 		GameManager.instance.ghostscreen();
-		label.text = riddle;
+		privateText.text = riddle;
 		wordLeft = word;
 		wordDone = "";
     }
