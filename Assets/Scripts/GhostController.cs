@@ -2,23 +2,12 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class GhostController : MonoBehaviour {
-	private Rigidbody2D rb2d;
-	private GameObject player;
-	public float speed;
-	public float minRange;
-	public float maxRange;
-    private BoardManager boardmanager;
-    public Text label;
+public class GhostController : MonsterController {
+	
     public Text answer;
-    private float distance;
-    PlayerHealth playerHealth;
-    public int damage;
     private string riddle;
     public string type;
-    private string ask;
-    private string askLeft;
-    private string askDone;
+
 	private AudioSource source;
 
 	void Awake ()
@@ -27,35 +16,23 @@ public class GhostController : MonoBehaviour {
 	}
 
     // Use this for initialization
-    void Start () {
-        riddle = label.text;
-        label.text = "";
-		rb2d = GetComponent<Rigidbody2D>();
-		player = GameObject.Find ("Player");
-        boardmanager = GameObject.Find("BoardManager").GetComponent<BoardManager>();
-        playerHealth = player.GetComponent<PlayerHealth>();
-        ask = "TALK";
-        askLeft = ask;
-        askDone = "";
+	protected void Start () {
+		base.Start ();
+		riddle = label.text;
+		reset ();
     }
 	
 	// Update is called once per frame
-	void Update () {
+	protected void Update () {
+		base.Update ();
         if (!GameManager.instance.ghostpause)
         {
-            var playerPoint = player.transform.position;
-            Vector2 currPoint = rb2d.position;
-            distance = Mathf.Sqrt(Mathf.Pow((playerPoint.x - currPoint.x), 2F) + Mathf.Pow((playerPoint.y - currPoint.y), 2F));
             if (type != "block")
             {
                 if (distance < maxRange && distance > minRange)
                 {
-					source.Play ();
-                    float moveY = (playerPoint.y - currPoint.y) / distance;
-                    float moveX = (playerPoint.x - currPoint.x) / distance;
-                    Vector2 Movement = new Vector2(moveX, moveY);
-                    Vector2 newPosition = currPoint + speed * Movement;
-                    rb2d.MovePosition(newPosition);
+					//source.Play ();
+					move ();
                 }
                 else if (distance <= minRange)
                 {
@@ -68,62 +45,40 @@ public class GhostController : MonoBehaviour {
                     rb2d.velocity = new Vector2(0, 0);
                 }
             }
-            else
-            {
-                if (inRange())
-                {
-                    label.text = "<color=#800000ff>" + askDone + "</color>" + askLeft;
-                }
-                else
-                {
-                    label.text = "";
-                }
-            }
-        }
-        else
-        {
-            
         }
 	}
-    public bool inRange()
+		
+	protected override void wordAction()
     {
-        
-        if (distance <= minRange)
-        {
-            return true;
-        }
-        return false;
+		GameManager.instance.ghostscreen();
+		label.text = riddle;
+		wordLeft = word;
+		wordDone = "";
     }
-    public void eliminate()
-    {
-        Vector3 curpos = this.transform.position;
-        curpos.y += 1000F;
-        this.transform.position = curpos;
-    }
+
     public void increaseHealth()
     {
         playerHealth.IncreaseHealth(damage);
     }
-    public void damagePlayer()
-    {
-        playerHealth.TakeDamage(damage);
-    }
-    public void increaseLetters()
-    {
 
-        askDone = askDone + askLeft[0];
-        askLeft = askLeft.Remove(0, 1);
-        if (askDone == ask)
-        {
-            GameManager.instance.ghostscreen();
-            label.text = riddle;
-            askLeft = ask;
-            askDone = "";
-        } 
-        
-    }
-    public char getChar()
-    {
-        return askLeft[0];
-    }
+	public void eliminate()
+	{
+		Vector3 curpos = this.transform.position;
+		curpos.y += 1000F;
+		this.transform.position = curpos;
+	}
+
+	public override void reset ()
+	{
+		rb2d.transform.position = originalPosition;
+		if (type == "block") {
+			word = "TALK";
+			wordLeft = word;
+			wordDone = "";
+		} else {
+			word = "";
+			wordLeft = "";
+			wordDone = "";
+		}
+	}
 }

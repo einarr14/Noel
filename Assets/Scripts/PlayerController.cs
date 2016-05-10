@@ -53,7 +53,6 @@ public class PlayerController : MonoBehaviour
                 if (boardManager.monsters[i].GetComponent<SpiderController>().inRange())
                 {
 					if (!boardManager.monsters[i].GetComponent<SpiderController>().timeSlowed) {
-						Debug.Log ("SLowint time");
 						StartCoroutine(slowTime(0.2F, 1F));
 						boardManager.monsters [i].GetComponent<SpiderController> ().timeSlowed = true;
 					}
@@ -83,6 +82,26 @@ public class PlayerController : MonoBehaviour
         return underAttack;
     }
 
+//	public void checkWord(string word, Component comp) {
+//		word = word.ToUpper();
+//
+//		for (int i = 0; i < boardManager.units.Length; i++)
+//		{
+//			if (boardManager.monsters[i].GetComponent<SpiderController>().inRange())
+//			{
+//				for (int j = 0; j<killword.Length; j++)
+//				{
+//					if (killword[j] == boardManager.monsters[i].GetComponent<SpiderController>().getChar())
+//					{
+//
+//						boardManager.monsters [i].GetComponent<SpiderController> ().increaseLetters ();
+//
+//					}
+//				}
+//			}
+//		}
+//	}
+
     public void kill(string killword)
     {
         killword = killword.ToUpper();
@@ -91,13 +110,12 @@ public class PlayerController : MonoBehaviour
         {
             if (boardManager.monsters[i].GetComponent<SpiderController>().inRange())
             {
-                typechar = boardManager.monsters[i].GetComponent<SpiderController>().getChar();
                 for (int j = 0; j<killword.Length; j++)
                 {
                     if (killword[j] == boardManager.monsters[i].GetComponent<SpiderController>().getChar())
                     {
                         
-                        boardManager.monsters[i].GetComponent<SpiderController>().increaseLetters();
+						boardManager.monsters [i].GetComponent<SpiderController> ().increaseLetters ();
                        
                     }
                 }

@@ -2,15 +2,8 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class DoorController : MonoBehaviour {
-	private Rigidbody2D rb2d;
-	private GameObject player;
-	public float minRange;
-	public float maxRange;
-	public Text label;
-    private string wordDone;
-    private string wordLeft;
-    private string open;
+public class DoorController : UnitController {
+
 	public float openTimeDelay;
 	public float openRotation;
 	private AudioSource source;
@@ -19,49 +12,33 @@ public class DoorController : MonoBehaviour {
     void Awake ()
     {
 		source = GetComponent<AudioSource> ();
-        open = "OPEN";
-        wordDone = "";
-        wordLeft = open;
     }
-	void Start () {
-		rb2d = GetComponent<Rigidbody2D>();
-		player = GameObject.Find ("Player");
+	protected void Start () {
+		base.Start ();
+		rb2d.freezeRotation = true;
+		reset ();
         
 	}
 
 	// Update is called once per frame
-	void Update () {
-		inRange ();
-	}
-
-	public bool inRange () {
-		var playerPoint = player.transform.position;
-		Vector2 currPoint = rb2d.position;
-		float distance = Mathf.Sqrt (Mathf.Pow ((playerPoint.x - currPoint.x), 2F) + Mathf.Pow ((playerPoint.y - currPoint.y), 2F));
-		if (distance < maxRange) {
-			label.text = "<color=#800000ff>" + wordDone + "</color>" + wordLeft; 
-			return true;
+	protected void Update () {
+		base.Update ();
+		if (inRange ()) {
+			Debug.Log ("chuuuunt");
 		}
-		label.text = "";
-		return false;
 	}
 
-	public void resetWord() {
-		open = "OPEN";
+	public override void reset() {
+		word = "OPEN";
 		wordDone = "";
-		wordLeft = open;
-	}
-
-	public void freezeRotation() {
-		rb2d.freezeRotation = true;
-	}
-
-	public void unFreezeRotation() {
-		rb2d.freezeRotation = false;
-	}
-
-	public void resetRotation() {
+		wordLeft = word;
 		rb2d.rotation = 0;
+		rb2d.transform.position = originalPosition;
+	}
+
+	protected override void wordAction ()
+	{
+		StartCoroutine (rotateDoor () );
 	}
 
 	private IEnumerator rotateDoor () {
@@ -75,22 +52,4 @@ public class DoorController : MonoBehaviour {
 			yield return new WaitForSeconds (openTimeDelay);
 		}
 	}
-
-    public void increaseLetters()
-    {
-
-        wordDone = wordDone + wordLeft[0];
-        wordLeft = wordLeft.Remove(0, 1);
-        if (wordDone == open)
-        {
-			StartCoroutine(rotateDoor());
-        }
-    }
-    public char getChar()
-    {
-		if (wordLeft.Length > 0) {
-			return wordLeft [0];
-		}
-		return ' ';
-    }
 }

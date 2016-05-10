@@ -47,7 +47,6 @@ public class GameManager : MonoBehaviour
 	void Update()
 	{
 		if (playerHealth.currentHealth < 1) {
-			Debug.Log ("here");
 			gameOver ();
 		}
 
