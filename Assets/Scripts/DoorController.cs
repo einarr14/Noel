@@ -13,10 +13,12 @@ public class DoorController : MonoBehaviour {
     private string unlock;
 	public float openTimeDelay;
 	public float openRotation;
+	private AudioSource source;
 
 	// Use this for initialization
     void Awake ()
     {
+		source = GetComponent<AudioSource> ();
         unlock = "UNLOCK";
         wordDone = "";
         wordLeft = unlock;
@@ -63,13 +65,13 @@ public class DoorController : MonoBehaviour {
 	}
 
 	private IEnumerator rotateDoor () {
+		source.Play ();
 		while (Mathf.Abs(rb2d.rotation - openRotation) > 1) {
 			if (openRotation >= rb2d.rotation) {
 				rb2d.rotation += 1;
 			} else {
 				rb2d.rotation -= 1;
 			}
-
 			yield return new WaitForSeconds (openTimeDelay);
 		}
 	}
