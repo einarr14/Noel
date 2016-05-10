@@ -10,7 +10,7 @@ public class DoorController : MonoBehaviour {
 	public Text label;
     private string wordDone;
     private string wordLeft;
-    private string unlock;
+    private string open;
 	public float openTimeDelay;
 	public float openRotation;
 	private AudioSource source;
@@ -19,9 +19,9 @@ public class DoorController : MonoBehaviour {
     void Awake ()
     {
 		source = GetComponent<AudioSource> ();
-        unlock = "UNLOCK";
+        open = "OPEN";
         wordDone = "";
-        wordLeft = unlock;
+        wordLeft = open;
     }
 	void Start () {
 		rb2d = GetComponent<Rigidbody2D>();
@@ -47,9 +47,9 @@ public class DoorController : MonoBehaviour {
 	}
 
 	public void resetWord() {
-		unlock = "UNLOCK";
+		open = "OPEN";
 		wordDone = "";
-		wordLeft = unlock;
+		wordLeft = open;
 	}
 
 	public void freezeRotation() {
@@ -81,7 +81,7 @@ public class DoorController : MonoBehaviour {
 
         wordDone = wordDone + wordLeft[0];
         wordLeft = wordLeft.Remove(0, 1);
-        if (wordDone == unlock)
+        if (wordDone == open)
         {
 			StartCoroutine(rotateDoor());
         }
