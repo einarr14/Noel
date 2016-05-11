@@ -28,8 +28,8 @@ public class PlayerInput : MonoBehaviour {
             string sentence = input.text;
             input.text = "";
             GameObject.Find("Player").GetComponent<PlayerController>().kill(sentence);
-            GameObject.Find("Player").GetComponent<PlayerController>().openDoor(sentence);
-            GameObject.Find("Player").GetComponent<PlayerController>().askghost(sentence);
+            //GameObject.Find("Player").GetComponent<PlayerController>().openDoor(sentence);
+            //GameObject.Find("Player").GetComponent<PlayerController>().askghost(sentence);
             if (Input.GetKeyDown("return"))
             {
                 input.Select();

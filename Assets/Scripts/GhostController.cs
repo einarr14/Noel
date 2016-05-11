@@ -4,20 +4,19 @@ using System.Collections;
 
 public class GhostController : MonsterController {
     public Text answer;
-    private string riddle;
-    public string type;
 
 	private AudioSource source;
 
 	void Awake ()
 	{
 		source = GetComponent<AudioSource> ();
+        type = "Ghost";
 	}
 
     // Use this for initialization
 	protected void Start () {
 		base.Start ();
-		riddle = privateText.text ;
+		//riddle = privateText.text ;
 		reset ();
     }
 	
@@ -26,7 +25,7 @@ public class GhostController : MonsterController {
 		base.Update ();
         if (!GameManager.instance.ghostpause)
         {
-            if (type != "block")
+            if (true)
             {
                 if (distance < maxRange && distance > minRange)
                 {
@@ -37,7 +36,7 @@ public class GhostController : MonsterController {
                 else if (distance <= minRange)
                 {
                     GameManager.instance.ghostscreen();
-					privateText.text = riddle;
+					//privateText.text = riddle;
 
                 }
                 else
@@ -51,7 +50,7 @@ public class GhostController : MonsterController {
 	protected override void wordAction()
     {
 		GameManager.instance.ghostscreen();
-		privateText.text = riddle;
+		//privateText.text = riddle;
 		wordLeft = word;
 		wordDone = "";
     }
@@ -71,7 +70,7 @@ public class GhostController : MonsterController {
 	public override void reset ()
 	{
 		rb2d.transform.position = originalPosition;
-		if (type == "block") {
+		if (true) {
 			word = "TALK";
 			wordLeft = word;
 			wordDone = "";

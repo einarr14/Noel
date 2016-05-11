@@ -1,15 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class BatController : MonsterController {
 
-    public float biteRange;
-    private bool attacking;
-    public float attackSpeed;
+    
     public int lifeSteal;
     //private Animator animator;
-    public bool timeSlowed = false;
-    private string[] killPhrases;
     //private AudioSource spiderAttack;
     //private AudioSource spiderDie;
 
@@ -18,6 +15,7 @@ public class BatController : MonsterController {
         //AudioSource[] source = GetComponents<AudioSource>();
         //spiderAttack = source[0];
         //spiderDie = source[1];
+        type = "Bat";
     }
 
     // Use this for initialization
@@ -28,6 +26,7 @@ public class BatController : MonsterController {
         // animator = GetComponent<Animator>();
         initializeKillPhrases();
         reset();
+        timeSlowed = false;
     }
 
     // Update is called once per frame
@@ -113,20 +112,7 @@ public class BatController : MonsterController {
         timeSlowed = false;
     }
 
-    private void initializeKillPhrases()
-    {
-        killPhrases = new string[9];
-
-        killPhrases[0] = "SAVAGE GARDEN";
-        killPhrases[1] = "MURDERTRAIN";
-        killPhrases[2] = "EINAR SAVAGE";
-        killPhrases[3] = "MASTER OF INHERITANCE";
-        killPhrases[4] = "YO MAMA";
-        killPhrases[5] = "ELDERLY BINGONIGHT";
-        killPhrases[6] = "ZOOLANDER 2";
-        killPhrases[7] = "HOT MAMA BITCH";
-        killPhrases[8] = "COOL GUYS DONT LOOK AT EXPLOTIONS";
-    }
+   
     private void backupLetters(int numberOfLetters)
     {
         for (int i = 0; i< numberOfLetters;i++)

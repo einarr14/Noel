@@ -4,11 +4,15 @@ using System.Collections;
 public class MonsterController : UnitController {
 
 	protected PlayerHealth playerHealth;
-
-	public float speed;
+    protected string[] killPhrases;
+    public float speed;
 	public int damage;
+    public float biteRange;
+    protected bool attacking;
+    public float attackSpeed;
 
-	void Awake () {
+
+    void Awake () {
 	}
 
 	// Use this for initialization
@@ -31,12 +35,23 @@ public class MonsterController : UnitController {
 		rb2d.MovePosition(newPosition);
 	}
 
-//	protected virtual void wordAction() {
-//
-//	}
 
-	public void damagePlayer()
+	public override void damagePlayer()
 	{
 		playerHealth.TakeDamage(damage);
 	}
+    protected void initializeKillPhrases()
+    {
+        killPhrases = new string[9];
+
+        killPhrases[0] = "SAVAGE GARDEN";
+        killPhrases[1] = "MURDERTRAIN";
+        killPhrases[2] = "EINAR SAVAGE";
+        killPhrases[3] = "MASTER OF INHERITANCE";
+        killPhrases[4] = "YO MAMA";
+        killPhrases[5] = "ELDERLY BINGONIGHT";
+        killPhrases[6] = "ZOOLANDER 2";
+        killPhrases[7] = "HOT MAMA BITCH";
+        killPhrases[8] = "COOL GUYS DONT LOOK AT EXPLOTIONS";
+    }
 }

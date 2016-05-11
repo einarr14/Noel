@@ -16,6 +16,9 @@ public class UnitController : MonoBehaviour {
 	protected GameObject privateCanvas; 
 	protected Text privateText;
 	protected Vector3 textPos;
+    protected string type;
+    public bool hostile;
+    public bool timeSlowed;
 
 	public float maxRange;
 	public float minRange;
@@ -41,6 +44,7 @@ public class UnitController : MonoBehaviour {
 		privateText.alignment = TextAnchor.MiddleCenter;
 		privateText.horizontalOverflow = HorizontalWrapMode.Overflow;
 		privateText.fontSize = 50;
+        timeSlowed = true;
 	}
 	
 	// Update is called once per frame
@@ -85,4 +89,28 @@ public class UnitController : MonoBehaviour {
 	public virtual void reset () {
 
 	}
+    protected virtual void move()
+    {
+
+    }
+    public virtual void damagePlayer()
+    {
+
+    }
+    public string getType()
+    {
+        return type;
+    }
+    public virtual void increaseHealth()
+    {
+
+    }
+    public virtual void eliminate()
+    {
+
+    }
+    public virtual string getAnswer()
+    {
+        return "";
+    }
 }

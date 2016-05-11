@@ -3,12 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class SpiderController : MonsterController {
-	public float biteRange;
-	private bool attacking;
-	public float attackSpeed;
     private Animator animator;
-	public bool timeSlowed;
-	private string [] killPhrases;
 	private AudioSource spiderAttack;
 	private AudioSource spiderDie;
 
@@ -17,12 +12,8 @@ public class SpiderController : MonsterController {
 		AudioSource[] source = GetComponents<AudioSource> ();
 		spiderAttack = source [0];
 		spiderDie = source [1];
+        type = "Spider";
 	}
-
-    //to be removed
-//	private GameObject myCanvas;
-//	public string canvasName;
-    
     // Use this for initialization
 	protected void Start()
     {
@@ -30,7 +21,6 @@ public class SpiderController : MonsterController {
 		timeSlowed = false;
 		attacking = false;
         animator = GetComponent<Animator>();
-        //myCanvas = GameObject.Find(canvasName);
 		initializeKillPhrases ();
 		reset ();
     }
@@ -57,18 +47,14 @@ public class SpiderController : MonsterController {
 			Vector2 Movement = new Vector2(moveX, moveY);
 			Vector2 newPosition = currPoint + speed * Movement;
 			animator.SetBool("SpiderWalk", true);
-			//rb2d.MoveRotation (Mathf.Acos (moveX));
 			if (moveY > 0)
 			{
 				rb2d.rotation = (180 + (Mathf.Acos(moveX) * 360 / 3.14F)) / 2;
-				//myCanvas.transform.RotateAround(this.transform.position, new Vector3(0,0,1),0);
 			}
 			else
 			{
 				rb2d.rotation = (180 - (Mathf.Acos(moveX) * 360 / 3.14F)) / 2;
-				//myCanvas.transform.RotateAround(this.transform.position, new Vector3(0,0,1),0);
 			}
-
 			rb2d.MovePosition(newPosition);
 		}
 		else if (distance > maxRange)
@@ -115,19 +101,7 @@ public class SpiderController : MonsterController {
 		timeSlowed = false;
     }
 
-	private void initializeKillPhrases() {
-		killPhrases = new string [9];
 	
-		killPhrases[0] = "SAVAGE GARDEN";
-		killPhrases[1] = "MURDERTRAIN";
-		killPhrases[2] = "EINAR SAVAGE";
-		killPhrases[3] = "MASTER OF INHERITANCE";
-		killPhrases[4] = "YO MAMA";
-		killPhrases[5] = "ELDERLY BINGONIGHT";
-		killPhrases[6] = "ZOOLANDER 2";
-		killPhrases[7] = "HOT MAMA BITCH";
-		killPhrases[8] = "COOL GUYS DONT LOOK AT EXPLOTIONS";
-	}
 }
 
 

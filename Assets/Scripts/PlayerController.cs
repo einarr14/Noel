@@ -51,12 +51,17 @@ public class PlayerController : MonoBehaviour
             underAttack = false;
             for (int i = 0; i < boardManager.monsters.Length; i++)
             {
-                if (boardManager.monsters[i].GetComponent<SpiderController>().inRange())
+                if (boardManager.monsters[i].GetComponent<UnitController>().inRange())
                 {
-					if (!boardManager.monsters[i].GetComponent<SpiderController>().timeSlowed) {
-						StartCoroutine(slowTime(0.5F, 0.5F));
-						boardManager.monsters [i].GetComponent<SpiderController> ().timeSlowed = true;
-					}
+                    if (boardManager.monsters[i].GetComponent<UnitController>().hostile)
+                    {
+                        if (!boardManager.monsters[i].GetComponent<UnitController>().timeSlowed)
+                        {
+                            StartCoroutine(slowTime(0.5F, 0.5F));
+                            boardManager.monsters[i].GetComponent<UnitController>().timeSlowed = true;
+                        }
+                    }
+					
                     underAttack = true;
                 }
             }
@@ -82,25 +87,6 @@ public class PlayerController : MonoBehaviour
         return underAttack;
     }
 
-//	public void checkWord(string word, Component comp) {
-//		word = word.ToUpper();
-//
-//		for (int i = 0; i < boardManager.units.Length; i++)
-//		{
-//			if (boardManager.monsters[i].GetComponent<SpiderController>().inRange())
-//			{
-//				for (int j = 0; j<killword.Length; j++)
-//				{
-//					if (killword[j] == boardManager.monsters[i].GetComponent<SpiderController>().getChar())
-//					{
-//
-//						boardManager.monsters [i].GetComponent<SpiderController> ().increaseLetters ();
-//
-//					}
-//				}
-//			}
-//		}
-//	}
 
     public void kill(string killword)
     {
@@ -108,86 +94,46 @@ public class PlayerController : MonoBehaviour
         
         for (int i = 0; i < boardManager.monsters.Length; i++)
         {
-            if (boardManager.monsters[i].GetComponent<SpiderController>().inRange())
+            if ("ChaseGhost"  != boardManager.monsters[i].GetComponent<UnitController>().getType() )
             {
-                for (int j = 0; j<killword.Length; j++)
+                if (boardManager.monsters[i].GetComponent<UnitController>().inRange())
                 {
-                    if (killword[j] == boardManager.monsters[i].GetComponent<SpiderController>().getChar())
+                    for (int j = 0; j < killword.Length; j++)
                     {
-                        
-						boardManager.monsters [i].GetComponent<SpiderController> ().increaseLetters ();
-                       
+                        if (killword[j] == boardManager.monsters[i].GetComponent<UnitController>().getChar())
+                        {
+
+                            boardManager.monsters[i].GetComponent<UnitController>().increaseLetters();
+
+                        }
                     }
                 }
             }
         }
     }
-
-	public void openDoor(string open) 
-	{
-        open = open.ToUpper();
-		for (int i = 0; i < boardManager.doors.Length; i++) 
-		{
-			if (boardManager.doors [i].GetComponent<DoorController> ().inRange()) 
-			{
-                for (int j = 0; j < open.Length; j++)
-                {
-                    if (open[j] == boardManager.doors[i].GetComponent<DoorController>().getChar())
-                    {
-                        
-                        boardManager.doors[i].GetComponent<DoorController>().increaseLetters();
-                    }
-                }
-			}
-		}
-	}
-    public void askghost(string ask)
-    {
-         ask = ask.ToUpper();
-            for (int i = 0; i < boardManager.ghosts.Length; i++)
-            {
-                if (boardManager.ghosts[i].GetComponent<GhostController>().type == "block")
-                { 
-                    if (boardManager.ghosts[i].GetComponent<GhostController>().inRange())
-                    {
-                        typechar = boardManager.ghosts[i].GetComponent<GhostController>().getChar();
-                        for (int j = 0; j < ask.Length; j++)
-                        {
-                            if (ask[j] == boardManager.ghosts[i].GetComponent<GhostController>().getChar())
-                            {
-                                
-                                boardManager.ghosts[i].GetComponent<GhostController>().increaseLetters();
-                            }
-                        }
-                    }
-                }
-            
-            }
-    }
-
     public void answerghost(string sentence)
     {
-        for (int i = 0; i < boardManager.ghosts.Length; i++)
+        for (int i = 0; i < boardManager.monsters.Length; i++)
         {
-            if (boardManager.ghosts[i].GetComponent<GhostController>().inRange())
+            if (boardManager.monsters[i].GetComponent<UnitController>().getType() == "ChaseGhost" || boardManager.monsters[i].GetComponent<UnitController>().getType() == "BlockGhost")
             {
-                if (sentence.ToLower().Contains(boardManager.ghosts[i].GetComponent<GhostController>().answer.text))
+                Debug.Log("here");
+                if (boardManager.monsters[i].GetComponent<UnitController>().inRange())
                 {
-                    boardManager.ghosts[i].GetComponent<GhostController>().increaseHealth();
-                    boardManager.ghosts[i].GetComponent<GhostController>().eliminate();
-                   
-                    
-
-                }
-                else
-                {
-                    boardManager.ghosts[i].GetComponent<GhostController>().damagePlayer();
-                    if (boardManager.ghosts[i].GetComponent<GhostController>().type != "block")
+                    if (sentence.ToLower().Contains(boardManager.monsters[i].GetComponent<UnitController>().getAnswer()))
                     {
-                        boardManager.ghosts[i].GetComponent<GhostController>().eliminate();
+                        boardManager.monsters[i].GetComponent<UnitController>().increaseHealth();
+                        boardManager.monsters[i].GetComponent<UnitController>().eliminate();
                     }
-                    
-                }
+                    else
+                    {
+                        boardManager.monsters[i].GetComponent<UnitController>().damagePlayer();
+                        if (boardManager.monsters[i].GetComponent<UnitController>().getType() == "ChaseGhost")
+                        {
+                            boardManager.monsters[i].GetComponent<UnitController>().eliminate();
+                        }
+                    }
+                }  
             }
         }
     }

@@ -12,6 +12,7 @@ public class DoorController : UnitController {
     void Awake ()
     {
 		source = GetComponent<AudioSource> ();
+        type = "Door";
     }
 	protected void Start () {
 		base.Start ();
