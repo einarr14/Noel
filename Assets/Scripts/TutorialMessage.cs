@@ -16,6 +16,7 @@ public class TutorialMessage : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log(other);
 		tutorialText.text = other.GetComponent<Text> ().text;
 	}
 }
