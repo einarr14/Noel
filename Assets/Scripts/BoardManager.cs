@@ -7,6 +7,7 @@ public class BoardManager : MonoBehaviour {
 	public GameObject[] ghosts;
 	public GameObject[] items;
 	public GameObject[] doors;
+    public GameObject[] bats;
     private PlayerHealth playerHealth ;
 
 
@@ -21,6 +22,9 @@ public class BoardManager : MonoBehaviour {
 			ghosts = new GameObject[2];
 			items = new GameObject[3];
 			doors = new GameObject[2];
+            bats = new GameObject[1];
+
+            bats[0] = GameObject.Find ("Bat");
 
 			monsters[1] = GameObject.Find ("Spider2");
             monsters[0] = GameObject.Find ("Spider1");
@@ -43,7 +47,11 @@ public class BoardManager : MonoBehaviour {
 	}
 
 	public void resetLevel () {
-		for (int i = 0; i < monsters.Length; i++) {
+        for (int i = 0; i < bats.Length; i++)
+        {
+            bats[i].GetComponent<BatController>().reset();
+        }
+        for (int i = 0; i < monsters.Length; i++) {
 			monsters [i].GetComponent<SpiderController> ().reset();
         }
 		for (int i = 0; i < ghosts.Length; i++) {
