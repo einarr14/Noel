@@ -19,9 +19,7 @@ public class BoardManager : MonoBehaviour {
     public void initiateLevel (int level) {
 		if (level == 1) {
 			monsters = new GameObject[8];
-			
-			items = new GameObject[3];
-			;
+            items = new GameObject[3];
 
             
 			monsters[1] = GameObject.Find ("Spider2");
@@ -39,6 +37,11 @@ public class BoardManager : MonoBehaviour {
 			items [1] = GameObject.Find ("SpiderQueenWeb");
 			items [2] = GameObject.Find ("Door1");
 		}
+		if (level == 3) { 	// Tutorial
+			monsters = new GameObject[2];
+			monsters [0] = GameObject.Find ("Door");
+			monsters [1] = GameObject.Find ("Spider");
+		}
 	}
 
 	public void resetLevel () {
@@ -52,7 +55,6 @@ public class BoardManager : MonoBehaviour {
         playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
         playerHealth.setHealth();
 		playerHealth.fillHealth();
-
     }
 	
 	// Update is called once per frame
