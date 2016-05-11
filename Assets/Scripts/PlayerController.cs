@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     }
     void FixedUpdate()
     {
+		Time.timeScale = timeScale;
         if (immobile)
         {
             return;
@@ -43,7 +44,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		Time.timeScale = timeScale;
+		
 		//rb2d.velocity = new Vector2(0F, 0F);
         if (!GameManager.instance.ghostpause)
         {
@@ -53,7 +54,7 @@ public class PlayerController : MonoBehaviour
                 if (boardManager.monsters[i].GetComponent<SpiderController>().inRange())
                 {
 					if (!boardManager.monsters[i].GetComponent<SpiderController>().timeSlowed) {
-						StartCoroutine(slowTime(0.2F, 1F));
+						StartCoroutine(slowTime(0.5F, 0.5F));
 						boardManager.monsters [i].GetComponent<SpiderController> ().timeSlowed = true;
 					}
                     underAttack = true;
@@ -70,7 +71,6 @@ public class PlayerController : MonoBehaviour
 	private IEnumerator slowTime (float slowTo, float duration) {
 		timeScale = 1;
 		HOTween.To (this, duration, "timeScale", slowTo);
-
 		yield return new WaitForSeconds (duration);
 
 		HOTween.To (this, duration, "timeScale", 1);

@@ -7,7 +7,7 @@ public class SpiderController : MonsterController {
 	private bool attacking;
 	public float attackSpeed;
     private Animator animator;
-	public bool timeSlowed = false;
+	public bool timeSlowed;
 	private string [] killPhrases;
 	private AudioSource spiderAttack;
 	private AudioSource spiderDie;
@@ -27,6 +27,7 @@ public class SpiderController : MonsterController {
 	protected void Start()
     {
 		base.Start ();
+		timeSlowed = false;
 		attacking = false;
         animator = GetComponent<Animator>();
         //myCanvas = GameObject.Find(canvasName);
@@ -103,7 +104,6 @@ public class SpiderController : MonsterController {
 		this.transform.position = curpos;
         wordDone = "";
         wordLeft = word;
-		timeSlowed = false;
     }
 
     public override void reset ()
