@@ -41,6 +41,11 @@ public class BoardManager : MonoBehaviour {
 			monsters = new GameObject[2];
 			monsters [0] = GameObject.Find ("Door");
 			monsters [1] = GameObject.Find ("Spider");
+
+			items = new GameObject[2];
+			items[0] = GameObject.Find("Door1");
+			items[1] = GameObject.Find("Crate");
+
 		}
 	}
 
