@@ -26,8 +26,8 @@ public class BoardManager : MonoBehaviour {
 
             bats[0] = GameObject.Find ("Bat");
 
-            monsters[0] = GameObject.Find ("Spider1");
 			monsters[1] = GameObject.Find ("Spider2");
+            monsters[0] = GameObject.Find ("Spider1");
 			monsters[2] = GameObject.Find ("SpiderQueen");
 
 			ghosts[0] = GameObject.Find ("Ghost1");

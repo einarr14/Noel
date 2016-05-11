@@ -22,7 +22,6 @@ public class PauseMenu : MonoBehaviour {
 			Time.timeScale = 0f;
 		} else {
 			pauseMenuCanvas.SetActive (false);
-			Time.timeScale = 1f;
 			input.Select ();
 			input.ActivateInputField();
 		}
@@ -34,6 +33,7 @@ public class PauseMenu : MonoBehaviour {
 
 	public void Resume() {
 		isPaused = false;
+		Time.timeScale = 1f;
 	}
 
 	public void Mute() {
