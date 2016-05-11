@@ -18,13 +18,4 @@ public class TutorialMessage : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		tutorialText.text = other.GetComponent<Text> ().text;
 	}
-
-	/*void OnTriggerExit2D(Collider2D other) {
-		if (other.gameObject.tag == "FirstTutorial") {
-			tutorialText.text = "";
-		}
-		if (other.gameObject.tag == "SecondTutorial") {
-			tutorialText.text = "";
-		}
-	}*/
 }
