@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     public float speed;
     private Rigidbody2D rb2d;
     public bool underAttack = false;
-    public bool immobile = false;
+	public bool immobile;
     private float MoveVertical;
     private float MoveHorizontal;
     private char typechar;
@@ -26,16 +26,11 @@ public class PlayerController : MonoBehaviour
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         boardManager = GameObject.Find("BoardManager").GetComponent<BoardManager>();
 		timeScale = 1;
-
-
+		immobile = false;
     }
     void FixedUpdate()
     {
 		Time.timeScale = timeScale;
-        if (immobile)
-        {
-            return;
-        }
         if (!GameManager.instance.ghostpause)
         {
             move(1,typechar);
@@ -44,7 +39,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		
 		//rb2d.velocity = new Vector2(0F, 0F);
         if (!GameManager.instance.ghostpause)
         {
@@ -138,6 +132,10 @@ public class PlayerController : MonoBehaviour
     }
     private void move(int direction, char killChar) // direction should shuld be 1 or -1 to determine the direction
     {
+		if (immobile)
+		{
+			return;
+		}
         Vector2 currPoint = rb2d.position;
 		MoveHorizontal = 0;
 		MoveVertical = 0;
@@ -179,6 +177,15 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+
+	public void immobilize () {
+		immobile = true;
+	}
+
+	public void mobilize () {
+		immobile = false;
+	}
+
 }
 
 	
