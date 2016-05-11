@@ -117,7 +117,6 @@ public class PlayerController : MonoBehaviour
         {
             if (boardManager.monsters[i].GetComponent<UnitController>().getType() == "ChaseGhost" || boardManager.monsters[i].GetComponent<UnitController>().getType() == "BlockGhost")
             {
-                Debug.Log("here");
                 if (boardManager.monsters[i].GetComponent<UnitController>().inRange())
                 {
                     if (sentence.ToLower().Contains(boardManager.monsters[i].GetComponent<UnitController>().getAnswer()))

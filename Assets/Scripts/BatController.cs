@@ -84,7 +84,7 @@ public class BatController : MonsterController {
     {
         //spiderAttack.Play();
         playerHealth.TakeDamage(damage);
-        //backupLetters(lifeSteal);
+        backupLetters(lifeSteal);
         //animator.SetTrigger("SpiderBite");
         yield return new WaitForSeconds(attackSpeed);
 

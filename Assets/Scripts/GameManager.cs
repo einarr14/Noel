@@ -22,8 +22,8 @@ public class GameManager : MonoBehaviour
 	//Awake is always called before any Start functions
 	void Awake()
 	{
-		level = SceneManager.GetActiveScene ().buildIndex;
-        Debug.Log(level);
+        //level = SceneManager.GetActiveScene ().buildIndex;
+        level = 1;
 	}
 
 	void Start () {
