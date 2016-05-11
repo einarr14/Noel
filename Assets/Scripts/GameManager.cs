@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
 	void Awake()
 	{
 		level = SceneManager.GetActiveScene ().buildIndex;
-		Debug.Log (level);
 	}
 
 	void Start () {

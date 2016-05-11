@@ -43,17 +43,19 @@ public class BoardManager : MonoBehaviour {
 		if (level == 3) { 	// Tutorial
 			doors = new GameObject[1];
 			doors [0] = GameObject.Find ("Door");
+
+			monsters = new GameObject[1];
+			monsters [0] = GameObject.Find ("Spider");
 		}
 	}
 
 	public void resetLevel () {
-        for (int i = 0; i < bats.Length; i++)
-        {
-            bats[i].GetComponent<BatController>().reset();
-        }
-        for (int i = 0; i < monsters.Length; i++) {
-			monsters [i].GetComponent<SpiderController> ().reset();
-        }
+		//for (int i = 0; i < bats.Length; i++) {
+		//	bats [i].GetComponent<BatController> ().reset ();
+		//}
+		for (int i = 0; i < monsters.Length; i++) {
+			monsters [i].GetComponent<SpiderController> ().reset ();
+		}
 		for (int i = 0; i < ghosts.Length; i++) {
 			ghosts [i].GetComponent<GhostController> ().reset ();
 		}
@@ -63,10 +65,9 @@ public class BoardManager : MonoBehaviour {
 		for (int i = 0; i < doors.Length; i++) {
 			doors [i].GetComponent<DoorController> ().reset ();
 		}
-        playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
-        playerHealth.setHealth();
-		playerHealth.fillHealth();
-
+		playerHealth = GameObject.Find ("Player").GetComponent<PlayerHealth> ();
+		playerHealth.setHealth ();
+		playerHealth.fillHealth ();
     }
 	
 	// Update is called once per frame

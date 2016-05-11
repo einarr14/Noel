@@ -17,6 +17,10 @@ public class StartMenu : MonoBehaviour {
 		Application.LoadLevel (1);
 	}
 
+	public void tutorialScene() {
+		Application.LoadLevel (3);
+	}
+
 	public void quitApplication() {
 		Application.Quit();
 	}

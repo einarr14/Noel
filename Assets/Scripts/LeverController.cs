@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class LeverController : MonoBehaviour {
 	private AudioSource source;
@@ -22,6 +23,9 @@ public class LeverController : MonoBehaviour {
 		if (other.name == "Crate") {
 			GameObject.Find ("Door1").transform.position = new Vector3 (1000, 1000, 1000);
 			source.Play ();
+			if (SceneManager.GetActiveScene ().buildIndex == 3) {
+				GameObject.Find ("4th").transform.position = new Vector3 (1000, 1000, 1000);
+			}
 		}
 	}
 }
