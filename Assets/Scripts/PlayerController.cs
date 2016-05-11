@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
     public void kill(string killword)
     {
         killword = killword.ToUpper();
-        
+
         for (int i = 0; i < boardManager.monsters.Length; i++)
         {
             if (boardManager.monsters[i].GetComponent<SpiderController>().inRange())

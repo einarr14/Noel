@@ -3,6 +3,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;       //Allows us to use Lists. 
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,11 +17,13 @@ public class GameManager : MonoBehaviour
 	Vector3 initialPosition;
     public bool ghostpause;
 
-    private int level = 1;
+    private int level;
 
 	//Awake is always called before any Start functions
 	void Awake()
 	{
+		level = SceneManager.GetActiveScene ().buildIndex;
+		Debug.Log (level);
 	}
 
 	void Start () {
