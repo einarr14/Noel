@@ -59,6 +59,7 @@ public class PlayerInput : MonoBehaviour {
                 input.ActivateInputField();
                 GameObject.Find("Player").GetComponent<PlayerController>().answerghost(sentence);
                 GameManager.instance.ghostscreen();
+				Debug.Log ("JALLA");
             }
         }
         

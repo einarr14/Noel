@@ -121,10 +121,12 @@ public class PlayerController : MonoBehaviour
                     else
                     {
                         boardManager.monsters[i].GetComponent<UnitController>().damagePlayer();
-                        if (boardManager.monsters[i].GetComponent<UnitController>().getType() == "ChaseGhost")
+                        if (boardManager.monsters[i].GetComponent<UnitController> ().getType() == "ChaseGhost")
                         {
                             boardManager.monsters[i].GetComponent<UnitController>().eliminate();
-                        }
+						} else if (boardManager.monsters[i].GetComponent<UnitController> ().getType() == "BlockGhost") {
+							boardManager.monsters [i].GetComponent<UnitController> ().reset ();
+						}
                     }
                 }  
             }
