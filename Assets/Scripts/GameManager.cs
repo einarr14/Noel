@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
 
 	void resetPlayer() {
 		GameObject.Find ("Player").transform.position = initialPosition;
+		playerController.mobilize ();
 	}
     
     public void ghostscreen()

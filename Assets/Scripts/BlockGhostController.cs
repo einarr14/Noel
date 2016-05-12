@@ -38,10 +38,12 @@ public class BlockGhostController : MonsterController {
 
     protected override void wordAction()
     {
+		privateText.text = "";
+		word = "";
+		theRiddle.text = riddle;
+		wordLeft = word;
+		wordDone = "";
         GameManager.instance.ghostscreen();
-        theRiddle.text = riddle;
-        wordLeft = word;
-        wordDone = "";
     }
 
     public override void increaseHealth()
