@@ -70,8 +70,10 @@ public class UnitController : MonoBehaviour {
 	}
 
 	public void increaseLetters() {
-		wordDone = wordDone + wordLeft[0];
-		wordLeft = wordLeft.Remove(0, 1);
+		if (wordLeft != "") {
+			wordDone = wordDone + wordLeft [0];
+			wordLeft = wordLeft.Remove(0, 1);
+		}
 		if (wordDone == word)
 		{
 			wordAction();
@@ -83,7 +85,10 @@ public class UnitController : MonoBehaviour {
 	}
 
 	public char getChar() {
-		return wordLeft[0];
+		if (wordLeft != "") {
+			return wordLeft[0];
+		}
+		return '\0';
 	}
 
 	public virtual void reset () {

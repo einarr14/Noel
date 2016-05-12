@@ -18,7 +18,7 @@ public class BoardManager : MonoBehaviour {
     } 
     public void initiateLevel (int level) {
 		if (level == 1) {
-			monsters = new GameObject[10];
+			monsters = new GameObject[11];
             items = new GameObject[2];
 
             
@@ -34,6 +34,7 @@ public class BoardManager : MonoBehaviour {
 			monsters [7] = GameObject.Find ("Door2");
 			monsters [8] = GameObject.Find ("SpiderQueenWeb");
 			monsters [9] = GameObject.Find ("SpiderWeb");
+			monsters [10] = GameObject.Find ("Coffin");
 
 			items [0] = GameObject.Find ("Crate");
 			items [1] = GameObject.Find ("Door1");
