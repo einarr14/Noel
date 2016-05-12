@@ -22,8 +22,8 @@ public class GameManager : MonoBehaviour
 	//Awake is always called before any Start functions
 	void Awake()
 	{
-        //level = SceneManager.GetActiveScene ().buildIndex;
-        level = 1;
+        level = SceneManager.GetActiveScene ().buildIndex;
+        //level = 1;
 	}
 
 	void Start () {
@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
 
 	void resetPlayer() {
 		GameObject.Find ("Player").transform.position = initialPosition;
+		playerController.mobilize ();
 	}
     
     public void ghostscreen()
