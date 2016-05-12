@@ -35,7 +35,7 @@ public class LightController : MonoBehaviour {
 		light.range = intensity;
 	}
 
-	private void fadeIn() {
+	public void fadeIn() {
 		busy = true;
 		HOTween.To (this, 2F, "intensity", 7.8);
 		StartCoroutine (waitForBusy (2F));
@@ -46,5 +46,11 @@ public class LightController : MonoBehaviour {
 		yield return new WaitForSeconds (duration);
 		//Debug.Log ("ASDASDSA");
 		busy = false;
+	}
+
+	public void fadeOut() {
+		busy = true;
+		HOTween.To (this, 2F, "intensity", 0);
+		StartCoroutine (waitForBusy (2F));
 	}
 }
