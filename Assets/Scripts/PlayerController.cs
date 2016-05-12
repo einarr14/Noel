@@ -33,13 +33,13 @@ public class PlayerController : MonoBehaviour
 		Time.timeScale = timeScale;
         if (!GameManager.instance.ghostpause)
         {
-            move(1,typechar);
+            move();
         }
     }
     // Update is called once per frame
     void Update()
     {
-		//rb2d.velocity = new Vector2(0F, 0F);
+		rb2d.velocity = new Vector2(0F, 0F);
         if (!GameManager.instance.ghostpause)
         {
             underAttack = false;
@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    private void move(int direction, char killChar) // direction should shuld be 1 or -1 to determine the direction
+    private void move() // direction should shuld be 1 or -1 to determine the direction
     {
 		if (immobile)
 		{
@@ -139,24 +139,18 @@ public class PlayerController : MonoBehaviour
         Vector2 currPoint = rb2d.position;
 		MoveHorizontal = 0;
 		MoveVertical = 0;
-        if (killChar != 'A' || killChar != 'D')
-        {
 			if (Input.GetKey (KeyCode.RightArrow)) {
 				MoveHorizontal++;
 			}
 			if (Input.GetKey (KeyCode.LeftArrow)) {
 				MoveHorizontal--;
 			}
-        }
-        if (killChar != 'W' || killChar != 'D')
-        {
 			if (Input.GetKey (KeyCode.UpArrow)) {
 				MoveVertical++;
 			}
 			if (Input.GetKey (KeyCode.DownArrow)) {
 				MoveVertical--;
 			}
-        }
 
         
         if (MoveHorizontal != 0 || MoveVertical != 0)
