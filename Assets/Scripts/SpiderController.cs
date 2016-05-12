@@ -42,11 +42,23 @@ public class SpiderController : MonsterController {
 	protected override void move() {
 		if (distance < maxRange && distance > minRange)
 		{
-			float moveY = (playerPoint.y - currPoint.y) / distance;
-			float moveX = (playerPoint.x - currPoint.x) / distance;
-			Vector2 Movement = new Vector2(moveX, moveY);
-			Vector2 newPosition = currPoint + speed * Movement;
-			animator.SetBool("SpiderWalk", true);
+            float moveY;
+            float moveX;
+            if (collision)
+            {
+                moveY = (playerPoint.y - currPoint.y + collisionVector.y) / Mathf.Sqrt(Mathf.Pow((playerPoint.x - currPoint.x + collisionVector.x), 2F) + Mathf.Pow((playerPoint.y - currPoint.y + collisionVector.y), 2F));
+                moveX = (playerPoint.x - currPoint.x + collisionVector.x )/ Mathf.Sqrt(Mathf.Pow((playerPoint.x - currPoint.x + collisionVector.x), 2F) + Mathf.Pow((playerPoint.y - currPoint.y + collisionVector.y), 2F));
+            }
+            else
+            {
+                moveY = (playerPoint.y - currPoint.y) / distance;
+                moveX = (playerPoint.x - currPoint.x) / distance;
+            }
+            Vector2 Movement = new Vector2(moveX, moveY);
+            Vector2 newPosition = currPoint + speed * Movement;
+            moveY = (playerPoint.y - currPoint.y) / distance;
+            moveX = (playerPoint.x - currPoint.x) / distance;
+            animator.SetBool("SpiderWalk", true);
 			if (moveY > 0)
 			{
 				rb2d.rotation = (180 + (Mathf.Acos(moveX) * 360 / 3.14F)) / 2;
