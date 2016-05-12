@@ -54,4 +54,17 @@ public class MonsterController : UnitController {
         killPhrases[7] = "HOT MAMA BITCH";
         killPhrases[8] = "COOL GUYS DONT LOOK AT EXPLOTIONS";
     }
+    protected bool collision;
+    protected Vector3 collisionVector;
+    void OnCollisionStay2D(Collision2D coll)
+    {
+        collisionVector = rb2d.transform.position - coll.transform.position;
+        collision = true;
+
+    }
+    void OnCollisionExit2D(Collision2D coll)
+    {
+        collision = false;
+
+    }
 }

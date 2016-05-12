@@ -48,10 +48,22 @@ public class BatController : MonsterController {
     {
         if (distance < maxRange && distance > minRange)
         {
-            float moveY = (playerPoint.y - currPoint.y) / distance;
-            float moveX = (playerPoint.x - currPoint.x) / distance;
+            float moveY;
+            float moveX;
+            if (collision)
+            {
+                moveY = (playerPoint.y - currPoint.y + collisionVector.y) / Mathf.Sqrt(Mathf.Pow((playerPoint.x - currPoint.x + collisionVector.x), 2F) + Mathf.Pow((playerPoint.y - currPoint.y + collisionVector.y), 2F));
+                moveX = (playerPoint.x - currPoint.x + collisionVector.x) / Mathf.Sqrt(Mathf.Pow((playerPoint.x - currPoint.x + collisionVector.x), 2F) + Mathf.Pow((playerPoint.y - currPoint.y + collisionVector.y), 2F));
+            }
+            else
+            {
+                moveY = (playerPoint.y - currPoint.y) / distance;
+                moveX = (playerPoint.x - currPoint.x) / distance;
+            }
             Vector2 Movement = new Vector2(moveX, moveY);
             Vector2 newPosition = currPoint + speed * Movement;
+            moveY = (playerPoint.y - currPoint.y) / distance;
+            moveX = (playerPoint.x - currPoint.x) / distance;
             //animator.SetBool("SpiderWalk", true);
             if (moveY > 0)
             {

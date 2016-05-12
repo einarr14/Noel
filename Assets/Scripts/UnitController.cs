@@ -49,7 +49,9 @@ public class UnitController : MonoBehaviour {
 	
 	// Update is called once per frame
 	protected void Update () {
-		if (!GameManager.instance.ghostpause) {
+        rb2d.velocity = new Vector2(0F, 0F);
+        rb2d.angularVelocity = 0F;
+        if (!GameManager.instance.ghostpause) {
 			playerPoint = player.transform.position;
 			currPoint = rb2d.position;
 			distance = Mathf.Sqrt (Mathf.Pow ((playerPoint.x - currPoint.x), 2F) + Mathf.Pow ((playerPoint.y - currPoint.y), 2F));
