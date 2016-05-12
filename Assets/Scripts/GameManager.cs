@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 	float restartTimer;
 	Vector3 initialPosition;
     public bool ghostpause;
+    public int leverColorCount;
 
     private int level;
 
