@@ -51,12 +51,14 @@ public class GameManager : MonoBehaviour
 	void Update()
 	{
 		if (playerHealth.currentHealth < 1) {
-			gameOver ();
+			StartCoroutine(gameOver ());
 		}
 
 	}
 
-	void gameOver() {
+	IEnumerator gameOver() {
+		GameObject.Find ("Point light").GetComponent<LightController> ().fadeOut();
+		yield return new WaitForSeconds(2F);
 		resetPlayer ();
 		boardManager.resetLevel ();
 	}
