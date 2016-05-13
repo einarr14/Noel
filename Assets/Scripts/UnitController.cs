@@ -45,6 +45,7 @@ public class UnitController : MonoBehaviour {
 		privateText.horizontalOverflow = HorizontalWrapMode.Overflow;
 		privateText.fontSize = 50;
         timeSlowed = true;
+		GameObject.Find ("BoardManager").GetComponent<BoardManager> ().addUnit (this);
 	}
 	
 	// Update is called once per frame
@@ -114,7 +115,7 @@ public class UnitController : MonoBehaviour {
     }
     public virtual void eliminate()
     {
-
+		GameObject.Find ("BoardManager").GetComponent<BoardManager> ().removeUnit (this);
     }
     public virtual string getAnswer()
     {

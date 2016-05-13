@@ -34,6 +34,7 @@ public class SpiderWebController : UnitController {
 		this.transform.position = curpos;
 		wordDone = "";
 		wordLeft = word;
+		GameObject.Find ("BoardManager").GetComponent<BoardManager> ().removeUnit (this);
 	}
 
 	public override void reset ()
