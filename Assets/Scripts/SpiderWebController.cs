@@ -10,7 +10,6 @@ public class SpiderWebController : UnitController {
 	void Start () {
 		base.Start();
 		hostile = true;
-		Debug.Log ("Spiiiiderweb");
 		reset();
 	}
 

@@ -42,19 +42,23 @@ public class SpiderController : MonsterController {
 	protected override void move() {
 		if (distance < maxRange && distance > minRange)
 		{
-            float moveY;
-            float moveX;
+            float moveY = 0;
+            float moveX = 0;
             if (collision)
             {
                 moveY = (playerPoint.y - currPoint.y + collisionVector.y) / Mathf.Sqrt(Mathf.Pow((playerPoint.x - currPoint.x + collisionVector.x), 2F) + Mathf.Pow((playerPoint.y - currPoint.y + collisionVector.y), 2F));
                 moveX = (playerPoint.x - currPoint.x + collisionVector.x )/ Mathf.Sqrt(Mathf.Pow((playerPoint.x - currPoint.x + collisionVector.x), 2F) + Mathf.Pow((playerPoint.y - currPoint.y + collisionVector.y), 2F));
+                Debug.Log("this");
             }
+
             else
             {
                 moveY = (playerPoint.y - currPoint.y) / distance;
                 moveX = (playerPoint.x - currPoint.x) / distance;
+                Debug.Log("that");
             }
             Vector2 Movement = new Vector2(moveX, moveY);
+            Debug.Log(Movement);
             Vector2 newPosition = currPoint + speed * Movement;
             moveY = (playerPoint.y - currPoint.y) / distance;
             moveX = (playerPoint.x - currPoint.x) / distance;
