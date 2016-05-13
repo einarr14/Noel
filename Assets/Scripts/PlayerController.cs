@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Holoville.HOTween;
+using System.Collections.Generic;
 
 public class PlayerController : MonoBehaviour
 {
@@ -43,16 +44,16 @@ public class PlayerController : MonoBehaviour
         if (!GameManager.instance.ghostpause)
         {
             underAttack = false;
-            for (int i = 0; i < boardManager.monsters.Length; i++)
+			foreach (UnitController unit in boardManager.units )
             {
-                if (boardManager.monsters[i].GetComponent<UnitController>().inRange())
+                if (unit.inRange())
                 {
-                    if (boardManager.monsters[i].GetComponent<UnitController>().hostile)
+                    if (unit.hostile)
                     {
-                        if (!boardManager.monsters[i].GetComponent<UnitController>().timeSlowed)
+                        if (!unit.timeSlowed)
                         {
                             StartCoroutine(slowTime(0.5F, 0.5F));
-                            boardManager.monsters[i].GetComponent<UnitController>().timeSlowed = true;
+                            unit.timeSlowed = true;
                         }
                     }
 					
@@ -85,19 +86,20 @@ public class PlayerController : MonoBehaviour
     public void kill(string killword)
     {
         killword = killword.ToUpper();
-
-        for (int i = 0; i < boardManager.monsters.Length; i++)
+		UnitController[] localUnits = new UnitController[boardManager.units.Count];
+		boardManager.units.CopyTo (localUnits);
+		foreach (UnitController unit in localUnits )
         {
-            if ("ChaseGhost"  != boardManager.monsters[i].GetComponent<UnitController>().getType() )
+            if ("ChaseGhost"  != unit.getType() )
             {
-                if (boardManager.monsters[i].GetComponent<UnitController>().inRange())
+                if (unit.inRange())
                 {
                     for (int j = 0; j < killword.Length; j++)
                     {
-                        if (killword[j] == boardManager.monsters[i].GetComponent<UnitController>().getChar())
+                        if (killword[j] == unit.getChar())
                         {
 
-                            boardManager.monsters[i].GetComponent<UnitController>().increaseLetters();
+                            unit.increaseLetters();
 
                         }
                     }
@@ -107,25 +109,27 @@ public class PlayerController : MonoBehaviour
     }
     public void answerghost(string sentence)
     {
-        for (int i = 0; i < boardManager.monsters.Length; i++)
+		UnitController[] localUnits = new UnitController[boardManager.units.Count];
+		boardManager.units.CopyTo (localUnits);
+		foreach (UnitController unit in localUnits )
         {
-            if (boardManager.monsters[i].GetComponent<UnitController>().getType() == "ChaseGhost" || boardManager.monsters[i].GetComponent<UnitController>().getType() == "BlockGhost")
+            if (unit.getType() == "ChaseGhost" || unit.getType() == "BlockGhost")
             {
-                if (boardManager.monsters[i].GetComponent<UnitController>().inRange())
+                if (unit.inRange())
                 {
-                    if (sentence.ToLower().Contains(boardManager.monsters[i].GetComponent<UnitController>().getAnswer()))
+                    if (sentence.ToLower().Contains(unit.getAnswer()))
                     {
-                        boardManager.monsters[i].GetComponent<UnitController>().increaseHealth();
-                        boardManager.monsters[i].GetComponent<UnitController>().eliminate();
+                        unit.increaseHealth();
+                        unit.eliminate();
                     }
                     else
                     {
-                        boardManager.monsters[i].GetComponent<UnitController>().damagePlayer();
-                        if (boardManager.monsters[i].GetComponent<UnitController> ().getType() == "ChaseGhost")
+                        unit.damagePlayer();
+                        if (unit.getType() == "ChaseGhost")
                         {
-                            boardManager.monsters[i].GetComponent<UnitController>().eliminate();
-						} else if (boardManager.monsters[i].GetComponent<UnitController> ().getType() == "BlockGhost") {
-							boardManager.monsters [i].GetComponent<UnitController> ().reset ();
+                            unit.eliminate();
+						} else if (unit.getType() == "BlockGhost") {
+							unit.reset ();
 						}
                     }
                 }  

@@ -29,6 +29,7 @@ public class CoffinController : UnitController {
 		word = "";
 		wordDone = "";
 		wordLeft = word;
+		GameObject.Find ("BoardManager").GetComponent<BoardManager> ().removeUnit (this);
 	}
 
 	public override void reset ()

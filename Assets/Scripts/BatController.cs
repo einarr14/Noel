@@ -113,6 +113,7 @@ public class BatController : MonsterController {
         wordDone = "";
         wordLeft = word;
         timeSlowed = false;
+		GameObject.Find ("BoardManager").GetComponent<BoardManager> ().removeUnit (this);
     }
 
     public override void reset()

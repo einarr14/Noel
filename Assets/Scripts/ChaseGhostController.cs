@@ -59,6 +59,7 @@ public class ChaseGhostController : MonsterController {
         Vector3 curpos = this.transform.position;
         curpos.y += 1000F;
         this.transform.position = curpos;
+		GameObject.Find ("BoardManager").GetComponent<BoardManager> ().removeUnit (this);
     }
 
     public override void reset()
