@@ -29,7 +29,7 @@ public class SpiderWebController : UnitController {
 	protected override void wordAction ()
 	{
 		player.GetComponent<PlayerController> ().mobilize ();
-		Vector3 curpos = this.transform.position;
+        Vector3 curpos = this.transform.position;
 		curpos.y += 1000F;
 		this.transform.position = curpos;
 		wordDone = "";
