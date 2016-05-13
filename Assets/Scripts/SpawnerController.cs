@@ -7,15 +7,21 @@ public class SpawnerController : UnitController {
 	public int numSpiders;
 	public float delay;
 
-	GameObject spider;
+	public GameObject spider;
 
 	// Use this for initialization
 	void Start () {
+		base.Start ();
 		spawned = false;
+		timeSlowed = true;
+		word = "";
+		wordDone = word;
+		wordLeft = word;
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		base.Update ();
 		if (!spawned) {
 			if (distance < maxRange) {
 				StartCoroutine (StartSpawning ());
@@ -27,8 +33,9 @@ public class SpawnerController : UnitController {
 	IEnumerator StartSpawning() {
 		int i = 0;
 		while (i < numSpiders) {
-			GameObject newBat = Instantiate (spider);
-			newBat.transform.position = this.transform.position;
+			GameObject newSpider = Instantiate (spider);
+			newSpider.transform.position = this.transform.position;
+			Debug.Log ("SPAWNING");
 			yield return new WaitForSeconds (delay);
 			i++;
 		}
