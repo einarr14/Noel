@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     private float MoveHorizontal;
     private char typechar;
 	public float timeScale;
+    public AudioSource success;
+    public AudioSource failure;
 
 
     GameManager gameManager;
@@ -23,6 +25,9 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        AudioSource[] audio = GameObject.Find("Ghost2").GetComponents<AudioSource>();
+        success = audio[1];
+        failure = audio[2];
         rb2d = GetComponent<Rigidbody2D>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         boardManager = GameObject.Find("BoardManager").GetComponent<BoardManager>();
@@ -119,11 +124,13 @@ public class PlayerController : MonoBehaviour
                 {
                     if (sentence.ToLower().Contains(unit.getAnswer()))
                     {
+                        success.Play();
                         unit.increaseHealth();
                         unit.eliminate();
                     }
                     else
                     {
+                        failure.Play();
                         unit.damagePlayer();
                         if (unit.getType() == "ChaseGhost")
                         {

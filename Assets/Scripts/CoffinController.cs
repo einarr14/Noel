@@ -5,6 +5,7 @@ public class CoffinController : UnitController {
 
 	private Animator animator;
 	private AudioSource source;
+	public GameObject bat;
 
 	// Use this for initialization
 	void Start () {
@@ -22,7 +23,8 @@ public class CoffinController : UnitController {
 
 	protected override void wordAction ()
 	{
-		GameObject.Find ("Bat").transform.position = this.transform.position;
+		GameObject newBat = Instantiate (bat);
+		newBat.transform.position = this.transform.position;
 		source.Play ();
 		animator.SetBool("open", true);
 		privateText.text = "";
