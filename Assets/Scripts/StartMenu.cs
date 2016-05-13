@@ -13,6 +13,10 @@ public class StartMenu : MonoBehaviour {
 	
 	}
 
+	public void toMainMenu() {
+		Application.LoadLevel (0);
+	}
+
 	public void toMainScene() {
 		Application.LoadLevel (1);
 	}
@@ -23,11 +27,5 @@ public class StartMenu : MonoBehaviour {
 
 	public void quitApplication() {
 		Application.Quit();
-	}
-
-	void OnTriggerEnter2D(Collider2D other) {
-		if (other.name == "Player") {
-			Application.LoadLevel (0);
-		}
 	}
 }
