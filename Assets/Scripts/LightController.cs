@@ -32,7 +32,7 @@ public class LightController : MonoBehaviour {
 			}
 		}
 		light.intensity = intensity;
-		light.range = intensity;
+		light.range = intensity -1F;
 	}
 
 	public void fadeIn() {
@@ -42,15 +42,13 @@ public class LightController : MonoBehaviour {
 	}
 
 	private IEnumerator waitForBusy(float duration) {
-		//Debug.Log ("ASDASDSA");
 		yield return new WaitForSeconds (duration);
-		//Debug.Log ("ASDASDSA");
 		busy = false;
 	}
 
 	public void fadeOut() {
 		busy = true;
-		HOTween.To (this, 2F, "intensity", 0);
-		StartCoroutine (waitForBusy (2F));
+		HOTween.To (this, 1F, "intensity", 0);
+		StartCoroutine (waitForBusy (1F));
 	}
 }
