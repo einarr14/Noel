@@ -42,9 +42,7 @@ public class LightController : MonoBehaviour {
 	}
 
 	private IEnumerator waitForBusy(float duration) {
-		//Debug.Log ("ASDASDSA");
 		yield return new WaitForSeconds (duration);
-		//Debug.Log ("ASDASDSA");
 		busy = false;
 	}
 

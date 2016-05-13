@@ -25,9 +25,9 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        AudioSource[] audio = GameObject.Find("Ghost2").GetComponents<AudioSource>();
-        success = audio[1];
-        failure = audio[2];
+        //AudioSource[] audio = GameObject.Find("Ghost2").GetComponents<AudioSource>();
+        //success = GetComponent<AudioSource>()[1];
+        //failure = GetComponent<AudioSource>()[2];
         rb2d = GetComponent<Rigidbody2D>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         boardManager = GameObject.Find("BoardManager").GetComponent<BoardManager>();
