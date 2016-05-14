@@ -16,11 +16,13 @@ public class UnitController : MonoBehaviour {
 	protected GameObject privateCanvas; 
 	protected Text privateText;
 	protected Vector3 textPos;
+    public float sizeRange;
     protected string type;
     public bool hostile;
     public bool timeSlowed;
+    protected BoardManager boardManager;
 
-	public float maxRange;
+    public float maxRange;
 	public float minRange;
 	//public Text label;
 
@@ -44,6 +46,7 @@ public class UnitController : MonoBehaviour {
 		privateText.alignment = TextAnchor.MiddleCenter;
 		privateText.horizontalOverflow = HorizontalWrapMode.Overflow;
 		privateText.fontSize = 50;
+        boardManager = GameObject.Find("BoardManager").GetComponent<BoardManager>();
         timeSlowed = true;
 		GameObject.Find ("BoardManager").GetComponent<BoardManager> ().addUnit (this);
 	}
@@ -120,5 +123,9 @@ public class UnitController : MonoBehaviour {
     public virtual string getAnswer()
     {
         return "";
+    }
+    public float getRange()
+    {
+        return sizeRange;
     }
 }
