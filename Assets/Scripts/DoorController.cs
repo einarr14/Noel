@@ -39,6 +39,9 @@ public class DoorController : UnitController {
 	protected override void wordAction ()
 	{
 		StartCoroutine (rotateDoor () );
+		word = "";
+		wordDone = "";
+		wordLeft = word;
 		GameObject.Find ("BoardManager").GetComponent<BoardManager> ().removeUnit (this);
 	}
 

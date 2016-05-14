@@ -25,6 +25,7 @@ public class SpawnerController : MonoBehaviour {
 			musicSwapped = true;
 			StartCoroutine (MusicBack ());
 			GameObject.Find ("PanicDoorOpen").transform.position = new Vector3 (1000, -6, 0);
+			GameObject.Find ("PanicDoorClose").GetComponent<AudioSource> ().Play ();
 		}
 	}
 
@@ -34,6 +35,7 @@ public class SpawnerController : MonoBehaviour {
 		}
 		if (!spawned) {
 			GameObject.Find ("PanicDoorClose").transform.position = new Vector3 (-25.5F, -6, 0);
+			GameObject.Find ("PanicDoorClose").GetComponent<AudioSource> ().Play ();
 			GameObject.Find ("Audio Source").GetComponent<AudioSource> ().Stop();
 			GameObject.Find ("Scream").GetComponent<AudioSource> ().Play();
 			GameObject.Find ("Danger Music").GetComponent<AudioSource> ().Play();
