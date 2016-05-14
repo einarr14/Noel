@@ -20,13 +20,17 @@ public class LevelFinish : MonoBehaviour {
 			if (level == 1) {
 				Application.LoadLevel (4);
 			}
-            if(level == 4)
-            {
-                Application.LoadLevel(2);
-            }
 			if (level == 3) {
 				Application.LoadLevel (0);
 			}
+            if (level == 4)
+            {
+                Application.LoadLevel(5);
+            }
+            if (level == 5)
+            {
+                Application.LoadLevel(2);
+            }
 		}
 	}
 }
