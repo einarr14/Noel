@@ -6,6 +6,8 @@ public class BatController : MonsterController {
 
     
     public int lifeSteal;
+    private float moveY;
+    private float moveX;
     //private Animator animator;
     //private AudioSource spiderAttack;
     //private AudioSource spiderDie;
@@ -36,6 +38,7 @@ public class BatController : MonsterController {
         if (!GameManager.instance.ghostpause)
         {
             move();
+            rotiation();
             if (distance < biteRange && attacking == false)
             {
                 attacking = true;
@@ -48,8 +51,6 @@ public class BatController : MonsterController {
     {
         if (distance < maxRange && distance > minRange)
         {
-            float moveY;
-            float moveX;
             if (collision)
             {
                 moveY = (playerPoint.y - currPoint.y + collisionVector.y) / Mathf.Sqrt(Mathf.Pow((playerPoint.x - currPoint.x + collisionVector.x), 2F) + Mathf.Pow((playerPoint.y - currPoint.y + collisionVector.y), 2F));
@@ -62,18 +63,7 @@ public class BatController : MonsterController {
             }
             Vector2 Movement = new Vector2(moveX, moveY);
             Vector2 newPosition = currPoint + speed * Movement;
-            moveY = (playerPoint.y - currPoint.y) / distance;
-            moveX = (playerPoint.x - currPoint.x) / distance;
-            //animator.SetBool("SpiderWalk", true);
-            if (moveY > 0)
-            {
-                rb2d.rotation = (180 + (Mathf.Acos(moveX) * 360 / 3.14F)) / 2;
-            }
-            else
-            {
-                rb2d.rotation = (180 - (Mathf.Acos(moveX) * 360 / 3.14F)) / 2;
-            }
-
+            //animator.SetBool("SpiderWalk", true)
             rb2d.MovePosition(newPosition);
         }
         else if (distance > maxRange)
@@ -84,6 +74,20 @@ public class BatController : MonsterController {
         else
         {
             rb2d.velocity = new Vector2(0, 0);
+        }
+    }
+    private void rotiation()
+    {
+        moveY = (playerPoint.y - currPoint.y) / distance;
+        moveX = (playerPoint.x - currPoint.x) / distance;
+
+        if (moveY > 0)
+        {
+            rb2d.rotation = (180 + (Mathf.Acos(moveX) * 360 / 3.14F)) / 2;
+        }
+        else
+        {
+            rb2d.rotation = (180 - (Mathf.Acos(moveX) * 360 / 3.14F)) / 2;
         }
     }
 
