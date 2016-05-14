@@ -25,6 +25,8 @@ public class SpiderController : MonsterController {
         animator = GetComponent<Animator>();
 		initializeKillPhrases ();
 		reset ();
+        CircleCollider2D circle = this.GetComponent<CircleCollider2D>();
+        //sizeRange = circle.radius + 0.1F;
     }
 
 	// Update is called once per frame
@@ -57,11 +59,16 @@ public class SpiderController : MonsterController {
                 moveX = (playerPoint.x - currPoint.x) / distance;
             }
             Vector2 Movement = new Vector2(moveX, moveY);
-            Debug.Log(Movement);
             Vector2 newPosition = currPoint + speed * Movement;
             
             animator.SetBool("SpiderWalk", true);
             rb2d.MovePosition(newPosition);
+            Vector2 monsterVec = new Vector2(0F,0F);
+            if (monsterInRange(ref monsterVec))
+            {
+                rb2d.MovePosition(currPoint + monsterVec);
+            }
+            
         }
 		else if (distance > maxRange)
 		{

@@ -10,6 +10,8 @@ public class MonsterController : UnitController {
     public float biteRange;
     protected bool attacking;
     public float attackSpeed;
+    private Vector3 monsterPoint;
+    private Vector2 myPos;
 
 
     void Awake () {
@@ -66,5 +68,30 @@ public class MonsterController : UnitController {
     {
         collision = false;
 
+    }
+    protected bool monsterInRange(ref Vector2 monsterVec)
+    {
+        int count = 0;
+        foreach (UnitController unit in boardManager.units)
+        {
+            count++;
+            if (this != unit)
+            {
+                monsterPoint =  unit.transform.position;
+                myPos = rb2d.position;
+                float dif = Mathf.Sqrt(Mathf.Pow((monsterPoint.x - myPos.x), 2F) + Mathf.Pow((monsterPoint.y - myPos.y), 2F));
+                if (unit.getRange() + sizeRange > dif)
+                {
+                    monsterVec.x = (monsterPoint.y - myPos.y) / dif; 
+                    monsterVec.y = -(monsterPoint.x - myPos.x) / dif;
+                    return true;
+                }
+            }
+            else
+            {
+            }
+        }
+        
+        return false;
     }
 }
