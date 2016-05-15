@@ -19,7 +19,7 @@ public class CrateCorner : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.name == "Crate")
+        if (other.name == "Crate" || other.name == "Crate2")
         {
             if(level == 1)
             {
@@ -28,6 +28,17 @@ public class CrateCorner : MonoBehaviour {
             if(level == 3)
             {
                 GameObject.Find("Crate").transform.position = new Vector3(3.67f, -14.37f, 0);
+            }
+            if(level == 5)
+            {
+                if(other.name == "Crate")
+                {
+                    GameObject.Find("Crate").transform.position = new Vector3(-22.49f, -41.02f, 0);
+                }
+                else if(other.name == "Crate2")
+                {
+                    GameObject.Find("Crate2").transform.position = new Vector3(28.15f, -40.28f, 0);
+                }
             }
         }
     }
