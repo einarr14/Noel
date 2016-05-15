@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GrubbController : MonsterController {
 
-    //private Animator animator;
+    private Animator animator;
     //private AudioSource spiderAttack;
     //private AudioSource spiderDie;
     private float moveY;
@@ -24,7 +24,7 @@ public class GrubbController : MonsterController {
         timeSlowed = false;
         attacking = false;
         
-        //animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         initializeKillPhrases();
         initializeLetters();
         reset();
@@ -67,6 +67,12 @@ public class GrubbController : MonsterController {
             Vector2 newPosition = currPoint + speed * Movement;
             //animator.SetBool("SpiderWalk", true);
             rb2d.MovePosition(newPosition);
+            // þetta er illa dapurt movement fix til að þeir ýti ekki hvor öðrum
+            Vector2 monsterVec = new Vector2(0F, 0F);
+            if (monsterInRange(ref monsterVec))
+            {
+                rb2d.MovePosition(currPoint + monsterVec * speed);
+            }
         }
         else if (distance > maxRange)
         {
@@ -77,6 +83,7 @@ public class GrubbController : MonsterController {
         {
             rb2d.velocity = new Vector2(0, 0);
         }
+
     }
     private void rotiation()
     {
@@ -85,11 +92,11 @@ public class GrubbController : MonsterController {
         
         if (moveY > 0)
         {
-            rb2d.rotation = (180 + (Mathf.Acos(moveX) * 360 / 3.14F)) / 2;
+            rb2d.rotation = (-180 + (Mathf.Acos(moveX) * 360 / 3.14F)) / 2;
         }
         else
         {
-            rb2d.rotation = (180 - (Mathf.Acos(moveX) * 360 / 3.14F)) / 2;
+            rb2d.rotation = (-180 - (Mathf.Acos(moveX) * 360 / 3.14F)) / 2;
         }
     }
 
@@ -102,7 +109,7 @@ public class GrubbController : MonsterController {
     {
         //spiderAttack.Play();
         playerHealth.TakeDamage(damage);
-        //animator.SetTrigger("SpiderBite");
+        animator.SetTrigger("Attack");
         yield return new WaitForSeconds(attackSpeed);
 
         attacking = false;
@@ -134,7 +141,9 @@ public class GrubbController : MonsterController {
         for (int i = 0; i < textLength;i++)
         {
             word = word + letters[Mathf.FloorToInt(Random.value * 26)];
+            
         }
+        word = word.ToUpper();
     }
     void initializeLetters()
     {
