@@ -66,7 +66,7 @@ public class SpiderController : MonsterController {
             Vector2 monsterVec = new Vector2(0F,0F);
             if (monsterInRange(ref monsterVec))
             {
-                rb2d.MovePosition(currPoint + monsterVec);
+                rb2d.MovePosition(currPoint + monsterVec * speed);
             }
             
         }
