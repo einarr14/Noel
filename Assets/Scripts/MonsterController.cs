@@ -44,7 +44,9 @@ public class MonsterController : UnitController {
 	}
     protected void initializeKillPhrases()
     {
+
         killPhrases = new string[30];
+
 
         killPhrases[0] = "SAVAGE GARDEN";
         killPhrases[1] = "MURDERTRAIN";
