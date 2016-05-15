@@ -30,7 +30,6 @@ public class ColorLeverController : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         //GBRY
-        Debug.Log(gameManager.leverColorCount);
         if(this.name == "Blue")
         {
             if (gameManager.leverColorCount != 1)
@@ -39,7 +38,6 @@ public class ColorLeverController : MonoBehaviour {
             }
             else
             {
-                Debug.Log("Yo");
                 GameObject.Find("BlueActivated").transform.position = new Vector3(23.2f, -6.5f, 0);
             } 
         }

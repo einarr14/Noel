@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 	Vector3 initialPosition;
     public bool ghostpause;
     public int leverColorCount;
+    public int teleportLeverCount;
 
     private int level;
 
@@ -36,6 +37,8 @@ public class GameManager : MonoBehaviour
 		initialPosition = GameObject.Find ("Player").transform.position;
 		InitGame ();
         ghostpause = false;
+        leverColorCount = 0;
+        teleportLeverCount = 0;
 
     }
 
