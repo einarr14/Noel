@@ -123,7 +123,7 @@ public class SpiderController : MonsterController {
     public override void reset ()
     {
 		rb2d.transform.position = originalPosition;
-		word = killPhrases[Mathf.FloorToInt(Random.value * 9)];
+		word = killPhrases[Mathf.FloorToInt(Random.value * killPhrases.Length)];
         wordLeft = word;
         wordDone = "";
 		timeSlowed = false;

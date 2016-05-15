@@ -44,7 +44,7 @@ public class MonsterController : UnitController {
 	}
     protected void initializeKillPhrases()
     {
-        killPhrases = new string[9];
+        killPhrases = new string[30];
 
         killPhrases[0] = "SAVAGE GARDEN";
         killPhrases[1] = "MURDERTRAIN";
@@ -71,6 +71,12 @@ public class MonsterController : UnitController {
         killPhrases[22] = "GRUMPY BADGER";
         killPhrases[23] = "CRAZY CATWOMAN";
         killPhrases[24] = "EXPLODING DIARRHEA";
+        killPhrases[25] = "EATER OF SOULS";
+        killPhrases[26] = "GINGERBREAD MAN";
+        killPhrases[27] = "HORDES OF RATS";
+        killPhrases[28] = "INNOCENT BLOOD";
+        killPhrases[29] = "FERMENTED SHARK";
+
 
 
 
