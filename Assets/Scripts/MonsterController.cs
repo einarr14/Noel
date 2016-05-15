@@ -48,13 +48,34 @@ public class MonsterController : UnitController {
 
         killPhrases[0] = "SAVAGE GARDEN";
         killPhrases[1] = "MURDERTRAIN";
-        killPhrases[2] = "EINAR SAVAGE";
-        killPhrases[3] = "MASTER OF INHERITANCE";
-        killPhrases[4] = "YO MAMA";
+        killPhrases[2] = "DEATH STAR";
+        killPhrases[3] = "MASTER OF PUPPETS";
+        killPhrases[4] = "DESTRUCTION";
         killPhrases[5] = "ELDERLY BINGONIGHT";
-        killPhrases[6] = "ZOOLANDER 2";
-        killPhrases[7] = "HOT MAMA BITCH";
-        killPhrases[8] = "COOL GUYS DONT LOOK AT EXPLOTIONS";
+        killPhrases[6] = "HOUNTED HOUSE";
+        killPhrases[7] = "MOLTEN LAVA";
+        killPhrases[8] = "ASTROID BELT";
+        killPhrases[9] = "NASTY CREATURE";
+        killPhrases[10] = "THE BOOGEYMAN";
+        killPhrases[11] = "MASSIVE EXPLOSION";
+        killPhrases[12] = "CREEPY STALKER";
+        killPhrases[13] = "OVERRIPE AVACADO";
+        killPhrases[14] = "SQUISHY WORM";
+        killPhrases[15] = "SHARK ATTACK";
+        killPhrases[16] = "KILLER WHALE";
+        killPhrases[17] = "DEATH FROM ABOVE";
+        killPhrases[18] = "RAPID HELLHOUNDS";
+        killPhrases[19] = "BANANA BREAD";
+        killPhrases[20] = "WICKED WITCH";
+        killPhrases[21] = "TASMANIAN DEVIL";
+        killPhrases[22] = "GRUMPY BADGER";
+        killPhrases[23] = "CRAZY CATWOMAN";
+        killPhrases[24] = "EXPLODING DIARRHEA";
+
+
+
+
+
     }
     protected bool collision;
     protected Vector3 collisionVector;
