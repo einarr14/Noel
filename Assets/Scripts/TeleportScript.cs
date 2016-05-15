@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class TeleportScript : MonoBehaviour {
-
+    AudioSource source;
 	// Use this for initialization
 	void Start () {
-	
+        source = GameObject.Find("TeleporterIn").GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -43,6 +43,7 @@ public class TeleportScript : MonoBehaviour {
         }
             
         other.transform.position = GameObject.Find(destination).transform.position;
+        source.Play();
     }
     
 }
