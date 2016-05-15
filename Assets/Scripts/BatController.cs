@@ -8,7 +8,7 @@ public class BatController : MonsterController {
     public int lifeSteal;
     private float moveY;
     private float moveX;
-    //private Animator animator;
+    private Animator animator;
     //private AudioSource spiderAttack;
     //private AudioSource spiderDie;
 
@@ -25,7 +25,7 @@ public class BatController : MonsterController {
     {
         base.Start();
         attacking = false;
-        // animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         initializeKillPhrases();
         reset();
         timeSlowed = false;
@@ -101,7 +101,7 @@ public class BatController : MonsterController {
         //spiderAttack.Play();
         playerHealth.TakeDamage(damage);
         backupLetters(lifeSteal);
-        //animator.SetTrigger("SpiderBite");
+        animator.SetTrigger("Attack");
         yield return new WaitForSeconds(attackSpeed);
 
         attacking = false;
