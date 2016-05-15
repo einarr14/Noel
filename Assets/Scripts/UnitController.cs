@@ -46,6 +46,7 @@ public class UnitController : MonoBehaviour {
 		privateText.alignment = TextAnchor.MiddleCenter;
 		privateText.horizontalOverflow = HorizontalWrapMode.Overflow;
 		privateText.fontSize = 50;
+		privateCanvas.GetComponent<Canvas> ().sortingLayerName = "Walls";
         boardManager = GameObject.Find("BoardManager").GetComponent<BoardManager>();
         timeSlowed = true;
 		GameObject.Find ("BoardManager").GetComponent<BoardManager> ().addUnit (this);
