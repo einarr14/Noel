@@ -103,7 +103,7 @@ public class MonsterController : UnitController {
     {
 		playerPos = player.transform.position;
 		myPos = rb2d.position;
-		float thisDistFromPlayer = Mathf.Sqrt(Mathf.Pow((playerPos.x - myPos.x), 2F) + Mathf.Pow((playerPos.y - myPos.y), 2F));
+		//float thisDistFromPlayer = Mathf.Sqrt(Mathf.Pow((playerPos.x - myPos.x), 2F) + Mathf.Pow((playerPos.y - myPos.y), 2F));
         foreach (UnitController unit in boardManager.units)
         {
             if (this != unit)
