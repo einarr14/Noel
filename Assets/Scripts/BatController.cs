@@ -9,14 +9,14 @@ public class BatController : MonsterController {
     private float moveY;
     private float moveX;
     private Animator animator;
-    //private AudioSource spiderAttack;
-    //private AudioSource spiderDie;
+    private AudioSource batAttack;
+    private AudioSource batDie;
 
     void Awake()
     {
-        //AudioSource[] source = GetComponents<AudioSource>();
-        //spiderAttack = source[0];
-        //spiderDie = source[1];
+        AudioSource[] source = GetComponents<AudioSource>();
+        batAttack = source[0];
+        batDie = source[1];
         type = "Bat";
     }
 
@@ -104,7 +104,7 @@ public class BatController : MonsterController {
 
     private IEnumerator DoBitePlayer()
     {
-        //spiderAttack.Play();
+        batAttack.Play();
         playerHealth.TakeDamage(damage);
         backupLetters(lifeSteal);
         animator.SetTrigger("Attack");
@@ -116,7 +116,7 @@ public class BatController : MonsterController {
 
     protected override void wordAction()
     {
-        //spiderDie.Play();
+        batDie.Play();
         Vector3 curpos = this.transform.position;
         curpos.y += 1000F;
         this.transform.position = curpos;

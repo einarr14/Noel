@@ -4,17 +4,17 @@ using System.Collections;
 public class GrubbController : MonsterController {
 
     private Animator animator;
-    //private AudioSource spiderAttack;
-    //private AudioSource spiderDie;
+    private AudioSource zombieAttack;
+    private AudioSource zombieDie;
     private float moveY;
     private float moveX;
     public int textLength;
     private char[] letters;
     void Awake()
     {
-        //AudioSource[] source = GetComponents<AudioSource>();
-        //spiderAttack = source[0];
-        //spiderDie = source[1];
+        AudioSource[] source = GetComponents<AudioSource>();
+        zombieAttack = source[0];
+        zombieDie = source[1];
         type = "Grubb";
     }
     // Use this for initialization
@@ -107,7 +107,7 @@ public class GrubbController : MonsterController {
 
     private IEnumerator DoBitePlayer()
     {
-        //spiderAttack.Play();
+        zombieAttack.Play();
         playerHealth.TakeDamage(damage);
         animator.SetTrigger("Attack");
         yield return new WaitForSeconds(attackSpeed);
@@ -118,7 +118,8 @@ public class GrubbController : MonsterController {
 
     protected override void wordAction()
     {
-        //spiderDie.Play();
+        zombieDie.time = 0.5f;
+        zombieDie.Play();
         Vector3 curpos = this.transform.position;
         curpos.y += 1000F;
         this.transform.position = curpos;

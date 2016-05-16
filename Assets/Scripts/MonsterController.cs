@@ -12,6 +12,7 @@ public class MonsterController : UnitController {
     public float attackSpeed;
     private Vector3 monsterPoint;
     private Vector2 myPos;
+	private Vector3 playerPos;
 
 
     void Awake () {
@@ -100,16 +101,18 @@ public class MonsterController : UnitController {
     }
     protected bool monsterInRange(ref Vector2 monsterVec)
     {
-        int count = 0;
+		playerPos = player.transform.position;
+		myPos = rb2d.position;
+		//float thisDistFromPlayer = Mathf.Sqrt(Mathf.Pow((playerPos.x - myPos.x), 2F) + Mathf.Pow((playerPos.y - myPos.y), 2F));
         foreach (UnitController unit in boardManager.units)
         {
-            count++;
             if (this != unit)
             {
                 monsterPoint =  unit.transform.position;
-                myPos = rb2d.position;
                 float dif = Mathf.Sqrt(Mathf.Pow((monsterPoint.x - myPos.x), 2F) + Mathf.Pow((monsterPoint.y - myPos.y), 2F));
-                if (unit.getRange() + sizeRange > dif)
+				float thisPlayerDist = Mathf.Sqrt(Mathf.Pow((playerPos.x - myPos.x), 2F) + Mathf.Pow((playerPos.y - myPos.y), 2F));
+				float unitDistPlayer = Mathf.Sqrt(Mathf.Pow((playerPos.x - monsterPoint.x), 2F) + Mathf.Pow((playerPos.y - monsterPoint.y), 2F));
+				if (unit.getRange() + sizeRange > dif && thisPlayerDist > unitDistPlayer)
                 {
                     monsterVec.x = (monsterPoint.y - myPos.y) / dif; 
                     monsterVec.y = -(monsterPoint.x - myPos.x) / dif;

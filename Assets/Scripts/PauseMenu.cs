@@ -53,6 +53,8 @@ public class PauseMenu : MonoBehaviour {
 	}
 
 	public void MainMenu() {
+        Time.timeScale = 1f;
+		isPaused = false;
 		Application.LoadLevel (0);
 	}
 }
