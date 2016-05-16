@@ -72,6 +72,9 @@ public class SpiderController : MonsterController {
 	}
 
 	protected override void move() {
+		if (gameManager.playerDead()) {
+			return;
+		}
 		if (distance < maxRange && distance > minRange)
 		{
             if (collision)

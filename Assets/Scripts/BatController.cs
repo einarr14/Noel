@@ -78,6 +78,9 @@ public class BatController : MonsterController {
 
     protected override void move()
     {
+		if (gameManager.playerDead()) {
+			return;
+		}
         if (distance < maxRange && distance > minRange)
         {
             if (collision)
