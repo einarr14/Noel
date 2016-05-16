@@ -25,9 +25,11 @@ public class PlayerInput : MonoBehaviour {
 	void Update () {
         if (!GameManager.instance.ghostpause)
         {
-            string sentence = input.text;
-            input.text = "";
-            GameObject.Find("Player").GetComponent<PlayerController>().kill(sentence);
+			if (!gameManager.playerDead()) {
+	            string sentence = input.text;
+	            input.text = "";
+	            GameObject.Find("Player").GetComponent<PlayerController>().kill(sentence);
+			}
             //GameObject.Find("Player").GetComponent<PlayerController>().openDoor(sentence);
             //GameObject.Find("Player").GetComponent<PlayerController>().askghost(sentence);
             if (Input.GetKeyDown("return"))

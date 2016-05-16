@@ -55,14 +55,14 @@ public class MonsterController : UnitController {
         killPhrases[3] = "MASTER OF PUPPETS";
         killPhrases[4] = "DESTRUCTION";
         killPhrases[5] = "ELDERLY BINGONIGHT";
-        killPhrases[6] = "HOUNTED HOUSE";
+        killPhrases[6] = "HAUNTED GRAVE";
         killPhrases[7] = "MOLTEN LAVA";
         killPhrases[8] = "ASTROID BELT";
         killPhrases[9] = "NASTY CREATURE";
         killPhrases[10] = "THE BOOGEYMAN";
         killPhrases[11] = "MASSIVE EXPLOSION";
         killPhrases[12] = "CREEPY STALKER";
-        killPhrases[13] = "OVERRIPE AVACADO";
+        killPhrases[13] = "OVERRIPE AVOCADO";
         killPhrases[14] = "SQUISHY WORM";
         killPhrases[15] = "SHARK ATTACK";
         killPhrases[16] = "KILLER WHALE";

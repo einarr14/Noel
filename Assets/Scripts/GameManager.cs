@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public bool ghostpause;
     public int leverColorCount;
     public int teleportLeverCount;
+	private bool dead;
 
     private int level;
 
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
 	}
 
 	void Start () {
+		dead = false;
         instance = GameObject.FindObjectOfType<GameManager>();
 		playerController = GameObject.Find ("Player").GetComponent<PlayerController> ();
 		boardManager = GameObject.Find ("BoardManager").GetComponent<BoardManager>();
@@ -60,14 +62,17 @@ public class GameManager : MonoBehaviour
 	}
 
 	IEnumerator gameOver() {
+		dead = true;
 		GameObject.Find ("Point light").GetComponent<LightController> ().fadeOut();
 		yield return new WaitForSeconds(2F);
 		resetPlayer ();
 		boardManager.resetLevel ();
+		dead = false;
 	}
 
 	void resetPlayer() {
 		GameObject.Find ("Player").transform.position = initialPosition;
+		dead = false;
 		playerController.mobilize ();
 	}
     
@@ -75,4 +80,8 @@ public class GameManager : MonoBehaviour
     {
         ghostpause = !ghostpause;
     }
+
+	public bool playerDead() {
+		return dead;
+	}
 }
