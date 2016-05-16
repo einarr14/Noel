@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
                     {
                         if (!unit.timeSlowed)
                         {
-                            StartCoroutine(slowTime(0.5F, 0.5F));
+                            StartCoroutine(slowTime(0.8F, 0.3F));
                             unit.timeSlowed = true;
                         }
                     }
