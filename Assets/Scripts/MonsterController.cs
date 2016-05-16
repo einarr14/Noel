@@ -106,12 +106,12 @@ public class MonsterController : UnitController {
             count++;
             if (this != unit)
             {
-				monsterPoint =  unit.transform.position;
-				myPos = rb2d.position;
-				float dif = Mathf.Sqrt(Mathf.Pow((monsterPoint.x - myPos.x), 2F) + Mathf.Pow((monsterPoint.y - myPos.y), 2F));
+                monsterPoint =  unit.transform.position;
+                myPos = rb2d.position;
+                float dif = Mathf.Sqrt(Mathf.Pow((monsterPoint.x - myPos.x), 2F) + Mathf.Pow((monsterPoint.y - myPos.y), 2F));
                 if (unit.getRange() + sizeRange > dif)
                 {
-                    monsterVec.x = -(monsterPoint.y - myPos.y) / dif; 
+                    monsterVec.x = (monsterPoint.y - myPos.y) / dif; 
                     monsterVec.y = -(monsterPoint.x - myPos.x) / dif;
                     return true;
                 }
