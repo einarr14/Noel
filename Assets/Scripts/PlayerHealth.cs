@@ -30,7 +30,6 @@ public class PlayerHealth : MonoBehaviour {
         AudioSource[] audio = GetComponents<AudioSource>();
         charHit = audio[0];
         charDeath = audio[1];
-        difficulty = 1;
 		//currentHealth = totalHealth;
 		visualHealth.value = currentHealth;
 		gameManager = GameObject.Find ("GameManager");
@@ -76,6 +75,11 @@ public class PlayerHealth : MonoBehaviour {
     public void changeDifficulty(float multiplier)
     {
         difficulty = multiplier;
+    }
+
+    public float getDifficulty()
+    {
+        return difficulty;
     }
 
 	public void TakeDamage (int ammount) {

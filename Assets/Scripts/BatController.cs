@@ -11,6 +11,7 @@ public class BatController : MonsterController {
     private Animator animator;
     private AudioSource batAttack;
     private AudioSource batDie;
+    public string custom;
 
     void Awake()
     {
@@ -161,7 +162,15 @@ public class BatController : MonsterController {
     public override void reset()
     {
         rb2d.transform.position = originalPosition;
-        word = killPhrases[Mathf.FloorToInt(Random.value * killPhrases.Length)];
+        if(custom == "standard")
+        {
+            word = killPhrases[Mathf.FloorToInt(Random.value * killPhrases.Length)];
+        }
+        else
+        {
+            word = custom;
+        }
+        
         wordLeft = word;
         wordDone = "";
         timeSlowed = false;

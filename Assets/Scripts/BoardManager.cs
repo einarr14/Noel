@@ -6,6 +6,7 @@ public class BoardManager : MonoBehaviour {
 
 	public bool checkpoint;
 	private GameObject player;
+    private GameObject savedVariable;
 
 	public List<UnitController> units;
 	
@@ -21,6 +22,8 @@ public class BoardManager : MonoBehaviour {
 		units = new List<UnitController>();
 		checkpoint = false;
 		player = GameObject.Find ("Player");
+        savedVariable = GameObject.Find("SavedVariables");
+        DontDestroyOnLoad(savedVariable);
     } 
     public void initiateLevel (int level) {
 		if (level == 1) {
