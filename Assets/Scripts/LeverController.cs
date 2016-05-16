@@ -4,10 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class LeverController : MonoBehaviour {
 	private AudioSource source;
+    private AudioSource success;
     GameManager gameManager;
 
 	void Awake () {
 		source = GameObject.Find("Door1").GetComponent<AudioSource> ();
+        success = GetComponent<AudioSource>();
 	}
 
 	// Use this for initialization
@@ -21,9 +23,7 @@ public class LeverController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log("yo");
 		if (other.name == "Crate" || other.name == "Crate2") {
-            Debug.Log("hi");
             if (SceneManager.GetActiveScene().buildIndex != 5)
             {
                 GameObject.Find("Door1").transform.position = new Vector3(1000, 1000, 1000);
@@ -35,12 +35,15 @@ public class LeverController : MonoBehaviour {
             }
             else
             {
-                Debug.Log(gameManager.teleportLeverCount);
                 gameManager.teleportLeverCount++;
                 if(gameManager.teleportLeverCount == 2)
                 {
                     GameObject.Find("Door1").transform.position = new Vector3(1000, 1000, 1000);
                     source.Play();
+                }
+                else
+                {
+                    success.Play();
                 }
             }
 			
