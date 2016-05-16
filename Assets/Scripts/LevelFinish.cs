@@ -17,20 +17,23 @@ public class LevelFinish : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.name == "Player") {
-			if (level == 1) {
+			if (level == 1) { 	// Main
 				Application.LoadLevel (4);
 			}
-			if (level == 3) {
+			if (level == 3) {	// Tutorial
 				Application.LoadLevel (0);
 			}
-            if (level == 4)
+            if (level == 4)		// Level 2
             {
                 Application.LoadLevel(5);
             }
-            if (level == 5)
+            if (level == 5)		// Level 3
             {
-                Application.LoadLevel(2);
+                Application.LoadLevel(6);
             }
+			if (level == 6) { 	// Level 4
+				Application.LoadLevel (2);
+			}
 		}
 	}
 }
