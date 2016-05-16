@@ -193,6 +193,9 @@ public class PlayerController : MonoBehaviour
 		immobile = false;
 	}
 
+	public void teleport(Vector3 newPos) {
+		rb2d.MovePosition (newPos);
+	}
 }
 
 	

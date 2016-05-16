@@ -30,6 +30,7 @@ public class SpawnerController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
+		GameObject.Find ("BoardManager").GetComponent<BoardManager> ().checkpoint = true;
 		if (other.name != "Player") {
 			return;
 		}

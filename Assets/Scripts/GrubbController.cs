@@ -25,7 +25,7 @@ public class GrubbController : MonsterController {
         attacking = false;
         
         animator = GetComponent<Animator>();
-        initializeKillPhrases();
+        //initializeKillPhrases();
         initializeLetters();
         reset();
         

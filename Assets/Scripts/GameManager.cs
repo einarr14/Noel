@@ -65,13 +65,17 @@ public class GameManager : MonoBehaviour
 		dead = true;
 		GameObject.Find ("Point light").GetComponent<LightController> ().fadeOut();
 		yield return new WaitForSeconds(2F);
-		resetPlayer ();
 		boardManager.resetLevel ();
+		resetPlayer ();
 		dead = false;
 	}
 
 	void resetPlayer() {
-		GameObject.Find ("Player").transform.position = initialPosition;
+		//GameObject.Find ("Player").transform.position = initialPosition;
+		if (boardManager.checkpoint == true) {
+			Vector3 newPos = new Vector3 (-21, -15, 0);
+			playerController.teleport (newPos);
+		}
 		dead = false;
 		playerController.mobilize ();
 	}
