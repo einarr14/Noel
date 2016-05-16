@@ -63,16 +63,15 @@ public class GrubbController : MonsterController {
                 moveY = (playerPoint.y - currPoint.y) / distance;
                 moveX = (playerPoint.x - currPoint.x) / distance;
             }
-            Vector2 Movement = new Vector2(moveX, moveY);
-            Vector2 newPosition = currPoint + speed * Movement;
-            //animator.SetBool("SpiderWalk", true);
-            rb2d.MovePosition(newPosition);
-            // þetta er illa dapurt movement fix til að þeir ýti ekki hvor öðrum
-            Vector2 monsterVec = new Vector2(0F, 0F);
-            if (monsterInRange(ref monsterVec))
-            {
-                rb2d.MovePosition(currPoint + monsterVec * speed);
-            }
+			Vector2 monsterVec = new Vector2 (0F, 0F);
+			if (monsterInRange (ref monsterVec)) {
+				//rb2d.MovePosition (currPoint + monsterVec * speed);
+			} else {
+				Vector2 Movement = new Vector2 (moveX, moveY);
+				Vector2 newPosition = currPoint + speed * Movement;
+				//animator.SetBool("SpiderWalk", true)
+				rb2d.MovePosition (newPosition);
+			}
         }
         else if (distance > maxRange)
         {

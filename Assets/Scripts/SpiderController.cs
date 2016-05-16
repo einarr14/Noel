@@ -58,16 +58,17 @@ public class SpiderController : MonsterController {
                 moveY = (playerPoint.y - currPoint.y) / distance;
                 moveX = (playerPoint.x - currPoint.x) / distance;
             }
-            Vector2 Movement = new Vector2(moveX, moveY);
-            Vector2 newPosition = currPoint + speed * Movement;
+			Vector2 monsterVec = new Vector2(0F,0F);
+			if (monsterInRange (ref monsterVec)) {
+				rb2d.MovePosition (currPoint + monsterVec * speed);
+			} else {
+				Vector2 Movement = new Vector2 (moveX, moveY);
+				Vector2 newPosition = currPoint + speed * Movement;
+	            
+				animator.SetBool ("SpiderWalk", true);
+				rb2d.MovePosition (newPosition);
+			}
             
-            animator.SetBool("SpiderWalk", true);
-            rb2d.MovePosition(newPosition);
-            Vector2 monsterVec = new Vector2(0F,0F);
-            if (monsterInRange(ref monsterVec))
-            {
-                rb2d.MovePosition(currPoint + monsterVec * speed);
-            }
             
         }
 		else if (distance > maxRange)
