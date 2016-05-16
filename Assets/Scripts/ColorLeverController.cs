@@ -32,54 +32,58 @@ public class ColorLeverController : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         //GBRY
-        if(this.name == "Blue")
+        if (other.tag == "Player")
         {
-            if (gameManager.leverColorCount != 1)
+            if (this.name == "Blue")
             {
-                fail = true;
-                
+                if (gameManager.leverColorCount != 1)
+                {
+                    fail = true;
+
+                }
+                else
+                {
+                    GameObject.Find("BlueActivated").transform.position = new Vector3(23.2f, -6.5f, 0);
+                }
             }
-            else
+            else if (this.name == "Green")
             {
-                GameObject.Find("BlueActivated").transform.position = new Vector3(23.2f, -6.5f, 0);
-            } 
+                if (gameManager.leverColorCount != 0)
+                {
+                    fail = true;
+
+                }
+                else
+                {
+                    GameObject.Find("GreenActivated").transform.position = new Vector3(23.2f, -4.0f, 0);
+                }
+            }
+            else if (this.name == "Red")
+            {
+                if (gameManager.leverColorCount != 2)
+                {
+                    fail = true;
+
+                }
+                else
+                {
+                    GameObject.Find("RedActivated").transform.position = new Vector3(23.2f, -1.6f, 0);
+                }
+            }
+            else if (this.name == "Yellow")
+            {
+                if (gameManager.leverColorCount != 3)
+                {
+                    fail = true;
+
+                }
+                else
+                {
+                    GameObject.Find("YellowActivated").transform.position = new Vector3(23.2f, 0.8f, 0);
+                }
+            }
         }
-        else if(this.name == "Green")
-        {
-            if (gameManager.leverColorCount != 0)
-            {
-                fail = true;
-                
-            }
-            else
-            {
-                GameObject.Find("GreenActivated").transform.position = new Vector3(23.2f, -4.0f, 0);
-            }
-        }
-        else if(this.name == "Red")
-        {
-            if (gameManager.leverColorCount != 2)
-            {
-                fail = true;
-                
-            }
-            else
-            {
-                GameObject.Find("RedActivated").transform.position = new Vector3(23.2f, -1.6f, 0);
-            } 
-        }
-        else if(this.name == "Yellow")
-        {
-            if (gameManager.leverColorCount != 3)
-            {
-                fail = true;
-                
-            }
-            else
-            {
-                GameObject.Find("YellowActivated").transform.position = new Vector3(23.2f, 0.8f, 0);
-            }
-        }
+        
         if(fail == true)
         {
             failure.Play();
