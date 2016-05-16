@@ -29,6 +29,33 @@ public class SpiderController : MonsterController {
         //sizeRange = circle.radius + 0.1F;
     }
 
+	protected void initializeKillPhrases()
+	{
+		killPhrases = new string[21];
+
+		killPhrases[0] = "TARANTULA";
+		killPhrases[1] = "BLACK WIDOW";
+		killPhrases[2] = "CAMEL SPIDER";
+		killPhrases[3] = "VENOMOUS FANGS";
+		killPhrases[4] = "STEP ON IT";
+		killPhrases[5] = "KILL IT WITH FIRE";
+		killPhrases[6] = "ORDER ARANAEE";
+		killPhrases[7] = "ARTHROPODS";
+		killPhrases[8] = "ARACHNIDS";
+		killPhrases[9] = "NASTY CREATURE";
+		killPhrases[10] = "CEPHALOTHORAX";
+		killPhrases[11] = "ANTIVENOM";
+		killPhrases[12] = "MYAGALOMORPH";
+		killPhrases[13] = "ARACHNOPHOBIA";
+		killPhrases[14] = "SQUISHY SPIDER";
+		killPhrases[15] = "LEAVE ME ALONE";
+		killPhrases[16] = "SPIDERLING";
+		killPhrases[17] = "GOLIATH BIRDEATER";
+		killPhrases[18] = "SPIDERMAN";
+		killPhrases[19] = "CARTWHEELING";
+		killPhrases[20] = "AMAZON SPIDER";
+	}
+
 	// Update is called once per frame
 	protected void Update () {
 		base.Update ();
