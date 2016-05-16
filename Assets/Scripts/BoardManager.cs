@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class BoardManager : MonoBehaviour {
 
 	public bool checkpoint;
+	private GameObject player;
 
 	public List<UnitController> units;
 	
@@ -19,6 +20,7 @@ public class BoardManager : MonoBehaviour {
     {
 		units = new List<UnitController>();
 		checkpoint = false;
+		player = GameObject.Find ("Player");
     } 
     public void initiateLevel (int level) {
 		if (level == 1) {
@@ -71,13 +73,14 @@ public class BoardManager : MonoBehaviour {
 //			items [i].GetComponent<ItemController> ().reset ();
 //		}
 		Application.LoadLevel (Application.loadedLevelName);
-		if (Application.loadedLevelName == "2") {
-			Debug.Log ("Checkpoint");
-			GameObject.Find ("Player").transform.position = new Vector3 (0, 0, 0);
-		}
         playerHealth = GameObject.Find("Player").GetComponent<PlayerHealth>();
         playerHealth.setHealth();
 		playerHealth.fillHealth();
+		if (Application.loadedLevelName == "Level2" && checkpoint) {
+			Debug.Log ("Checkpoint");
+			Vector3 newPos = new Vector3 (-21, -15, 0);
+			player.GetComponent<PlayerController> ().teleport (newPos);
+		}
     }
 	
 	// Update is called once per frame

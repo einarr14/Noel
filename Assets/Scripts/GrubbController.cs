@@ -25,7 +25,7 @@ public class GrubbController : MonsterController {
         attacking = false;
         
         animator = GetComponent<Animator>();
-        initializeKillPhrases();
+        //initializeKillPhrases();
         initializeLetters();
         reset();
         
@@ -50,6 +50,9 @@ public class GrubbController : MonsterController {
 
     protected override void move()
     {
+		if (gameManager.playerDead()) {
+			return;
+		}
         if (distance < maxRange && distance > minRange)
         {
             if (collision)

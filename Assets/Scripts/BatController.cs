@@ -47,8 +47,40 @@ public class BatController : MonsterController {
         }
     }
 
+	protected void initializeKillPhrases()
+	{
+		killPhrases = new string[22];
+
+		killPhrases[0] = "DRACULA";
+		killPhrases[1] = "BLOODSUCKER";
+		killPhrases[2] = "STAKE";
+		killPhrases[3] = "CRANBERRY";
+		killPhrases[4] = "DESTRUCTION";
+		killPhrases[5] = "SUNLIGHT";
+		killPhrases[6] = "FANGS";
+		killPhrases[7] = "COFFIN";
+		killPhrases[8] = "VAMPIRE";
+		killPhrases[9] = "CREATURE";
+		killPhrases[10] = "TWILIGHT";
+		killPhrases[11] = "CULLEN";
+		killPhrases[12] = "STALKER";
+		killPhrases[13] = "UNDEAD";
+		killPhrases[14] = "TRANSYLVANIA";
+		killPhrases[15] = "SPARKLING";
+		killPhrases[16] = "BLOODTHIRSTY";
+		killPhrases[17] = "NOSFERATU";
+		killPhrases[18] = "TERROR";
+		killPhrases[19] = "NIGHT";
+		killPhrases[20] = "GARLIC";
+		killPhrases [21] = "BANANA";
+
+	}
+
     protected override void move()
     {
+		if (gameManager.playerDead()) {
+			return;
+		}
         if (distance < maxRange && distance > minRange)
         {
             if (collision)

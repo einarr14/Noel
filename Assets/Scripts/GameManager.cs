@@ -63,15 +63,22 @@ public class GameManager : MonoBehaviour
 
 	IEnumerator gameOver() {
 		dead = true;
+		playerController.die ();
+		yield return new WaitForSeconds(1F);
 		GameObject.Find ("Point light").GetComponent<LightController> ().fadeOut();
 		yield return new WaitForSeconds(2F);
-		resetPlayer ();
 		boardManager.resetLevel ();
+		resetPlayer ();
 		dead = false;
+		playerController.live ();
 	}
 
 	void resetPlayer() {
-		GameObject.Find ("Player").transform.position = initialPosition;
+		//GameObject.Find ("Player").transform.position = initialPosition;
+		if (boardManager.checkpoint == true) {
+			Vector3 newPos = new Vector3 (-21, -15, 0);
+			playerController.teleport (newPos);
+		}
 		dead = false;
 		playerController.mobilize ();
 	}

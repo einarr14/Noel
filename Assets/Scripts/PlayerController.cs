@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 	public float timeScale;
     public AudioSource success;
     public AudioSource failure;
+	private Animator animator;
 
 
     GameManager gameManager;
@@ -33,6 +34,7 @@ public class PlayerController : MonoBehaviour
         boardManager = GameObject.Find("BoardManager").GetComponent<BoardManager>();
 		timeScale = 1;
 		immobile = false;
+		animator = GetComponent<Animator>();
     }
     void FixedUpdate()
     {
@@ -193,6 +195,17 @@ public class PlayerController : MonoBehaviour
 		immobile = false;
 	}
 
+	public void teleport(Vector3 newPos) {
+		rb2d.MovePosition (newPos);
+	}
+
+	public void die () {
+		animator.SetBool ("NoelDead", true);
+	}
+
+	public void live () {
+		animator.SetBool ("NoelDead", false);
+	}
 }
 
 	
