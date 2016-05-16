@@ -39,13 +39,13 @@ public class SpiderController : MonsterController {
 		killPhrases[3] = "VENOMOUS FANGS";
 		killPhrases[4] = "STEP ON IT";
 		killPhrases[5] = "KILL IT WITH FIRE";
-		killPhrases[6] = "ORDER ARANAEE";
+		killPhrases[6] = "ORDER ARANEAE";
 		killPhrases[7] = "ARTHROPODS";
 		killPhrases[8] = "ARACHNIDS";
 		killPhrases[9] = "NASTY CREATURE";
 		killPhrases[10] = "CEPHALOTHORAX";
 		killPhrases[11] = "ANTIVENOM";
-		killPhrases[12] = "MYAGALOMORPH";
+		killPhrases[12] = "MYGALOMORPHAE";
 		killPhrases[13] = "ARACHNOPHOBIA";
 		killPhrases[14] = "SQUISHY SPIDER";
 		killPhrases[15] = "LEAVE ME ALONE";
