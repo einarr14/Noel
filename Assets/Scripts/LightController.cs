@@ -48,7 +48,7 @@ public class LightController : MonoBehaviour {
 
 	public void fadeOut() {
 		busy = true;
-		HOTween.To (this, 0.5F, "intensity", 0);
-		StartCoroutine (waitForBusy (1F));
+		HOTween.To (this, 2F, "intensity", 0);
+		StartCoroutine (waitForBusy (2F));
 	}
 }

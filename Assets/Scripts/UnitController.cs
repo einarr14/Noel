@@ -21,6 +21,7 @@ public class UnitController : MonoBehaviour {
     public bool hostile;
     public bool timeSlowed;
     protected BoardManager boardManager;
+	protected GameManager gameManager;
 
     public float maxRange;
 	public float minRange;
@@ -32,6 +33,7 @@ public class UnitController : MonoBehaviour {
 
 	// Use this for initialization
 	protected void Start () {
+		gameManager = GameObject.Find ("GameManager").GetComponent<GameManager> ();
 		rb2d = GetComponent<Rigidbody2D> ();
 		player = GameObject.Find ("Player");
 		originalPosition = rb2d.transform.position;
