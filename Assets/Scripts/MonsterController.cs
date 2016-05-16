@@ -44,6 +44,7 @@ public class MonsterController : UnitController {
 		playerHealth.TakeDamage(damage);
 	}
 
+
     
     protected bool collision;
     protected Vector3 collisionVector;

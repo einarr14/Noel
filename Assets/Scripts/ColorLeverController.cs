@@ -7,15 +7,17 @@ public class ColorLeverController : MonoBehaviour {
     public AudioSource failure;
     public AudioSource doorSound;
     GameManager gameManager;
+    public GameObject Zombie;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         AudioSource[] audio = GameObject.Find("Levers").GetComponents<AudioSource>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         doorSound = GameObject.Find("Door1").GetComponent<AudioSource>();
         success = audio[0];
         failure = audio[1];
         fail = false;
+      
 	}
 	
 
@@ -35,6 +37,7 @@ public class ColorLeverController : MonoBehaviour {
             if (gameManager.leverColorCount != 1)
             {
                 fail = true;
+                
             }
             else
             {
@@ -46,6 +49,7 @@ public class ColorLeverController : MonoBehaviour {
             if (gameManager.leverColorCount != 0)
             {
                 fail = true;
+                
             }
             else
             {
@@ -57,6 +61,7 @@ public class ColorLeverController : MonoBehaviour {
             if (gameManager.leverColorCount != 2)
             {
                 fail = true;
+                
             }
             else
             {
@@ -68,6 +73,7 @@ public class ColorLeverController : MonoBehaviour {
             if (gameManager.leverColorCount != 3)
             {
                 fail = true;
+                
             }
             else
             {
@@ -77,7 +83,7 @@ public class ColorLeverController : MonoBehaviour {
         if(fail == true)
         {
             failure.Play();
-            
+            spawn();
             GameObject.Find("BlueActivated").transform.position = new Vector3(500, 500, 500);
             GameObject.Find("GreenActivated").transform.position = new Vector3(500, 500, 500);
             GameObject.Find("RedActivated").transform.position = new Vector3(500, 500, 500);
@@ -97,6 +103,14 @@ public class ColorLeverController : MonoBehaviour {
                 doorSound.Play();
             }
         }
+
        
     }
+    void spawn()
+    {
+        GameObject newZombie = Instantiate(Zombie);
+        Vector3 pos = new Vector3(-5F, 0, 0);
+        newZombie.transform.position = this.transform.position+pos;
+    }
+
 }
