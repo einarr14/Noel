@@ -19,8 +19,8 @@ public class PauseMenu : MonoBehaviour {
 		isPaused = false;
 		isMuted = false;
 		muteText.text = "Mute";
-        difficulty = 0;
-       //difficulty = GameObject.Find("SavedVariables").GetComponent<SavedVariables>().getDifficulty();
+        //difficulty = 0;
+        difficulty = GameObject.Find("SavedVariables").GetComponent<SavedVariables>().getDifficulty();
         initializeDifficulty();
 
 	}
