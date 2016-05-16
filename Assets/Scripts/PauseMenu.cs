@@ -8,11 +8,18 @@ public class PauseMenu : MonoBehaviour {
 	public GameObject pauseMenuCanvas;
 	public InputField input;
 	public Text muteText;
+    private GameObject player;
+    private PlayerHealth playerHealth;
+    private int difficulty;
+    public Text difficultyText;
 
 	void Start() {
+        player = GameObject.Find("Player");
+        playerHealth = player.GetComponent<PlayerHealth>();
 		isPaused = false;
 		isMuted = false;
 		muteText.text = "Mute";
+        difficulty = 0;
 	}
 
 	// Update is called once per frame
@@ -51,6 +58,34 @@ public class PauseMenu : MonoBehaviour {
 
 		isMuted = !isMuted;
 	}
+
+    public void Difficulty()
+    {
+        difficulty++;
+        if(difficulty == 0)
+        {
+            difficultyText.text = "Difficulty: Normal";
+            playerHealth.changeDifficulty(1f);
+        }
+        else if(difficulty == 1)
+        {
+            difficultyText.text = "Difficulty: Hard";
+            playerHealth.changeDifficulty(1.4f);
+        }
+        else if(difficulty == 2)
+        {
+            difficultyText.text = "Difficulty: Extreme";
+            playerHealth.changeDifficulty(2f);
+        }
+        else if(difficulty == 3)
+        {
+            difficultyText.text = "Difficulty: Easy";
+            playerHealth.changeDifficulty(0.5f);
+            difficulty = -1;
+        }
+        
+        
+    }
 
 	public void MainMenu() {
         Time.timeScale = 1f;

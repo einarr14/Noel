@@ -23,13 +23,14 @@ public class PlayerHealth : MonoBehaviour {
 	public Light playerLight;
     public AudioSource charHit;
     public AudioSource charDeath;
+    private float difficulty;
 
 	// Use this for initialization
 	void Start () {
         AudioSource[] audio = GetComponents<AudioSource>();
         charHit = audio[0];
         charDeath = audio[1];
-
+        difficulty = 1;
 		//currentHealth = totalHealth;
 		visualHealth.value = currentHealth;
 		gameManager = GameObject.Find ("GameManager");
@@ -72,6 +73,11 @@ public class PlayerHealth : MonoBehaviour {
 		healing = false;
 	}
 
+    public void changeDifficulty(float multiplier)
+    {
+        difficulty = multiplier;
+    }
+
 	public void TakeDamage (int ammount) {
 		if(ammount >= currentHealth)
         {
@@ -81,7 +87,7 @@ public class PlayerHealth : MonoBehaviour {
         {
             charHit.Play();
         }
-		currentHealth -= ammount;
+		currentHealth -= Mathf.Floor(ammount * difficulty);
 		visualHealth.value = currentHealth;
 		blendColor = 1;
 	}
